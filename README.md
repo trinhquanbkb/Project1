@@ -16,3 +16,11 @@ sequelize db:migrate:undo:all
 
 Config:
 node: v16.17.1 
+
+
+
+
+Branch: not master
+branch-1: CRUD user 
+branch-2:
+....

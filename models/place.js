@@ -4,20 +4,20 @@ const {
 } = require('sequelize');
 const cardstudent = require('./cardstudent');
 module.exports = (sequelize, DataTypes) => {
-  class Place extends Model {
+  class Places extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      this.hasOne(users, {foreignKey: 'userId', as: 'userIdPlace'});
+    static associate({Users}) {
+      this.hasOne(Users, {foreignKey: 'userId', as: 'userIdPlace'});
     }
   }
-  Place.init({
+  Places.init({
     positionPlace: DataTypes.STRING,
     status: {
-      type: DataTypes.DataTypes,
+      type: DataTypes.INTEGER,
       validate: {
         max: 1,
         min: 0
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Place',
+    modelName: 'Places',
   });
-  return Place;
+  return Places;
 };

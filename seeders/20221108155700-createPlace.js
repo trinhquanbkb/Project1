@@ -12,27 +12,21 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('Users', [
+    await queryInterface.bulkInsert('Places', [
       {
-        name: 'Nguyễn Công Lập',
-        mssv: '20202412',
-        phoneNumber: '0325847985',
-        email: "lapbk@gmail.com",
-        password: 'abcd1234',
-        userType: 'admin',
+        positionPlace: '23D',
+        status: 0,
+        userId: 1,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12'
       },
       {
-        name: 'Trịnh Hoàng Quân',
-        mssv: '20204850',
-        phoneNumber: '0325314123',
-        email: "quanbk@gmail.com",
-        password: 'abcd1234',
-        userType: 'admin',
+        positionPlace: '1E',
+        status: 1,
+        userId: 2,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12'
-      }
+      },
     ], {});
   },
 
@@ -43,6 +37,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     await queryInterface.bulkDelete('Users', null, {});
+    await queryInterface.bulkDelete('Places', null, {});
   }
 };

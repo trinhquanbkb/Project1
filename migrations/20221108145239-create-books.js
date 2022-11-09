@@ -15,7 +15,7 @@ module.exports = {
       author: {
         type: Sequelize.STRING
       },
-      description: {
+      title: {
         type: Sequelize.STRING
       },
       countPage: {

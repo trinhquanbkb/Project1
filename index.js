@@ -1,11 +1,11 @@
 const express = require('express')
 const app = express();
 const {sequelize} = require('./models/index')
-const {router} = require('./routers/index')
+const {rootRouter} = require('./routers/index')
 
 app.use(express.json())   
 
-app.use("/api/v1", router)
+app.use("/api/v1", rootRouter)
 
 app.listen(3000, async () => {
     console.log(`listening http://localhost:3000`)

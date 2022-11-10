@@ -7,6 +7,6 @@ bookRouter.post('/', createBook)
 bookRouter.delete('/:id', checkBook, deleteBook)
 bookRouter.get('/', getAllBook)
 
-module.exports = {
+module.exports = { 
     bookRouter
 }

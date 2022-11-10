@@ -28,6 +28,14 @@ module.exports = {
         userId: 1,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12'
+      },
+      {
+        nameUser: 'Trần Thanh Quang',
+        school: 'Đại học Bách Khoa Hà Nội',
+        balance: 60000,
+        userId: 3,
+        createdAt: '2022-01-17 04:33:12',
+        updatedAt: '2022-01-17 04:33:12'
       }
     ], {});
   },

@@ -17,8 +17,7 @@ module.exports = {
         allowNull: false,           //đánh dấu mssv không được rỗng
         unique: true,               //mssv là duy nhất
         validate: {
-          len: [8, 8],               //chiều dài là 8->8 ký tự
-          isNumeric: true,          //thuộc tính phải là dạng số
+          len: [8, 8],              //chiều dài là 8 ký tự
         }
       },
       phoneNumber: {
@@ -37,7 +36,7 @@ module.exports = {
       password: {
         type: Sequelize.STRING,
         validate: {
-          len: [6,12],
+          len: [6,100],
         }
       },
       userType: {

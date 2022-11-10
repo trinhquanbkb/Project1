@@ -2,7 +2,7 @@
 const {
   Model
 } = require('sequelize');
-const cardstudent = require('./cardstudent');
+
 module.exports = (sequelize, DataTypes) => {
   class Places extends Model {
     /**
@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate({Users}) {
-      this.hasOne(Users, {foreignKey: 'userId', as: 'userIdPlace'});
+      this.belongsTo(Users, {foreignKey: 'userId', as: 'userIdPlace'});
     }
   }
   Places.init({
@@ -22,8 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         max: 1,
         min: 0
       }
-    },
-    userId: DataTypes.INTEGER
+    }
   }, {
     sequelize,
     modelName: 'Places',

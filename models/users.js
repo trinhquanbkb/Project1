@@ -2,9 +2,7 @@
 const {
   Model
 } = require('sequelize');
-const books = require('./books');
-const cardstudent = require('./cardstudent');
-const place = require('./place');
+
 module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
     /**
@@ -13,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate({Books, Places, CardStudent}) {
-      this.belongsTo(CardStudent, {foreignKey: 'userId', as: 'userIdCard'});
-      this.belongsTo(Places, {foreignKey: 'userId', as: 'userIdPlace'});
+      this.hasOne(CardStudent, {foreignKey: 'userId', as: 'userIdCard'});
+      this.hasOne(Places, {foreignKey: 'userId', as: 'userIdPlace'});
       this.hasMany(Books, {foreignKey:'userId', as:'userIdBook'});
     }
   }
@@ -23,11 +21,10 @@ module.exports = (sequelize, DataTypes) => {
     mssv: {
       type: DataTypes.STRING,
       allowNull: false,           //đánh dấu mssv không được rỗng
-      unique: true,               //mssv là duy nhất
-      validate: {
-        len: [8,8],               //chiều dài là 8->8 ký tự
-        isNumeric: true,          //thuộc tính phải là dạng số
-      }
+        unique: true,               //mssv là duy nhất
+        validate: {
+          len: [8, 8],              //chiều dài là 8 ký tự
+        }
     },
     phoneNumber: {
       type: DataTypes.STRING,
@@ -45,10 +42,11 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       validate: {
-        len: [6,12],
+        len: [6,100],
       }
     },
-    userType: DataTypes.STRING
+    userType: DataTypes.STRING   
+    //userType có 3 kiểu là user, userOtherSchool và admin
   }, {
     sequelize,
     modelName: 'Users',

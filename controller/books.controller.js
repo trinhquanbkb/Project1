@@ -14,6 +14,24 @@ const getAllBook = async (req, res) => {
     }
 }
 
+const getBookById = async (req, res) => {
+    const { id } = req.params
+    try{
+        const book = await Books.findOne({
+            where: {
+                id: id
+            }
+        })
+        if(book){
+            res.status(200).send(book)
+        }else{
+            throw new Error(`Cannot get book by id = ${id}`)
+        }
+    } catch(e){
+        res.status(500).send(e)
+    }
+}
+
 const createBook = async (req, res) => {
     try {
         const { name, author, title, countPage, year, positionBook } = req.body
@@ -51,4 +69,5 @@ module.exports = {
     createBook,
     deleteBook,
     getAllBook,
+    getBookById,
 }

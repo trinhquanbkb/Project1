@@ -17,7 +17,6 @@ module.exports = {
         nameUser: 'Trịnh Hoàng Quân',
         school: 'Đại học Thương Mại',
         balance: 30000,
-        userId: 2,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12'
       },
@@ -25,7 +24,6 @@ module.exports = {
         nameUser: 'Nguyễn Công Lập',
         school: 'Đại học Kinh Tế Quốc Dân',
         balance: 60000,
-        userId: 1,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12'
       },
@@ -33,7 +31,6 @@ module.exports = {
         nameUser: 'Trần Thanh Quang',
         school: 'Đại học Bách Khoa Hà Nội',
         balance: 60000,
-        userId: 3,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12'
       }

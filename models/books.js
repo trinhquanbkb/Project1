@@ -2,7 +2,6 @@
 const {
   Model
 } = require('sequelize');
-const users = require('./users');
 module.exports = (sequelize, DataTypes) => {
   class Books extends Model {
     /**
@@ -21,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
     countPage: DataTypes.INTEGER,
     year: DataTypes.INTEGER,
     positionBook: DataTypes.STRING,
-    userId: DataTypes.INTEGER,
     dayBorrow: DataTypes.DATE
   }, {
     sequelize,

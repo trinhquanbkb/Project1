@@ -20,7 +20,6 @@ module.exports = {
         countPage: 195,
         year: 1941,
         positionBook: '32D',
-        userId: null,
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12'
@@ -32,7 +31,6 @@ module.exports = {
         countPage: 75,
         year: 1962,
         positionBook: '2C',
-        userId: null,
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12'
@@ -44,7 +42,6 @@ module.exports = {
         countPage: 291,
         year: 1936,
         positionBook: '15G',
-        userId: null,
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12'
@@ -56,7 +53,6 @@ module.exports = {
         countPage: 2300,
         year: 1876,
         positionBook: '3T',
-        userId: null,
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12'
@@ -68,7 +64,6 @@ module.exports = {
         countPage: 167,
         year: 1923,
         positionBook: '4T',
-        userId: null,
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12'
@@ -80,7 +75,6 @@ module.exports = {
         countPage: 159,
         year: 1923,
         positionBook: '5T',
-        userId: null,
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12'
@@ -92,7 +86,6 @@ module.exports = {
         countPage: 163,
         year: 1923,
         positionBook: '6T',
-        userId: null,
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12'
@@ -104,7 +97,6 @@ module.exports = {
         countPage: 213,
         year: 1994,
         positionBook: '2G',
-        userId: null,
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12'
@@ -116,7 +108,6 @@ module.exports = {
         countPage: 210,
         year: 1994,
         positionBook: '5G',
-        userId: null,
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12'
@@ -128,7 +119,6 @@ module.exports = {
         countPage: 200,
         year: 1994,
         positionBook: '12F',
-        userId: null,
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12'
@@ -140,7 +130,6 @@ module.exports = {
         countPage: 5243,
         year: 1862,
         positionBook: '1B',
-        userId: null,
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12'

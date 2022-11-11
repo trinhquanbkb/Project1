@@ -23,7 +23,7 @@ master: điều quan trọng nên nhắc nhiều lần, không push lên đây :
 Ưu tiên 1:
 branch-1: register (cần mã hóa password vào db) (quân)                     -----done-----
 branch-2: login (phần đăng nhập, sẽ tạo ra một token chứa userType của người dùng) (quân)          -----done-----
-branch-3: forgotPassword, changePassword (quân)
+branch-3: forgotPassword, changePassword (quân)             -----done-----
 branch-4: authentication (sẽ decode token và ném dữ liệu là userType sang cho bên authorization) (quân)          -----done-----
 branch-5: authorization (phân quyền cho người dùng, được sử dụng phía routes để cho phép người dùng được sử dụng tính năng nào) (quân)          -----done-----
 

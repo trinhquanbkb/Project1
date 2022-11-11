@@ -47,6 +47,25 @@ const createBook = async (req, res) => {
     }
 }
 
+const updateBook = async (req, res) => {
+    const { id } = req.params
+    const { name, author, title, countPage, year, positionBook } = req.body
+    try {
+        const book = await Books.update({name: name, author: author, title: title, countPage: countPage, year: year, positionBook: positionBook}, {
+            where: {
+                id,
+            }
+        })
+        if(book){
+            res.status(201).send(`Update book success with book id is ${id}`)
+        }else{
+            throw new Error("Update book failure with book id is ${id}")
+        }
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}
+
 const deleteBook = async (req, res) => {
     try {
         const { id } = req.params
@@ -70,4 +89,5 @@ module.exports = {
     deleteBook,
     getAllBook,
     getBookById,
+    updateBook,
 }

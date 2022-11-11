@@ -28,7 +28,7 @@ branch-4: authentication (sẽ decode token và ném dữ liệu là userType sa
 branch-5: authorization (phân quyền cho người dùng, được sử dụng phía routes để cho phép người dùng được sử dụng tính năng nào) (quân)          -----done-----
 
 Ưu tiên 2:
-branch-6: CRUD trong Books (quân)
+branch-6: CRUD trong Books (quân)             -----done-----
 branch-7: CRUD trong CardStudent (quang)
 branch-8: CRUD trong Place (lập)
 

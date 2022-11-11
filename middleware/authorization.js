@@ -16,8 +16,9 @@ const userAuthorize = (req, res, next) => {
         next()
     }else if(["userOtherSchool"].findIndex(e => e === user.userType) > -1) {
         next()
-    }
-    else{
+    }else if(["admin"].findIndex(e => e === user.userType) > -1) {
+        next()
+    }else{
         res.send("You cannot use this permission")
     }
 }

@@ -4,14 +4,19 @@ const jwt = require('jsonwebtoken')
 
 
 const register = async (req, res) => {
-    const { name, mssv, phoneNumber, email, password } = req.body
+    const { name, mssv, phoneNumber, email, password, userType } = req.body
     try {
         //tạo ra một chuỗi 10 số ngẫu nhiên bằng thuật toán salt
         const salt = bcrypt.genSaltSync(10)
         //generate password
         const hashPassword = bcrypt.hashSync(password, salt)
-        const newUser = await Users.create({ name, mssv, phoneNumber, email, password: hashPassword })
-        res.status(201).send(newUser)
+        if(userType == "user" || userType == "userOtherSchool"){
+            const newUser = await Users.create({ name, mssv, phoneNumber, email, password: hashPassword , userType})
+            res.status(201).send(newUser)
+        }
+        else{
+            res.status(400).send("userType invalid")
+        }
     } catch (error) {
         res.status(500).send(error)
     }
@@ -123,10 +128,25 @@ const changePassword = async (req, res) => {
     }
 }
 
+const registerAdmin = async (req, res) => {
+    const { name, mssv, phoneNumber, email, password } = req.body
+    try {
+        //tạo ra một chuỗi 10 số ngẫu nhiên bằng thuật toán salt
+        const salt = bcrypt.genSaltSync(10)
+        //generate password
+        const hashPassword = bcrypt.hashSync(password, salt)
+        const newUser = await Users.create({ name, mssv, phoneNumber, email, password: hashPassword, userType: "admin" })
+        res.status(201).send(newUser)
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}
+
 module.exports = {
     register,
     login,
     forgotPassword,
     changePassword,
+    registerAdmin,
 }
 

@@ -42,6 +42,6 @@ branch-14: placeUser (tạo chức năng đặt chỗ cho sinh viên trong và n
 branch-15: unborrowListBook (liệt kê danh sách các quyển sách chưa được mượn, các quyển sách đó có userId là null) (lập)
 branch-16: totalBook (tổng số quyển sách của 1 loại sách, chỉ tính những quyển còn lại chưa được mượn) (lập)
 branch-17: listUser (xem danh sách người dùng là sinh viên trong trường hoặc ngoài trường kèm số sách họ đã và đang mượn) (lập)
-
+branch-18: registerAdmin (khi admin đăng nhập thì sẽ có phần đăng ký tài khoản để tạo ra một admin khác) (quân)
 
 Chú ý: 

@@ -1,5 +1,6 @@
 const { Books, CardStudent, Places, Users } = require('../models/index')
 
+//check xem dữ liệu đầu vào id của book có tồn tại hay không
 const checkBook = async (req, res, next) => {
     const id = req.params.id
     const book = await Books.findOne({

@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-11-08T15:47:21.729Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="A4gzjZDsCXyrFeGNT9GH" version="20.5.3" type="github">
+<mxfile host="app.diagrams.net" modified="2022-11-21T13:16:08.434Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36" etag="KL--AJU7D7fowKqYq5Rk" version="20.5.3" type="github">
   <diagram id="i-t45R0P4q4NNxCHWem7" name="Trang-1">
     <mxGraphModel dx="2138" dy="547" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1700" math="0" shadow="0">
       <root>
@@ -424,23 +424,54 @@
         <mxCell id="XsTKVomyEp_vysgjA1EA-13" value="-Tổng số quyển sách của một loại sách sẽ không được ghi vào trong db mà sẽ được count ra api show ra màn hình&lt;br&gt;-sinh viên mượn sách nếu sách không được tìm thấy sẽ show ra màn hình thời gian ngắn nhất có thể mượn&lt;br&gt;-sách mượn sẽ có timeline trả là 2 tháng và có thể gia hạn thêm tối đa 1 tháng.&lt;br&gt;-sau 1 ngày thì sẽ reset lại 2 trường status về 0 và userId là null của bảng Place" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="810" y="1180" width="280" height="230" as="geometry" />
         </mxCell>
-        <mxCell id="J5_ubwYrpImXxwMJO44a-1" value="index" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-1010" y="1128" width="120" height="60" as="geometry" />
+        <mxCell id="J5_ubwYrpImXxwMJO44a-1" value="index" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-1020" y="1128" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="J5_ubwYrpImXxwMJO44a-2" value="router" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="J5_ubwYrpImXxwMJO44a-2" value="router" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-840" y="1130" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="J5_ubwYrpImXxwMJO44a-3" value="controller" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="J5_ubwYrpImXxwMJO44a-3" value="controller" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-660" y="1130" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="J5_ubwYrpImXxwMJO44a-4" value="migration" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="J5_ubwYrpImXxwMJO44a-4" value="migration" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-310" y="1130" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="J5_ubwYrpImXxwMJO44a-5" value="models" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="J5_ubwYrpImXxwMJO44a-5" value="models" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-480" y="1130" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="J5_ubwYrpImXxwMJO44a-6" value="db" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+        <mxCell id="J5_ubwYrpImXxwMJO44a-6" value="db" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
           <mxGeometry x="-160" y="1118" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="5y8kFZeuz5u2EM3Kr_l1-4" value="tạo jwt" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1">
+          <mxGeometry y="10" width="80" relative="1" as="geometry">
+            <mxPoint x="-900" y="1434.5" as="sourcePoint" />
+            <mxPoint x="-820" y="1434.5" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y8kFZeuz5u2EM3Kr_l1-5" value="login&lt;br&gt;(decode password)" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1010" y="1410" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="5y8kFZeuz5u2EM3Kr_l1-6" value="authentication&lt;br&gt;(decode userType)" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="-820" y="1410" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="5y8kFZeuz5u2EM3Kr_l1-7" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px; background-color: rgb(255, 255, 255);&quot;&gt;session, mã hóa userType&lt;/span&gt;&lt;/div&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-890" y="1434" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5y8kFZeuz5u2EM3Kr_l1-9" value="authorization&lt;br&gt;(phân quyền theo &lt;br&gt;userType)" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="-630" y="1410" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="5y8kFZeuz5u2EM3Kr_l1-10" value="tạo req" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="-710" y="1434.5" as="sourcePoint" />
+            <mxPoint x="-630" y="1434.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y8kFZeuz5u2EM3Kr_l1-11" value="Register" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1010" y="1280" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="5y8kFZeuz5u2EM3Kr_l1-12" value="Note: sử dụng bcryptjs để mã&lt;br&gt;&amp;nbsp;hóa password rồi mới đưa &lt;br&gt;vào database&amp;nbsp;" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1271.25" width="180" height="67.5" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

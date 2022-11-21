@@ -14,7 +14,20 @@ const checkBook = async (req, res, next) => {
         res.status(400).send(`Cannot find book with id = ${id}`)
     }
 }
+//kiem tra id ton tai hay khong
+const checkCardStudents = async (req, res, next) => {
+    const id = req.params.id
+    const cardStudent = await CardStudent.findOne({
+        where: { id: id }
+    })
+    if (cardStudent) {
+        next()
+    } else {
+        res.status(400).send(`Cannot find card student with id = ${id}`)
+    }
+}
 
 module.exports = {
     checkBook,
+    checkCardStudents
 }

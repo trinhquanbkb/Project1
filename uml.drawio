@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-11-21T13:16:08.434Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36" etag="KL--AJU7D7fowKqYq5Rk" version="20.5.3" type="github">
+<mxfile host="app.diagrams.net" modified="2022-11-22T03:10:39.354Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36" etag="G01KED_Yv1HyLYR0s_lh" version="20.5.3" type="github">
   <diagram id="i-t45R0P4q4NNxCHWem7" name="Trang-1">
-    <mxGraphModel dx="2138" dy="547" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1700" math="0" shadow="0">
+    <mxGraphModel dx="1898" dy="421" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1700" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -472,6 +472,31 @@
         </mxCell>
         <mxCell id="5y8kFZeuz5u2EM3Kr_l1-12" value="Note: sử dụng bcryptjs để mã&lt;br&gt;&amp;nbsp;hóa password rồi mới đưa &lt;br&gt;vào database&amp;nbsp;" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
           <mxGeometry x="-840" y="1271.25" width="180" height="67.5" as="geometry" />
+        </mxCell>
+        <mxCell id="5y8kFZeuz5u2EM3Kr_l1-13" value="Controller" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1020" y="1520" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="5y8kFZeuz5u2EM3Kr_l1-14" value="tạo api" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="-910" y="1544.62" as="sourcePoint" />
+            <mxPoint x="-830" y="1544.62" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y8kFZeuz5u2EM3Kr_l1-15" value="router riêng để &lt;br&gt;config api" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="-830" y="1520" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="5y8kFZeuz5u2EM3Kr_l1-16" value="router/index.js" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="-640" y="1520" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="5y8kFZeuz5u2EM3Kr_l1-17" value="nối api" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1">
+          <mxGeometry y="5" width="80" relative="1" as="geometry">
+            <mxPoint x="-720" y="1544.62" as="sourcePoint" />
+            <mxPoint x="-640" y="1544.62" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y8kFZeuz5u2EM3Kr_l1-18" value="authenticate, authorize, check, api" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="-880" y="1570" width="210" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

@@ -1,4 +1,4 @@
-const { Books, CardStudent, Places, Users } = require('../models/index')
+const { Books, Card } = require('../models')
 
 //check xem dữ liệu đầu vào id của book có tồn tại hay không
 const checkBook = async (req, res, next) => {
@@ -17,7 +17,7 @@ const checkBook = async (req, res, next) => {
 //kiem tra id ton tai hay khong
 const checkCardStudents = async (req, res, next) => {
     const id = req.params.id
-    const cardStudent = await CardStudent.findOne({
+    const cardStudent = await Card.findOne({
         where: { id: id }
     })
     if (cardStudent) {

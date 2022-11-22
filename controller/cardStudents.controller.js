@@ -1,8 +1,8 @@
-const { CardStudent } = require('../models/index')
+const { Card } = require('../models/index')
 const findById = async (req, res) => {
     const { id } = req.params
     try {
-        const cardStudent = await CardStudent.findOne({
+        const cardStudent = await Card.findOne({
             where: { id: id }
         })
         if (cardStudent) {

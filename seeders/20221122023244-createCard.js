@@ -12,7 +12,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('CardStudent', [
+    await queryInterface.bulkInsert('Cards', [
       {
         nameUser: 'Trịnh Hoàng Quân',
         school: 'Đại học Thương Mại',
@@ -44,6 +44,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     await queryInterface.bulkDelete('CardStudent', null, {});
+     await queryInterface.bulkDelete('Cards', null, {});
   }
 };

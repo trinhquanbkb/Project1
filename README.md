@@ -17,8 +17,11 @@ node: v16.17.1
 
 
 
-Branch: not master
-master: điều quan trọng nên nhắc nhiều lần, không push lên đây :)))
+Branch: 
+
+
+
+BACKEND:
 
 Ưu tiên 1:
 branch-1: register (cần mã hóa password vào db) (quân)                     -----done-----
@@ -44,4 +47,8 @@ branch-16: totalBook (tổng số quyển sách của 1 loại sách, chỉ tín
 branch-17: listUser (xem danh sách người dùng là sinh viên trong trường hoặc ngoài trường kèm số sách họ đã và đang mượn) (lập)
 branch-18: registerAdmin (khi admin đăng nhập thì sẽ có phần đăng ký tài khoản để tạo ra một admin khác) (quân)
 
-Chú ý: 
+
+
+FRONTEND:
+.....
+

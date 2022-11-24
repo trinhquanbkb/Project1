@@ -32,7 +32,7 @@ branch-5: authorization (phân quyền cho người dùng, được sử dụng 
 
 Ưu tiên 2:
 branch-6: CRUD trong Books (quân)             -----done-----
-branch-7: CRUD trong CardStudent (quang)
+branch-7: CRUD trong CardStudent (quang)       -----done-----
 branch-8: CRUD trong Place (lập)
 
 Ưu tiên 3:
@@ -50,5 +50,6 @@ branch-18: registerAdmin (khi admin đăng nhập thì sẽ có phần đăng k�
 
 
 FRONTEND:
-.....
+
+HTML -> CSS -> Boostrap (style của html, css) -> Javascript DOM -> ReactJS
 

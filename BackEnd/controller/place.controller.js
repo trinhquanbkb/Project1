@@ -14,8 +14,80 @@ const getAllPlace = async (req, res) => {
     }
 }
 
+const getPlaceById = async (req, res) => {
+    const {id} = req.params
+    try {
+        const place = await Places.findOne({
+            where: {
+                id: id
+            }
+        })
+        if (place){
+            res.status(200).send(place)
+        } else {
+            throw new Error (`Cannot get place by id = ${id}`)
+        }
+    } catch(e) {
+        res.status(500).send(e)
+    }
+}
+
+const createPlace = async (req, res) => {
+    try {
+        const { positionPlace, status } = req.body
+        const newPlace = await Places.create({positionPlace, status})
+        if (newPlace) {
+            res.status(201).send(newPlace)
+        } else {
+            throw new Error('Cannot create place')
+        }
+    } catch (e) {
+        res.status(500).send(e)
+    }
+}
+
+const updatePosition = async (req, res) => {
+    const { id } = req.params
+    const { positionPlace, status} = req.body
+    try {
+        const place = await Places.update({positionPlace: positionPlace, status: status}, {
+            where: {
+                id,
+            }
+        })
+        if (place) {
+            res.status(201).send(`Update place success with place id is ${id}`)
+        } else {
+            throw new Error('Update place failure with place id is ${id}')
+        }
+    } catch (e) {
+        res.status(500).send(e)
+    }
+}
+
+const deletePlace = async (req, res) => {
+    try {
+        const {id} = req.params
+        const deletePlace = await Places.destroy({
+            where: {
+                id: id
+            }
+        });
+        if (deletePlace) {
+            res.status(200).send("delete place success")
+        } else {
+            throw new Error('Cannot delete place')
+        }
+    } catch(e) {
+        res.status(500).send(e)
+    }
+}
+
 
 module.exports = {
     getAllPlace,
-    
+    createPlace,
+    deletePlace,
+    updatePosition,
+    getPlaceById
 }

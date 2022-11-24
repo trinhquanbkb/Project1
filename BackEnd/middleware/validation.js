@@ -1,4 +1,4 @@
-const { Books, Card } = require('../models')
+const { Books, Card, Places } = require('../models')
 
 //check xem dữ liệu đầu vào id của book có tồn tại hay không
 const checkBook = async (req, res, next) => {
@@ -27,7 +27,20 @@ const checkCardStudents = async (req, res, next) => {
     }
 }
 
+const checkPlace = async (req, res, next) => {
+    const id = req.params.id
+    const place = await Places.findOne({
+        where: { id: id }
+    })
+    if (place) {
+        next()
+    } else {
+        res.status(400).send(`Cannot find place with id = ${id}`)
+    }
+}
+
 module.exports = {
     checkBook,
-    checkCardStudents
+    checkCardStudents,
+    checkPlace,
 }

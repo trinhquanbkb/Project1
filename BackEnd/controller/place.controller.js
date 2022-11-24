@@ -2,32 +2,32 @@ const { Places } = require('../models/index')
 //getAllPlace, findById, createPlace, updatePlace, deletePlace
 
 const getAllPlace = async (req, res) => {
-    try{
+    try {
         const places = await Places.findAll()
-        if(places){
+        if (places) {
             res.status(200).send(places)
-        }else{
+        } else {
             throw new Error('Cannot get all places')
         }
-    } catch(e){
+    } catch (e) {
         res.status(500).send(e)
     }
 }
 
 const getPlaceById = async (req, res) => {
-    const {id} = req.params
+    const { id } = req.params
     try {
         const place = await Places.findOne({
             where: {
                 id: id
             }
         })
-        if (place){
+        if (place) {
             res.status(200).send(place)
         } else {
-            throw new Error (`Cannot get place by id = ${id}`)
+            throw new Error(`Cannot get place by id = ${id}`)
         }
-    } catch(e) {
+    } catch (e) {
         res.status(500).send(e)
     }
 }
@@ -35,7 +35,7 @@ const getPlaceById = async (req, res) => {
 const createPlace = async (req, res) => {
     try {
         const { positionPlace, status } = req.body
-        const newPlace = await Places.create({positionPlace, status})
+        const newPlace = await Places.create({ positionPlace, status })
         if (newPlace) {
             res.status(201).send(newPlace)
         } else {
@@ -48,9 +48,9 @@ const createPlace = async (req, res) => {
 
 const updatePosition = async (req, res) => {
     const { id } = req.params
-    const { positionPlace, status} = req.body
+    const { positionPlace, status } = req.body
     try {
-        const place = await Places.update({positionPlace: positionPlace, status: status}, {
+        const place = await Places.update({ positionPlace: positionPlace, status: status }, {
             where: {
                 id,
             }
@@ -67,7 +67,7 @@ const updatePosition = async (req, res) => {
 
 const deletePlace = async (req, res) => {
     try {
-        const {id} = req.params
+        const { id } = req.params
         const deletePlace = await Places.destroy({
             where: {
                 id: id
@@ -78,7 +78,7 @@ const deletePlace = async (req, res) => {
         } else {
             throw new Error('Cannot delete place')
         }
-    } catch(e) {
+    } catch (e) {
         res.status(500).send(e)
     }
 }

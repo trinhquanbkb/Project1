@@ -1,27 +1,29 @@
 
 # Getting Started with Project I 
-## Start project: 
+## `Start project`: 
 npm start
 
-## Run database: 
+## `Run database`: 
 sequelize db:migrate 
 
-## Update Seed: 
+## `Update Seed`: 
 sequelize db:seed:all 
 
-## Delete table in database: 
+## `Delete table in database`: 
 sequelize db:migrate:undo:all 
+
+
+
+
 
 
 
 # BRANCH: 
 
-## BACKEND
+## `BACKEND`
 
 
-
-
-### Ưu tiên 1:
+### `Ưu tiên 1`:
 
 
 branch-1: register (cần mã hóa password vào db) (quân)                     -----done-----
@@ -36,7 +38,7 @@ branch-5: authorization (phân quyền cho người dùng, được sử dụng 
 
 
 
-### Ưu tiên 2:
+### `Ưu tiên 2`:
 
 
 branch-6: CRUD trong Books (quân)             -----done-----
@@ -47,7 +49,7 @@ branch-8: CRUD trong Place (lập)              -----done-----
 
 
 
-### Ưu tiên 3:
+### `Ưu tiên 3`:
 
 
 branch-9: rechargeCard (nạp thẻ cho sinh viên ngoài trường, nạp nhiều hơn 50k, số tiền nạp vào sẽ cộng với số tiền còn lại trong tài khoản) (quang)
@@ -72,6 +74,6 @@ branch-18: registerAdmin (khi admin đăng nhập thì sẽ có phần đăng k�
 
 
 
-## FRONTEND:
+## `FRONTEND`:
 
 HTML -> CSS -> Boostrap (style của html, css) -> Javascript DOM -> ReactJS

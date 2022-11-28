@@ -35,7 +35,7 @@ const getBookById = async (req, res) => {
 const createBook = async (req, res) => {
     try {
         const { name, author, title, countPage, year, positionBook } = req.body
-        const newBook = await Books.create({ name, author, title, countPage, year, positionBook })
+        const newBook = await Books.create({ name, author, title, countPage, year, positionBook, status: '0' })
         if (newBook) {
             res.status(201).send(newBook)
         }

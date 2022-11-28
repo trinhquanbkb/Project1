@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     countPage: DataTypes.INTEGER,
     year: DataTypes.INTEGER,
     positionBook: DataTypes.STRING,
-    dayBorrow: DataTypes.DATE
+    dayBorrow: DataTypes.DATE,
+    status: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Books',

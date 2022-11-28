@@ -22,7 +22,8 @@ module.exports = {
         positionBook: '32D',
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
-        updatedAt: '2022-01-17 04:33:12'
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0'
       },
       {
         name: 'Vợ nhặt',
@@ -33,7 +34,8 @@ module.exports = {
         positionBook: '2C',
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
-        updatedAt: '2022-01-17 04:33:12'
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0'
       },
       {
         name: 'Đắc nhân tâm',
@@ -44,7 +46,8 @@ module.exports = {
         positionBook: '15G',
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
-        updatedAt: '2022-01-17 04:33:12'
+        updatedAt: '2022-01-17 04:33:12',
+        status:'1'
       },
       {
         name: 'Sherlock holmes',
@@ -55,7 +58,8 @@ module.exports = {
         positionBook: '3T',
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
-        updatedAt: '2022-01-17 04:33:12'
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0'
       },
       {
         name: 'Dragonball tập 1',
@@ -66,7 +70,8 @@ module.exports = {
         positionBook: '4T',
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
-        updatedAt: '2022-01-17 04:33:12'
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0'
       },
       {
         name: 'Dragonball tập 2',
@@ -77,7 +82,8 @@ module.exports = {
         positionBook: '5T',
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
-        updatedAt: '2022-01-17 04:33:12'
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0'
       },
       {
         name: 'Dragonball tập 3',
@@ -88,7 +94,8 @@ module.exports = {
         positionBook: '6T',
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
-        updatedAt: '2022-01-17 04:33:12'
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0'
       },
       {
         name: 'Conan tập 1',
@@ -99,7 +106,8 @@ module.exports = {
         positionBook: '2G',
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
-        updatedAt: '2022-01-17 04:33:12'
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0'
       },
       {
         name: 'Conan tập 2',
@@ -110,7 +118,8 @@ module.exports = {
         positionBook: '5G',
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
-        updatedAt: '2022-01-17 04:33:12'
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0'
       },
       {
         name: 'Conan tập 12',
@@ -121,7 +130,8 @@ module.exports = {
         positionBook: '12F',
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
-        updatedAt: '2022-01-17 04:33:12'
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0'
       },
       {
         name: 'Những kẻ khốn khổ',
@@ -132,7 +142,8 @@ module.exports = {
         positionBook: '1B',
         dayBorrow: null,
         createdAt: '2022-01-17 04:33:12',
-        updatedAt: '2022-01-17 04:33:12'
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0'
       },
     ], {});
   },

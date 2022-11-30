@@ -52,7 +52,7 @@ branch-8: CRUD trong Place (lập)              -----done-----
 ### `Ưu tiên 3`:
 
 
-branch-9: rechargeCard (nạp thẻ cho sinh viên ngoài trường, nạp nhiều hơn 50k, số tiền nạp vào sẽ cộng với số tiền còn lại trong tài khoản) (quang)
+branch-9: rechargeCard (nạp thẻ cho sinh viên ngoài trường, nạp nhiều hơn 50k, số tiền nạp vào sẽ cộng với số tiền còn lại trong tài khoản) (quang)    -----done----
 
 branch-10: payMoney (mỗi tháng sẽ trừ một khoản tiền từ số dư trong thẻ, 10k/tháng và số dư trong thẻ phải luôn lớn hơn 50k để nhỡ user cuỗm sách mà không bắt được thì sẽ còn có một khoản nho nhỏ) (lập)
 

@@ -1,4 +1,6 @@
 const { Card } = require('../models/index')
+
+//CRUD card student
 const findById = async (req, res) => {
     const { id } = req.params
     try {
@@ -79,6 +81,41 @@ const deleteCard = async (req, res) => {
     }
 }
 
+//rechargeCard
+const rechargeCard=async(req, res) => {
+    const {id}= req.params
+    const {balance}=req.body
+    try{
+    const card= await Card.findOne({
+        where: {
+            userId:id,
+        }
+    })
+    
+    if (card) {
+        const newBalance= card.balance+ balance
+        const cardRecharged=  await Card.update({balance:newBalance }, {
+            where: {
+                userId:id,
+            }
+        })
+        try{
+            if (cardRecharged) {
+                res.status(201).send("Recharge successful")
+            }
+            else {
+                throw new Error("Recharge failed")
+            }
+        }catch(e){
+            res.status(500).send(e)           
+        }
+    }else {
+        throw new Error(`Couldn't find card student by userId is ${id}`)
+    }
+    }catch(e){
+        res.status(500).send(e)
+    }
+}
 
 //Export
 module.exports = {
@@ -86,5 +123,6 @@ module.exports = {
     getAllCard,
     createCard,
     updateCard,
-    deleteCard
+    deleteCard,
+    rechargeCard
 }

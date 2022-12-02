@@ -49,9 +49,13 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      endDate: {
+        type: Sequelize.DATE
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Books');
   }
 };
+

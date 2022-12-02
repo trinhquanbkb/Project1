@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     year: DataTypes.INTEGER,
     positionBook: DataTypes.STRING,
     dayBorrow: DataTypes.DATE,
-    status: DataTypes.STRING
+    status: DataTypes.STRING,
+    endDate: DataTypes.DATE,
   }, {
     sequelize,
     modelName: 'Books',

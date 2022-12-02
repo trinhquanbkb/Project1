@@ -18,21 +18,24 @@ module.exports = {
         school: 'Đại học Thương Mại',
         balance: 30000,
         createdAt: '2022-01-17 04:33:12',
-        updatedAt: '2022-01-17 04:33:12'
+        updatedAt: '2022-01-17 04:33:12',
+        userId: 1
       },
       {
         nameUser: 'Nguyễn Công Lập',
         school: 'Đại học Kinh Tế Quốc Dân',
         balance: 60000,
         createdAt: '2022-01-17 04:33:12',
-        updatedAt: '2022-01-17 04:33:12'
+        updatedAt: '2022-01-17 04:33:12',
+        userId: 2
       },
       {
         nameUser: 'Trần Thanh Quang',
         school: 'Đại học Bách Khoa Hà Nội',
         balance: 60000,
         createdAt: '2022-01-17 04:33:12',
-        updatedAt: '2022-01-17 04:33:12'
+        updatedAt: '2022-01-17 04:33:12',
+        userId: 3
       }
     ], {});
   },

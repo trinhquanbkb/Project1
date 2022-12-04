@@ -12,13 +12,6 @@ module.exports = {
       positionPlace: {
         type: Sequelize.STRING
       },
-      status: {
-        type: Sequelize.INTEGER,
-        validate: {
-          max: 1,
-          min: 0
-        }
-      },
       userId: {
         type: Sequelize.INTEGER,
         references: {

@@ -1,6 +1,6 @@
 const { DATE } = require('sequelize')
 const { Books, Users } = require('../models')
-const {statusBook}= require('../constant/index')
+const { statusBook } = require('../constant/index')
 
 const getAllBook = async (req, res) => {
     try {
@@ -84,43 +84,87 @@ const deleteBook = async (req, res) => {
         res.status(500).send(e)
     }
 }
-//Gia han muon tra Sach
+//Gia hạn mượn Sách
 const extendBook = async (req, res) => {
-    console.log('1')
     try {
-        const { bookId, userId } = req.body
+        //Lấy id của sách
+        const { id } = req.params
         const book = await Books.findOne({
             where: {
-                id:bookId,
+                id,
             }
-        })   
-        const dateNow= new Date()
-        console.log(dateNow)
+        })
+        const dateNow = new Date()
+        const endDate = new Date(book.endDate).getTime()
+        const newEndDate = endDate + 14 * 24 * 3600 * 1000
         if (book) {
-                if (book.userId === userId) {
-                    //Kiem tra xem sach da duoc gia han chua
-                        if (book.status === statusBook.notExtend) {
-                            const newEndDate= book.endDate+ 14*24*3600*1000
-                            book.update({ 
-                                status: statusBook.extended,
-                                endDate: newEndDate
-                             }, {
-                                where: {
-                                    id:bookId,
-                                }
-                            })
+            if (book.dataValues.userId) {
+                //Kiểm tra sách đã được gia hạn chưa
+                if (book.status === statusBook.notExtend) {
+                    //So sánh thời gian hiện tại có nằm trong khoảng mượn-hạn trả
+                    if (dateNow < newEndDate) {
+                        const updateBook = await Books.update({
+                            status: statusBook.extended,
+                            endDate: newEndDate
+                        }, {
+                            where: {
+                                id,
+                            }
+                        })
+                        if (updateBook) {
                             res.status(201).send("Extend successful!")
                         } else {
-                            if (book.status===statusBook.extended) {
-                                
-                                if(book.status===statusBook.expired){
-                                    
-                                }
-                            }
+                            res.status(500).send("Couldn't update this book")
                         }
-                } else {
-                    res.status(500).send(`Couldn't find user borrow book by user's id is ${userId}`)
+                    }
+                    //Thời giạn hiện tại lớn hơn newEndDate 
+                    else {
+                        const updateBook = await Books.update({
+                            status: statusBook.expired,
+                        }, {
+                            where: {
+                                id,
+                            }
+                        })
+                        if (updateBook) {
+                            res.status(201).send("Your loan period has expired. Please return of the library.")
+                        } else {
+                            res.status(500).send("Couldn't update this book")
+                        }
+                    }
                 }
+                //Nếu sách đã được gia hạn
+                else if (book.status === statusBook.extended) {
+                    //Kiểm tra endDate với thời gian hiện tại
+                    //Nếu còn hạn mượn sách
+                    if (endDate > dateNow) {
+                        //Hien thi so ngay muon con lai
+                        const remainDay = ((endDate - dateNow) / (24 * 3600 * 1000)).toFixed()
+                        res.status(200).send(`Remaining days of borrowing book is ${remainDay} day`)
+                    }
+                    //Nếu sách hết hạn 
+                    else {
+                        const updateBook = await Books.update({
+                            status: statusBook.expired,
+                        }, {
+                            where: {
+                                id,
+                            }
+                        })
+                        if (updateBook) {
+                            res.status(201).send("Your loan period has expired. Please return of the library.")
+                        } else {
+                            res.status(500).send("Couldn't update this book")
+                        }
+                    }
+                }
+                //Nếu sách đã hết hạn và status đang là : time borrow book is expired
+                else if (book.status === statusBook.expired) {
+                    res.status(200).send("Your loan period has expired. Please return of the library.")
+                }
+            } else {
+                res.status(200).send(`This book wasn't borrowed`)
+            }
         } else {
             throw new Error(`Couldn't find book by id is ${id}`)
         }

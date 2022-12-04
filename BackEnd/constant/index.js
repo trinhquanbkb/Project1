@@ -4,6 +4,6 @@ const statusBook = {
     expired: 'time borrow book is expired'
 }
 
-module.export ={
+module.exports ={
     statusBook,
 }

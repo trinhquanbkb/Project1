@@ -1,7 +1,7 @@
 const express = require('express')
 const bookRouter = express.Router()
 const { checkBook } = require('../middleware/validation')
-const {createBook, deleteBook, getAllBook, getBookById, updateBook,extendBook} = require('../controller/books.controller')
+const {createBook, deleteBook, getAllBook, getBookById, updateBook,extendBook,borrowBook, giveBook} = require('../controller/books.controller')
 const { authenticate } = require('../middleware/authentication')
 const { adminAuthorize, userAuthorize, userOtherSchoolAuthorize, allAuthorize } = require('../middleware/authorization')
 
@@ -11,6 +11,8 @@ bookRouter.get('/', authenticate, userAuthorize, getAllBook)
 bookRouter.get('/:id', authenticate, userAuthorize, checkBook, getBookById)
 bookRouter.put('/:id', authenticate, adminAuthorize, updateBook)
 bookRouter.put('/extendBook/:id',authenticate,userAuthorize,extendBook)
+bookRouter.put('/borrowBook/:idBook',authenticate,userAuthorize,borrowBook)
+bookRouter.put('/giveBook/:id',authenticate,userAuthorize,checkBook,giveBook)
 
 module.exports = { 
     bookRouter,

@@ -172,7 +172,74 @@ const extendBook = async (req, res) => {
         res.status(500).send(e)
     }
 }
-
+//Mượn sách borrowBook( mượn sách theo idBook)
+const borrowBook= async (req,res) => {
+    const {idBook}= req.params
+    const {userId}=req.query
+    const dateNow= new Date()
+    const newEndDate= new Date(dateNow).getTime()+60*24*3600*1000
+    try{
+        const book= await Books.findOne({
+            where: {
+                id:idBook,
+            }
+        })
+        if(book) {
+            //Kiểm tra sách đã được mượn hay chưa
+            if(!book.dataValues.userId){
+                //Chưa được mượn--cập nhật dayBorrow, userId, endDate
+                const updateBook= await Books.update({userId: userId,dayBorrow: dateNow, endDate:newEndDate},{
+                    where:{ 
+                        id: idBook,
+                    }
+                })
+                if (updateBook) {
+                    res.status(201).send("Borrow successful!")
+                } else {
+                    res.status(500).send("Borrow failed!")
+                }
+            }else{
+                //Sách đã được mượn--In ra thông báo
+                res.status(200).send("This book has been borrowed!")
+            }
+        }else{
+            throw new Error(`Couldn't find book by id is ${idBook}`)
+        }
+    }catch(e){
+        res.status(500).send(e)
+    }
+}
+//Trả sách giveBook
+const giveBook = async (req, res) =>{
+    const {id}=req.params
+    try{
+        const book= await Books.findOne({
+            where: {
+                id,
+            }
+        })
+        if (book) {
+            const updateBook= await Books.update({
+                userId:null,
+                dayBorrow:null,
+                status:statusBook.notExtend,
+                endDate:null
+            }, {where: {
+                id,
+            }
+        })
+        if (updateBook) {
+            res.status(201).send("Give book successful!")
+        } else {
+            res.status(500).send("Give book failed!")
+        }
+        }else{
+            throw new Error(`Couldn't find book by this id ${id}`)
+        }
+    }catch(e){
+        res.status(500).send(e)
+    }
+}
 
 module.exports = {
     createBook,
@@ -180,5 +247,7 @@ module.exports = {
     getAllBook,
     getBookById,
     updateBook,
-    extendBook
+    extendBook,
+    borrowBook,
+    giveBook
 }

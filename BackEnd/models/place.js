@@ -16,13 +16,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Places.init({
     positionPlace: DataTypes.STRING,
-    status: {
-      type: DataTypes.INTEGER,
-      validate: {
-        max: 1,
-        min: 0
-      }
-    }
   }, {
     sequelize,
     modelName: 'Places',

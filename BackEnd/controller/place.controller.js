@@ -34,8 +34,8 @@ const getPlaceById = async (req, res) => {
 
 const createPlace = async (req, res) => {
     try {
-        const { positionPlace, status } = req.body
-        const newPlace = await Places.create({ positionPlace, status })
+        const { positionPlace} = req.body
+        const newPlace = await Places.create({ positionPlace})
         if (newPlace) {
             res.status(201).send(newPlace)
         } else {
@@ -48,9 +48,9 @@ const createPlace = async (req, res) => {
 
 const updatePosition = async (req, res) => {
     const { id } = req.params
-    const { positionPlace, status } = req.body
+    const { positionPlace } = req.body
     try {
-        const place = await Places.update({ positionPlace: positionPlace, status: status }, {
+        const place = await Places.update({ positionPlace: positionPlace }, {
             where: {
                 id,
             }

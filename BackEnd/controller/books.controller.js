@@ -1,6 +1,7 @@
 const { DATE } = require('sequelize')
 const { Books, Users } = require('../models')
 const { statusBook } = require('../constant/index')
+const { Op } = require("sequelize");
 
 const getAllBook = async (req, res) => {
     try {
@@ -241,6 +242,30 @@ const giveBook = async (req, res) =>{
     }
 }
 
+const totalBook = async (req, res) => {
+    const {name} = req.params
+    try {
+        const books = await Books.findAll({
+           where: {
+            name:{
+                [Op.substring]: `${name}`,
+            },
+            userId: null,
+           } 
+        })
+        const data = {
+            "totalBook" : books.length
+        }
+        if (books) {
+            res.status(200).send(data)
+        }else{
+            res.status(500).send("Can't get total book")
+        }
+    } catch(e){
+        res.status(500).send(e)
+    }
+}
+
 module.exports = {
     createBook,
     deleteBook,
@@ -249,5 +274,6 @@ module.exports = {
     updateBook,
     extendBook,
     borrowBook,
-    giveBook
+    giveBook,
+    totalBook
 }

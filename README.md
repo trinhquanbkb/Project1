@@ -60,7 +60,7 @@ branch-11: historyBookBorrowOfStudent (xem lịch sử mượn sách của sinh 
 
 branch-12: extendBook (gia hạn sách cho sinh viên thêm 2 tuần, nếu sinh viên chưa gia hạn với sách bao giờ thì status của sách là 0, nếu đã gia hạn rồi thì status là 1 và nếu sau 2 tuần kể từ khi gia hạn vẫn chưa giả sách sẽ để status là 'time borrow book is expired'. Các trạng thái status này nằm trong đối tượng của constant/index.js) (quang)   -----done-----
 
-branch-13: minTime (sinh viên mượn sách nếu sách không được tìm thấy sẽ show ra màn hình thời gian ngắn nhất có thể mượn) (lập)
+branch-13: minTime (sinh viên mượn sách nếu sách không được tìm thấy sẽ show ra màn hình thời gian ngắn nhất có thể mượn) (quang)
 
 branch-14: placeUser (tạo chức năng đặt chỗ cho sinh viên trong và ngoài trường, cứ sau 1 ngày sẽ update status của các place về thành 0 hết) (quang)
 
@@ -76,7 +76,7 @@ branch-19: borrowBook (mượn sách theo id - id của book,cần check dayBorr
 
 branch-20: giveBook (trả sách theo id-id của book, cần update dayBorrow và userId, endDate là null, status về '0') (quang)    -----done-----
 
-branch-21: findPlaceByPositionPlace (tìm kiếm theo positionPlace-vị trí của ghế) (quang)
+branch-21: findPlaceByPositionPlace (tìm kiếm theo positionPlace-vị trí của ghế) (quang)    -----done-----
 
 
 

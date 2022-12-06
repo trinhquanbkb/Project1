@@ -76,6 +76,9 @@ branch-19: borrowBook (mượn sách theo id - id của book,cần check dayBorr
 
 branch-20: giveBook (trả sách theo id-id của book, cần update dayBorrow và userId, endDate là null, status về '0') (quang)    -----done-----
 
+branch-21: findPlaceByPositionPlace (tìm kiếm theo positionPlace-vị trí của ghế) (quang)
+
+
 
 ## `FRONTEND`:
 

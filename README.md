@@ -56,7 +56,7 @@ branch-9: rechargeCard (nạp thẻ cho sinh viên ngoài trường, nạp nhi�
 
 branch-10: payMoney (mỗi tháng sẽ trừ một khoản tiền từ số dư trong thẻ, 10k/tháng và số dư trong thẻ phải luôn lớn hơn 50k để nhỡ user cuỗm sách mà không bắt được thì sẽ còn có một khoản nho nhỏ) (quang)
 
-branch-11: historyBookBorrowOfStudent (xem lịch sử mượn sách của sinh viên về sách chưa giả) (lập)
+branch-11: historyBookBorrowOfStudent (xem lịch sử mượn sách của sinh viên về sách chưa giả) (lập)   -----done-----
 
 branch-12: extendBook (gia hạn sách cho sinh viên thêm 2 tuần, nếu sinh viên chưa gia hạn với sách bao giờ thì status của sách là 0, nếu đã gia hạn rồi thì status là 1 và nếu sau 2 tuần kể từ khi gia hạn vẫn chưa giả sách sẽ để status là 'time borrow book is expired'. Các trạng thái status này nằm trong đối tượng của constant/index.js) (quang)   -----done-----
 
@@ -68,7 +68,7 @@ branch-15: unborrowListBook (liệt kê danh sách các quyển sách chưa đư
 
 branch-16: totalBook (tổng số quyển sách của 1 loại sách, chỉ tính những quyển còn lại chưa được mượn) (lập)    -----done-----
 
-branch-17: listUser (xem danh sách người dùng là sinh viên trong trường hoặc ngoài trường kèm số sách họ đã và đang mượn) (lập)
+branch-17: listUser (xem danh sách người dùng là sinh viên trong trường hoặc ngoài trường kèm số sách họ đang mượn-tức là các quyển sách có id của các sinh viên đấy) (lập)   
 
 branch-18: registerAdmin (khi admin đăng nhập thì sẽ có phần đăng ký tài khoản để tạo ra một admin khác) (quân)    -----done-----
 

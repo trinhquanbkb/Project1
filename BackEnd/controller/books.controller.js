@@ -174,23 +174,23 @@ const extendBook = async (req, res) => {
     }
 }
 //Mượn sách borrowBook( mượn sách theo idBook)
-const borrowBook= async (req,res) => {
-    const {idBook}= req.params
-    const {userId}=req.query
-    const dateNow= new Date()
-    const newEndDate= new Date(dateNow).getTime()+60*24*3600*1000
-    try{
-        const book= await Books.findOne({
+const borrowBook = async (req, res) => {
+    const { idBook } = req.params
+    const { userId } = req.query
+    const dateNow = new Date()
+    const newEndDate = new Date(dateNow).getTime() + 60 * 24 * 3600 * 1000
+    try {
+        const book = await Books.findOne({
             where: {
-                id:idBook,
+                id: idBook,
             }
         })
-        if(book) {
+        if (book) {
             //Kiểm tra sách đã được mượn hay chưa
-            if(!book.dataValues.userId){
+            if (!book.dataValues.userId) {
                 //Chưa được mượn--cập nhật dayBorrow, userId, endDate
-                const updateBook= await Books.update({userId: userId,dayBorrow: dateNow, endDate:newEndDate},{
-                    where:{ 
+                const updateBook = await Books.update({ userId: userId, dayBorrow: dateNow, endDate: newEndDate }, {
+                    where: {
                         id: idBook,
                     }
                 })
@@ -199,69 +199,70 @@ const borrowBook= async (req,res) => {
                 } else {
                     res.status(500).send("Borrow failed!")
                 }
-            }else{
+            } else {
                 //Sách đã được mượn--In ra thông báo
                 res.status(200).send("This book has been borrowed!")
             }
-        }else{
+        } else {
             throw new Error(`Couldn't find book by id is ${idBook}`)
         }
-    }catch(e){
+    } catch (e) {
         res.status(500).send(e)
     }
 }
 //Trả sách giveBook
-const giveBook = async (req, res) =>{
-    const {id}=req.params
-    try{
-        const book= await Books.findOne({
+const giveBook = async (req, res) => {
+    const { id } = req.params
+    try {
+        const book = await Books.findOne({
             where: {
                 id,
             }
         })
         if (book) {
-            const updateBook= await Books.update({
-                userId:null,
-                dayBorrow:null,
-                status:statusBook.notExtend,
-                endDate:null
-            }, {where: {
-                id,
+            const updateBook = await Books.update({
+                userId: null,
+                dayBorrow: null,
+                status: statusBook.notExtend,
+                endDate: null
+            }, {
+                where: {
+                    id,
+                }
+            })
+            if (updateBook) {
+                res.status(201).send("Give book successful!")
+            } else {
+                res.status(500).send("Give book failed!")
             }
-        })
-        if (updateBook) {
-            res.status(201).send("Give book successful!")
         } else {
-            res.status(500).send("Give book failed!")
-        }
-        }else{
             throw new Error(`Couldn't find book by this id ${id}`)
         }
-    }catch(e){
+    } catch (e) {
         res.status(500).send(e)
     }
 }
 
 const totalBook = async (req, res) => {
-    const {name} = req.params
+    const { name } = req.params
     try {
         const books = await Books.findAll({
-           where: {
-            name:{
-                [Op.substring]: `${name}`,
-            },
-            userId: null,
-           } 
+            where: {
+                name: {
+                    [Op.substring]: `${name}`,
+                },
+                userId: null,
+            }
         })
         const data = {
-            "totalBook" : books.length
+            "totalBook": books.length
         }
         if (books) {
             res.status(200).send(data)
-        }else{
+        } else {
             res.status(500).send("Can't get total book")
         }
-    } catch(e){
+    } catch (e) {
         res.status(500).send(e)
     }
 }
@@ -283,6 +284,34 @@ const unborrowListBook = async (req, res) => {
     }
 }
 
+//xem lịch sử mượn sách của sinh viên về sách chưa trả
+const historyBookBorrowOfStudent = async (req, res) => {
+    const { userId } = req.params
+    try {
+        const user = await Users.findOne({
+            where: {
+                id: userId
+            }
+        })
+        if (user) {
+            const book = await Books.findAll({
+                where: {
+                    userId: userId,
+                }
+            })
+            if (book) {
+                res.status(200).send(book)
+            }
+            else {
+                res.status(500).send("Can't find books user borrow")
+            }
+        } else {
+            throw new Error("Can't find id of user")
+        }
+    } catch (e) {
+        res.status(500).send(e)
+    }
+}
 
 module.exports = {
     createBook,
@@ -293,7 +322,7 @@ module.exports = {
     extendBook,
     borrowBook,
     giveBook,
-    totalBook, 
-    unborrowListBook
-
+    totalBook,
+    unborrowListBook,
+    historyBookBorrowOfStudent
 }

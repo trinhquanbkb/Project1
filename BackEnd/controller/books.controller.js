@@ -283,6 +283,35 @@ const unborrowListBook = async (req, res) => {
     }
 }
 
+//xem lịch sử mượn sách của sinh viên về sách chưa trả
+const historyBookBorrowOfStudent = async (req, res) => {
+    const {userId} = req.params
+    try {
+        const user = await Users.findOne({
+            where : {
+                id: userId
+            }
+        })
+        if (user){
+        const book = await Books.findAll({
+            where: {
+                userId: userId,
+            }
+        })
+        if (book) {
+            res.status(200).send(book)
+        }
+        else {
+            res.status(500).send("Cann't access to borrowed history")
+        }
+    }else {
+        throw new Error("Cann't find ID of user")
+    }
+    }catch(e) {
+        res.status(500).send(e)
+    }
+}
+
 
 module.exports = {
     createBook,
@@ -294,6 +323,7 @@ module.exports = {
     borrowBook,
     giveBook,
     totalBook, 
-    unborrowListBook
+    unborrowListBook,
+    historyBookBorrowOfStudent
 
 }

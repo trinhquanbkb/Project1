@@ -34,8 +34,8 @@ const getPlaceById = async (req, res) => {
 
 const createPlace = async (req, res) => {
     try {
-        const { positionPlace} = req.body
-        const newPlace = await Places.create({ positionPlace})
+        const { positionPlace } = req.body
+        const newPlace = await Places.create({ positionPlace })
         if (newPlace) {
             res.status(201).send(newPlace)
         } else {
@@ -82,12 +82,29 @@ const deletePlace = async (req, res) => {
         res.status(500).send(e)
     }
 }
-
+//Tìm kiếm theo vị trí của Place
+const findPlaceByPositionPlace = async (req, res) => {
+    const { positionPlace } = req.params
+    try {
+        const place = await Places.findOne({
+            where: {
+                positionPlace: positionPlace,
+            }
+        })
+        console.log(place)
+     if(place==null) {
+            throw new Error(`Cannot find place with position is ${positionPlace}`)
+        }
+    } catch (e) {
+        res.status(500).send(e)
+    }
+}
 
 module.exports = {
     getAllPlace,
     createPlace,
     deletePlace,
     updatePosition,
-    getPlaceById
+    getPlaceById,
+    findPlaceByPositionPlace
 }

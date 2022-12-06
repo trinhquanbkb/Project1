@@ -265,6 +265,24 @@ const totalBook = async (req, res) => {
         res.status(500).send(e)
     }
 }
+//Liệt kê những cuốn sách chưa được mượn
+const unborrowListBook = async (req, res) => {
+    try {
+        const book = await Books.findAll({
+            where: {
+                userId: null,
+            }
+        })
+        if (book) {
+            res.status(200).send("Successfully list unborrowed books!")
+        } else {
+            throw new Error("Fail to list unborrowed books!")
+        }
+    } catch (e) {
+        res.status(500).send(e)
+    }
+}
+
 
 module.exports = {
     createBook,
@@ -275,5 +293,7 @@ module.exports = {
     extendBook,
     borrowBook,
     giveBook,
-    totalBook
+    totalBook, 
+    unborrowListBook
+
 }

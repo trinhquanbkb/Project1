@@ -91,7 +91,6 @@ const findPlaceByPositionPlace = async (req, res) => {
                 positionPlace: positionPlace,
             }
         })
-        console.log(place)
      if(place==null) {
             throw new Error(`Cannot find place with position is ${positionPlace}`)
         }

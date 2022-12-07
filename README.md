@@ -54,7 +54,7 @@ branch-8: CRUD trong Place (l)              -----done-----
 
 branch-9: rechargeCard (nạp thẻ cho sinh viên ngoài trường, nạp nhiều hơn 50k, số tiền nạp vào sẽ cộng với số tiền còn lại trong tài khoản) (qg)    -----done----
 
-branch-10: payMoney (đầu mỗi tháng sẽ trừ một khoản tiền từ số dư trong thẻ, 10k/tháng và số dư trong thẻ phải luôn lớn hơn 50k để nhỡ user cuỗm sách mà không bắt được thì sẽ còn có một khoản nho nhỏ) (q)
+branch-10: payMoney (đầu mỗi tháng sẽ trừ một khoản tiền từ số dư trong thẻ, 10k/tháng và số dư trong thẻ phải luôn lớn hơn 50k để nhỡ user cuỗm sách mà không bắt được thì sẽ còn có một khoản nho nhỏ) (q)    -----done-----
 
 branch-11: historyBookBorrowOfStudent (xem lịch sử mượn sách của sinh viên về sách chưa giả) (l)   -----done-----
 Sửa: lấy userId từ req.user, url xóa userId từ params đi

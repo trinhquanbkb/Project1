@@ -1,4 +1,44 @@
 const { Card } = require('../models/index')
+const { Op } = require('sequelize')
+
+//cron job
+var CronJob = require('cron').CronJob;
+var job = new CronJob(
+    '0 0 1 * *',   //mồng 1 mỗi tháng sẽ trừ tiền
+    async function () {
+        const cards = await Card.findAll({
+            where: {
+                userId: {
+                    [Op.ne]: null
+                },
+                balance: { //tài khoản phải lớn hơn 10000 mới được trừ
+                    [Op.gt]: 10000
+                }
+            }
+        })
+        const arrayBalance = cards.map( item => {
+            return item.dataValues.balance
+        })
+        arrayBalance.forEach( async(item) => {
+            const newBalance = item - 10000
+            const updateBalance = await Card.update({balance: newBalance},{
+                where: {
+                    userId: {
+                        [Op.ne]: null
+                    },
+                    balance: { //tài khoản phải lớn hơn 10000 mới được trừ
+                        [Op.gt]: 10000,
+                        [Op.eq]: item
+                    }
+                }
+            })
+        })
+    },
+    null,
+    true,
+    'Asia/Ho_Chi_Minh'
+)
+job.start()
 
 //CRUD card student
 const findById = async (req, res) => {
@@ -48,7 +88,7 @@ const updateCard = async (req, res) => {
     const { id } = req.params
     const { nameUser, school, balance } = req.body
     try {
-        const card = await Card.update({ nameUser:nameUser, school:school, balance:balance }, {
+        const card = await Card.update({ nameUser: nameUser, school: school, balance: balance }, {
             where: {
                 id,
             }
@@ -82,37 +122,37 @@ const deleteCard = async (req, res) => {
 }
 
 //rechargeCard
-const rechargeCard=async(req, res) => {
-    const {id}= req.params
-    const {balance}=req.body
-    try{
-    const card= await Card.findOne({
-        where: {
-            userId:id,
-        }
-    })
-    
-    if (card) {
-        const newBalance= card.balance+ balance
-        const cardRecharged=  await Card.update({balance:newBalance }, {
+const rechargeCard = async (req, res) => {
+    const { id } = req.params
+    const { balance } = req.body
+    try {
+        const card = await Card.findOne({
             where: {
-                userId:id,
+                userId: id,
             }
         })
-        try{
-            if (cardRecharged) {
-                res.status(201).send("Recharge successful")
+
+        if (card) {
+            const newBalance = card.balance + balance
+            const cardRecharged = await Card.update({ balance: newBalance }, {
+                where: {
+                    userId: id,
+                }
+            })
+            try {
+                if (cardRecharged) {
+                    res.status(201).send("Recharge successful")
+                }
+                else {
+                    throw new Error("Recharge failed")
+                }
+            } catch (e) {
+                res.status(500).send(e)
             }
-            else {
-                throw new Error("Recharge failed")
-            }
-        }catch(e){
-            res.status(500).send(e)           
+        } else {
+            throw new Error(`Couldn't find card student by userId is ${id}`)
         }
-    }else {
-        throw new Error(`Couldn't find card student by userId is ${id}`)
-    }
-    }catch(e){
+    } catch (e) {
         res.status(500).send(e)
     }
 }

@@ -1,5 +1,24 @@
 const { Places } = require('../models/index')
-//getAllPlace, findById, createPlace, updatePlace, deletePlace
+const { Op } = require("sequelize");
+
+//cron job with userId of Place
+var CronJob = require('cron').CronJob;
+var job = new CronJob(
+    '0 0 * * *',   //sau 00:00:00 mỗi ngày
+    async function () {
+        const updatePlace = await Places.update({ userId: null }, {
+            where: {
+                userId: {
+                    [Op.ne]: null
+                }
+            }
+        })
+    },
+    null,
+    true,
+    'Asia/Ho_Chi_Minh'
+)
+job.start()
 
 const getAllPlace = async (req, res) => {
     try {
@@ -91,11 +110,32 @@ const findPlaceByPositionPlace = async (req, res) => {
                 positionPlace: positionPlace,
             }
         })
-     if(place==null) {
+        if (place == null) {
             throw new Error(`Cannot find place with position is ${positionPlace}`)
         }
     } catch (e) {
         res.status(500).send(e)
+    }
+}
+
+//đặt chỗ cho sinh viên
+const placeUser = async (req, res) => {
+    const { userId } = req.user
+    const { positionPlace } = req.body
+    try {
+        //cập nhật userId vào bản ghi có vị trí ghế là postionPlace
+        const updatePlace = await Places.update({ userId: userId }, {
+            where: {
+                positionPlace: positionPlace
+            }
+        })
+        if (updatePlace) {
+            res.status(201).send('Set positionPlace for user success')
+        } else {
+            throw new Error('Cannot set positionPlace for user')
+        }
+    } catch (error) {
+        res.status(500).send(error)
     }
 }
 
@@ -105,5 +145,6 @@ module.exports = {
     deletePlace,
     updatePosition,
     getPlaceById,
-    findPlaceByPositionPlace
+    findPlaceByPositionPlace,
+    placeUser
 }

@@ -175,14 +175,14 @@ const extendBook = async (req, res) => {
 }
 //Mượn sách borrowBook( mượn sách theo idBook)
 const borrowBook = async (req, res) => {
-    const { idBook } = req.params
-    const { userId } = req.query
+    const { id } = req.params
+    const { userId } = req.user
     const dateNow = new Date()
     const newEndDate = new Date(dateNow).getTime() + 60 * 24 * 3600 * 1000
     try {
         const book = await Books.findOne({
             where: {
-                id: idBook,
+                id: id,
             }
         })
         if (book) {
@@ -191,7 +191,7 @@ const borrowBook = async (req, res) => {
                 //Chưa được mượn--cập nhật dayBorrow, userId, endDate
                 const updateBook = await Books.update({ userId: userId, dayBorrow: dateNow, endDate: newEndDate }, {
                     where: {
-                        id: idBook,
+                        id: id,
                     }
                 })
                 if (updateBook) {
@@ -204,7 +204,7 @@ const borrowBook = async (req, res) => {
                 res.status(200).send("This book has been borrowed!")
             }
         } else {
-            throw new Error(`Couldn't find book by id is ${idBook}`)
+            throw new Error(`Couldn't find book by id is ${id}`)
         }
     } catch (e) {
         res.status(500).send(e)

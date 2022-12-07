@@ -52,9 +52,34 @@ const checkUser = async (req, res, next) => {
     }
 }
 
+//Kiểm tra xem chỗ ngồi có tồn tại hay không, nếu tồn tại thì check xem đã có người đặt chỗ đó chưa
+const checkPositionPlace = async (req, res, next) => {
+    const { userId } = req.user
+    const { positionPlace } = req.body
+    const position = await Places.findOne({
+        where: {
+            positionPlace: positionPlace
+        }
+    })
+    if (position) {
+        if (position.dataValues.userId === null) {
+            next()
+        } else {
+            if (position.dataValues.userId == userId) {
+                res.status(400).send("You has been booked this position place")
+            } else {
+                res.status(400).send("Position place has been booked")
+            }
+        }
+    } else {
+        res.status(400).send("Position place doesn't exist")
+    }
+}
+
 module.exports = {
     checkBook,
     checkCardStudents,
     checkUser,
-    checkPlace
+    checkPlace,
+    checkPositionPlace
 }

@@ -31,7 +31,7 @@ const login = async (req, res) => {
             const isAuthen = bcrypt.compareSync(password, results.dataValues.password)
             if (isAuthen === true) {
                 //đăng nhập sẽ nhận được token
-                const token = jwt.sign({ mssv: results.mssv, userType: results.userType }, "trinhhoangquan", { expiresIn: 60 * 60 })
+                const token = jwt.sign({ userId: results.id, userType: results.userType }, "trinhhoangquan", { expiresIn: 60 * 60 })
                 res.status(200).send({ message: "Login success", token })
             } else {
                 res.status(400).send(`Password is not exist`)

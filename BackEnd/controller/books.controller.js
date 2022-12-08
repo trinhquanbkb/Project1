@@ -313,6 +313,45 @@ const historyBookBorrowOfStudent = async (req, res) => {
     }
 }
 
+const listUser = async (req, res) => {
+    try {
+        const user = await Users.findAll()
+        const arrayUserId = user.map((item) => {
+            return item.dataValues.id
+        })
+        let arrayRes = []
+        arrayUserId.forEach(async(item) => {
+            const listBook = await Books.findAll({
+                where: {
+                    userId: item,
+                }
+            })
+            const books = listBook.map((item) => {
+                return item.dataValues
+            })
+            const nameUser = await Users.findOne({
+                where: {
+                    id: item,
+                }
+            }) 
+            const data = {
+                id : item,
+                nameUser: nameUser.dataValues.name,
+                listBook: books
+            }
+            arrayRes.push({
+                id : item,
+                nameUser: nameUser.dataValues.name,
+                listBook: books
+            })
+            
+        })
+        console.log(arrayRes)
+    } catch (e) {
+        res.status(500).send(e)
+    }
+}
+
 module.exports = {
     createBook,
     deleteBook,
@@ -324,5 +363,6 @@ module.exports = {
     giveBook,
     totalBook,
     unborrowListBook,
-    historyBookBorrowOfStudent
+    historyBookBorrowOfStudent,
+    listUser
 }

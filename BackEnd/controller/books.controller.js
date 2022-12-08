@@ -320,7 +320,7 @@ const listUser = async (req, res) => {
             return item.dataValues.id
         })
         let arrayRes = []
-        arrayUserId.forEach(async(item) => {
+        arrayUserId.forEach(async (item) => {
             const listBook = await Books.findAll({
                 where: {
                     userId: item,
@@ -333,23 +333,95 @@ const listUser = async (req, res) => {
                 where: {
                     id: item,
                 }
-            }) 
+            })
             const data = {
-                id : item,
+                id: item,
                 nameUser: nameUser.dataValues.name,
                 listBook: books
             }
             arrayRes.push({
-                id : item,
+                id: item,
                 nameUser: nameUser.dataValues.name,
                 listBook: books
             })
-            
+
         })
         console.log(arrayRes)
     } catch (e) {
         res.status(500).send(e)
     }
+}
+
+//Lay ra thoi gian ngan nhat sinh vien co the muon sach
+const minTime = async (req, res) => {
+    const { name } = req.params
+    const allBook = await Books.findAll({
+        where: {
+            name: {
+                [Op.substring]: `${name}`,
+            }
+        }
+    })
+    if (allBook.length) {
+        const allNames = allBook.map(element => {
+            return element.name
+        })
+        const allNameDistince = new Set(allNames)
+        let arrayRes = []
+        const allName = []
+
+        allNameDistince.forEach((name) => {
+            allName.push(name)
+        })
+        allName.forEach((name, index) => {
+            const books = allBook.filter(element => element.dataValues.name == name)
+            const dateNow = new Date()
+            let book1 = books.filter(book => book.userId == null)
+            if (book1.length) {
+                book1.forEach(element => arrayRes.push(element))
+            }
+            else {
+                let book2 = books.map((book, index) => {
+                    let endDate
+                    if (book.status === '0') {
+                        endDate = new Date(book.endDate).getTime() + 14 * 24 * 3600 * 1000
+                    } else {
+                        endDate = new Date(book.endDate).getTime()
+                    }
+                    const count = Number(((endDate - dateNow) / (24 * 3600 * 1000)).toFixed())
+                    return {
+                        id: book.id,
+                        name: book.name,
+                        countDate: count,
+                        endDate: new Date(endDate)
+                    };
+                })
+                let minDate = book2[0].countDate
+                let bookEarly = book2[0]
+                const length_book2 = book2.length
+                for (let i = 1; i < length_book2; i++) {
+                    if (minDate > book2[i].countDate) {
+                        minDate = book2[i].countDate
+                        bookEarly = book2[i]
+                    }
+                }
+                arrayRes.push(bookEarly)
+            }
+        })
+
+        const dataRes = []
+        arrayRes.forEach(element => {
+            const data = {
+                "name": element.name,
+                "minDate": element.endDate ? element.endDate : "Còn sách"
+            }
+            dataRes.push(data)
+        })
+        res.status(200).send(dataRes)
+    } else {
+        res.status(500).send(`Cannot find book has name is ${ name }`)
+    }
+
 }
 
 module.exports = {
@@ -364,5 +436,6 @@ module.exports = {
     totalBook,
     unborrowListBook,
     historyBookBorrowOfStudent,
-    listUser
+    listUser,
+    minTime
 }

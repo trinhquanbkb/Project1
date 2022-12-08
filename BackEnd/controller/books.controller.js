@@ -320,7 +320,8 @@ const listUser = async (req, res) => {
             return item.dataValues.id
         })
         let arrayRes = []
-        arrayUserId.forEach(async (item) => {
+        for(let i=0; i< arrayUserId.length;i++){
+            const item = arrayUserId[i]
             const listBook = await Books.findAll({
                 where: {
                     userId: item,
@@ -334,19 +335,13 @@ const listUser = async (req, res) => {
                     id: item,
                 }
             })
-            const data = {
+            arrayRes[arrayRes.length] = {
                 id: item,
                 nameUser: nameUser.dataValues.name,
-                listBook: books
+                listBookBorrow: books
             }
-            arrayRes.push({
-                id: item,
-                nameUser: nameUser.dataValues.name,
-                listBook: books
-            })
-
-        })
-        console.log(arrayRes)
+        }
+        res.status(200).send(arrayRes)
     } catch (e) {
         res.status(500).send(e)
     }
@@ -419,7 +414,7 @@ const minTime = async (req, res) => {
         })
         res.status(200).send(dataRes)
     } else {
-        res.status(500).send(`Cannot find book has name is ${ name }`)
+        res.status(500).send(`Cannot find book has name is ${name}`)
     }
 
 }

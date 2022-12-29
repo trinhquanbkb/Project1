@@ -29,7 +29,7 @@ export default function Login() {
                                         </div>
                                         <div className="d-flex align-items-center justify-content-center pb-4">
                                             <p className="mb-0 me-2" style={{ fontSize: '12px' }}>Bạn chưa có tài khoản?</p>
-                                            <button type="button" style={{ fontSize: '13px' }} className="ml-4 btn btn btn-light btn-outline-info"><NavLink className="nav-link" to="/signin">Đăng ký ngay</NavLink></button>
+                                            <button type="button" style={{ fontSize: '13px' }} className="ml-4 btn btn btn-light btn-outline-info"><NavLink className="nav-link" to="/register">Đăng ký ngay</NavLink></button>
                                         </div>
 
                                         {/* Modal */}

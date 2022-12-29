@@ -2,8 +2,9 @@ import React from 'react'
 
 export default function PageNotFound() {
   return (
-    <div>
-        <p style={{fontSize: '60px', margin:'200px auto'}}>Not Found!</p>
+    <div style={{ marginTop: '150px' }}>
+      <p style={{ fontSize: '100px', margin: '0px auto' }}>404</p>
+      <p style={{ fontSize: '50px', margin: '0px auto' }}>Not Found!</p>
     </div>
   )
 }

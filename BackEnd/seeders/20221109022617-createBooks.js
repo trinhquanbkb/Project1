@@ -20,11 +20,11 @@ module.exports = {
         countPage: 195,
         year: 1941,
         positionBook: '32D',
-        dayBorrow: '2022-01-17 04:33:12',
+        dayBorrow: '2022-11-17 04:33:12',
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
-        endDate: '2022-03-17 04:33:12',
+        endDate: '2023-01-17 04:33:12',
         userId: 1
       },
       {
@@ -34,11 +34,11 @@ module.exports = {
         countPage: 75,
         year: 1962,
         positionBook: '2C',
-        dayBorrow: '2022-01-17 04:33:12',
+        dayBorrow: '2022-11-17 04:33:12',
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
-        endDate: '2022-01-17 04:33:12',
+        endDate: '2023-01-17 04:33:12',
         userId: 1
       },
       {
@@ -48,11 +48,11 @@ module.exports = {
         countPage: 291,
         year: 1936,
         positionBook: '15G',
-        dayBorrow: '2022-01-17 04:33:12',
+        dayBorrow: '2022-11-17 04:33:12',
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12',
         status:'1',
-        endDate: '2022-03-17 04:33:12',
+        endDate: '2023-01-17 04:33:12',
         userId: 2
       },
       {
@@ -62,11 +62,12 @@ module.exports = {
         countPage: 2300,
         year: 1876,
         positionBook: '3T',
-        dayBorrow: null,
+        dayBorrow: '2022-11-17 04:33:12',
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
-        endDate: '2022-03-17 04:33:12',
+        endDate: '2023-01-17 04:33:12',
+        userId: 2
       },
       {
         name: 'Dragonball tập 1',
@@ -75,11 +76,12 @@ module.exports = {
         countPage: 167,
         year: 1923,
         positionBook: '4T',
-        dayBorrow: null,
+        dayBorrow: '2022-11-17 04:33:12',
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
-        endDate: null,
+        endDate: '2023-01-17 04:33:12',
+        userId: 2
       },
       {
         name: 'Dragonball tập 2',

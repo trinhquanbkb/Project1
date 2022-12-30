@@ -1,22 +1,22 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
 
 export default function Header() {
     return (
         <div>
             <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
-                <NavLink className="navbar-brand" to="/adminPage">Trang chủ</NavLink>
+                <NavLink className="navbar-brand" to="/adminPage/indexAdmin">Trang chủ</NavLink>
                 <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation" />
                 <div className="collapse navbar-collapse" id="collapsibleNavId">
                     <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/userAdminPage">Tài khoản người dùng</NavLink>
+                            <NavLink className="nav-link" to="/adminPage/userAdminPage">Tài khoản người dùng</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/bookAdminPage">Sách thư viện</NavLink>
+                            <NavLink className="nav-link" to="/adminPage/bookAdminPage">Sách thư viện</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/placeAdminPage">Chỗ ngồi</NavLink>
+                            <NavLink className="nav-link" to="/adminPage/placeAdminPage">Chỗ ngồi</NavLink>
                         </li>
                     </ul>
                     <form className="form-inline my-2 my-lg-0">
@@ -25,6 +25,7 @@ export default function Header() {
                     </form>
                 </div>
             </nav>
+            <Outlet/>
         </div>
     )
 }

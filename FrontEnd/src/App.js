@@ -13,8 +13,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />\
-          <Route path="/adminPage" element={<Header/>} />
-          <Route path="/adminPage/indexAdmin" element={<IndexAdmin/>}/>
+          <Route path="/adminPage" element={<Header/>}>
+            <Route path="indexAdmin" element={<IndexAdmin/>}/>
+          </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

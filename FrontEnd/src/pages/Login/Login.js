@@ -13,7 +13,7 @@ export default function Login() {
                     </div>
                     <div className='col-4 ml-3 mr-3'>
                         <div className='row'>
-                            <div className="col-lg-11 ml-5 p-4 mr-5" style={{ backgroundColor: 'rgba(255,255,255,0.85)', borderRadius: '15px', marginTop: '40px' }}>
+                            <div className="col-lg-11 ml-5 p-4 mr-5" style={{ backgroundColor: 'rgba(255,255,255,0.8)', borderRadius: '15px', marginTop: '40px' }}>
                                 <div className="card-body p-md-4 mx-md-3">
                                     <form>
                                         <h1 style={{ paddingTop: '50px' }}>Đăng nhập</h1>
@@ -25,7 +25,7 @@ export default function Login() {
                                         </div>
                                         <div className="text-center pt-1 mb-5 pb-1" style={{ paddingLeft: '88px' }}>
                                             <button className="btn btn-primary btn-block fa-lg gradient-custom-2" style={{ width: '180px', fontSize: '16px' }} 
-                                            type="button"><NavLink className="nav-link" to="/adminPage">Đăng nhập</NavLink></button>
+                                            type="button"><NavLink replace className="nav-link" to="/adminPage">Đăng nhập</NavLink></button>
                                             <a className="text-muted" href="#!" style={{ fontSize: '13px', paddingRight: '88px' }} data-toggle="modal" data-target="#modelId">Quên mật khẩu?</a>
                                         </div>
                                         <div className="d-flex align-items-center justify-content-center pb-4">

@@ -1,6 +1,7 @@
 const { Users } = require('../models')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const { Op } = require("sequelize");
 
 
 const register = async (req, res) => {
@@ -10,11 +11,11 @@ const register = async (req, res) => {
         const salt = bcrypt.genSaltSync(10)
         //generate password
         const hashPassword = bcrypt.hashSync(password, salt)
-        if(userType == "user" || userType == "userOtherSchool"){
-            const newUser = await Users.create({ name, mssv, phoneNumber, email, password: hashPassword , userType})
+        if (userType == "user" || userType == "userOtherSchool") {
+            const newUser = await Users.create({ name, mssv, phoneNumber, email, password: hashPassword, userType })
             res.status(201).send(newUser)
         }
-        else{
+        else {
             res.status(400).send("userType invalid")
         }
     } catch (error) {
@@ -34,11 +35,13 @@ const login = async (req, res) => {
                 const token = jwt.sign({ userId: results.id, userType: results.userType }, "trinhhoangquan", { expiresIn: 60 * 60 })
                 res.status(200).send({ message: "Login success", token })
             } else {
-                res.status(400).send(`Password is not exist`)
+                throw new Error(`Password is not exist`)
             }
+        }else{
+            throw new Error(`Mssv is not exist`)
         }
     } catch (error) {
-        res.status(400).send(`Mssv is not exist`)
+        res.status(400).send( `${error}` )
     }
 }
 
@@ -111,9 +114,9 @@ const changePassword = async (req, res) => {
                             mssv,
                         }
                     })
-                    if(updatePassword){
+                    if (updatePassword) {
                         res.status(201).send("Change password success")
-                    }else{
+                    } else {
                         res.status(500).send("Change password failure")
                     }
                 } else {
@@ -142,11 +145,85 @@ const registerAdmin = async (req, res) => {
     }
 }
 
+const getAllStudent = async (req, res) => {
+    try {
+        const students = await Users.findAll({
+            where: {
+                userType: {
+                    [Op.ne]: 'admin'
+                }
+            }
+        })
+        if (students) {
+            res.status(200).send(students)
+        } else {
+            throw new Error('Cannot get all student')
+        }
+    }
+    catch (err) {
+        res.status(500).send(err)
+    }
+}
+
+const updateStudentById = async (req, res) => {
+    const { id } = req.params
+    let { name, mssv, phoneNumber, email } = req.body
+    try {
+        const student = await Users.findOne({
+            where: {
+                id
+            }
+        })
+        //check data is null
+        name = (name == '') ? student.dataValues.name : name
+        mssv = (mssv == '') ? student.dataValues.mssv : mssv
+        phoneNumber = (phoneNumber == '') ? student.dataValues.phoneNumber : phoneNumber
+        email = (email == '') ? student.dataValues.email : email
+        const updateStudent = await Users.update({name: name, mssv: mssv, phoneNumber: phoneNumber, email:email}, {
+            where: {
+                id,
+                userType: {
+                    [Op.ne]: 'admin'
+                }
+            }
+        })
+        if(updateStudent){
+            res.status(201).send(`Update student succes`)
+        }else{
+            throw new Error('Error update student')
+        }
+    }
+    catch(err){
+        res.status(500).send(err)
+    }
+}
+
+const deleteStudentById = async (req, res) => {
+    const {id} = req.params
+    try{
+        const deleteStudent = await Users.update({isDelete: 1},{
+            where:{
+                id
+            }
+        })
+        if(deleteStudent){
+            res.status(201).send('Delete student success')
+        }else{
+            throw new Error('Error delete student')
+        }
+    }catch(err){
+        res.status(500).send(err)
+    }
+}
+
 module.exports = {
     register,
     login,
     forgotPassword,
     changePassword,
     registerAdmin,
+    getAllStudent,
+    updateStudentById,
+    deleteStudentById,
 }
 

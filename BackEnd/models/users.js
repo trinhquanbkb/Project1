@@ -45,7 +45,11 @@ module.exports = (sequelize, DataTypes) => {
         len: [6,100],
       }
     },
-    userType: DataTypes.STRING   
+    userType: DataTypes.STRING,
+    //isDelete bằng 0 tức là bản ghi vẫn tồn tại, khi xóa bản ghi sẽ không xóa hẳn mà update isDelete lên thành 1
+    isDelete: {
+      type: DataTypes.INTEGER
+    } 
     //userType có 3 kiểu là user, userOtherSchool và admin
   }, {
     sequelize,

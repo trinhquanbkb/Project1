@@ -78,7 +78,11 @@ branch-20: giveBook (trả sách theo id-id của book, cần update dayBorrow v
 
 branch-21: findPlaceByPositionPlace (tìm kiếm theo positionPlace-vị trí của ghế) (qg)    -----done-----
 
+branch-22: getAllStudent (lấy tất cả sinh viên trong lẫn ngoài trường) (q)      -----done-----
 
+branch-23: updateStudentById (chỉnh sửa và cập nhật sinh viên với id) (q)      -----done-----
+
+branch-24: deleteStudentById (xóa sinh viên) (q)       -----done-----
 
 ## `FRONTEND`:
 

@@ -5,9 +5,10 @@ const {createBook, deleteBook, getAllBook, getBookById, updateBook,extendBook,bo
 const { authenticate } = require('../middleware/authentication')
 const { adminAuthorize, userAuthorize, userOtherSchoolAuthorize, allAuthorize } = require('../middleware/authorization')
 
+
 bookRouter.post('/createBook', authenticate, adminAuthorize, createBook)
 bookRouter.delete('/deleteBook/:id', authenticate, adminAuthorize, checkBook, deleteBook)
-bookRouter.get('/getAllBook', authenticate, userAuthorize, getAllBook)
+bookRouter.get('/getAllBook', authenticate, allAuthorize, getAllBook)
 bookRouter.get('/findById/:id', authenticate, userAuthorize, checkBook, getBookById)
 bookRouter.put('/updateBook/:id', authenticate, adminAuthorize, updateBook)
 bookRouter.put('/extendBook/:id',authenticate,userAuthorize,extendBook)

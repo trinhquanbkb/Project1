@@ -129,10 +129,10 @@ export default function Signin() {
         }
     }
     return (
-        <div className='d-flex justify-content-center' style={{ backgroundColor: '#eeeeee', margin: '0', padding: '0', height: '713px' }}>
-            <form onSubmit={(event) => { handleSubmit(event) }} style={{ backgroundColor: 'white', height: '600px', marginTop: '50px', width: '650px', fontFamily: 'Google Sans' }}>
-                <h4 className='text-center mt-5'>Đăng ký tài khoản mượn sách thư viện</h4>
-                <div className='container' style={{ marginTop: '30px' }}>
+        <div className='d-flex justify-content-center' style={{ backgroundColor: '#eeeeee', margin: '0', padding: '0', height: '800px' }}>
+            <form onSubmit={(event) => { handleSubmit(event) }} style={{ backgroundColor: 'white', height: '690px', marginTop: '50px', width: '650px', fontFamily: 'Google Sans' }}>
+                <h3 className='text-center mt-5' style={{fontWeight: 'bold'}}>Đăng ký tài khoản mượn sách thư viện</h3>
+                <div className='container' style={{ marginTop: '50px', height:'90px'}}>
                     <div className='row'>
                         <div className='col-6'>
                             <div className="group">
@@ -154,7 +154,7 @@ export default function Signin() {
                         </div>
                     </div>
                 </div>
-                <div className='container' style={{ marginTop: '-30px' }}>
+                <div className='container' style={{ height:'90px'}}>
                     <div className='row'>
                         <div className='col-12'>
                             <div className="group">
@@ -167,7 +167,7 @@ export default function Signin() {
                         </div>
                     </div>
                 </div>
-                <div className='container' style={{ marginTop: '-30px' }}>
+                <div className='container' style={{ height:'90px'}}>
                     <div className='row'>
                         <div className='col-12'>
                             <div className="group">
@@ -180,7 +180,7 @@ export default function Signin() {
                         </div>
                     </div>
                 </div>
-                <div className='container' style={{ marginTop: '-30px' }}>
+                <div className='container' style={{ height:'90px'}}>
                     <div className='row'>
                         <div className='col-12'>
                             <div className="group">
@@ -193,8 +193,8 @@ export default function Signin() {
                         </div>
                     </div>
                 </div>
-                <div className='container' style={{ marginTop: '-30px' }}>
-                    <div className='row'>
+                <div className='container' style={{ height:'90px'}}>
+                    <div className='row' style={{ height:'70px'}}>
                         <div className='col-6'>
                             <div className="group">
                                 <input type="password" name='password' required onChange={(event) => { handleOnChange(event) }} />
@@ -215,9 +215,9 @@ export default function Signin() {
                             </div>
                         </div>
                     </div>
-                    <span className='text text-warning text-left' style={{marginRight: '165px'}}>* mật khẩu cần có ít nhất 8 ký tự, có cả chữ và số</span>
+                    <span className='text text-warning text-left' style={{marginRight: '165px', marginTop: '-50px'}}>* mật khẩu cần có ít nhất 8 ký tự, có cả chữ và số</span>
                 </div>
-                <div className='d-flex justify-content-center' style={{ marginTop: '-20px' }}>
+                <div className='d-flex justify-content-center' style={{ marginTop: '50px' }}>
                     <button className='btn-dark' style={{ width: '200px', height: '40px', borderRadius: '4px' }}>Xác nhận</button>
                 </div>
             </form>

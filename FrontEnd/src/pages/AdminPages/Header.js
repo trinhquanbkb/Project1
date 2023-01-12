@@ -10,7 +10,7 @@ export default function Header() {
                 <div className="collapse navbar-collapse" id="collapsibleNavId">
                     <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/adminPage/userAdminPage">Tài khoản người dùng</NavLink>
+                            <NavLink className="nav-link" to="/adminPage/userManager">Tài khoản người dùng</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/adminPage/bookAdminPage">Sách thư viện</NavLink>

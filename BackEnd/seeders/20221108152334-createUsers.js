@@ -21,7 +21,8 @@ module.exports = {
         password: "$2a$10$Hv0NRxhpIrjtUEkWW0483e9TYsdJSr.t.paM1F9XFOtwdnMPawAhe",
         userType: "userOtherSchool",
         updatedAt: "2022-11-10 17:52:34",
-        createdAt: "2022-11-10 17:52:34"
+        createdAt: "2022-11-10 17:52:34",
+        isDelete: 0
       },
       {
         name: "Trịnh Hoàng Quân",
@@ -31,7 +32,8 @@ module.exports = {
         password: "$2a$10$dDUVt3GC.S.lXZd7MdbZ/ulVjLdy2rk6Q9aWP.L3wZ8/YecMio/8.",
         userType: "userOtherSchool",
         updatedAt: "2022-11-10 17:52:34",
-        createdAt: "2022-11-10 17:52:34"
+        createdAt: "2022-11-10 17:52:34",
+        isDelete: 0
       },
       {
         name: "Trần Thanh Quang",
@@ -41,7 +43,8 @@ module.exports = {
         password: "$2a$10$fxyoEBs6UIUgodVve0qoYO3TuSTPLO4pPcwF0dOVZMhuZYwl0k86G",
         userType: "userOtherSchool",
         updatedAt: "2022-11-10 17:52:34",
-        createdAt: "2022-11-10 17:52:34"
+        createdAt: "2022-11-10 17:52:34",
+        isDelete: 0
       },
       {
         name: "Nguyễn Bá Tư",
@@ -51,7 +54,8 @@ module.exports = {
         password: "$2a$10$EpZtNlkaOCMnaivxaYAvYugSm7BwHxDszAyPEONGzdDzb/td.ydBS",
         userType: "admin",
         updatedAt: "2022-11-10 17:52:34",
-        createdAt: "2022-11-10 17:52:34"
+        createdAt: "2022-11-10 17:52:34",
+        isDelete: 0
       },
       {
         name: "Nguyễn Hải long",
@@ -61,7 +65,8 @@ module.exports = {
         password: "$2a$10$ZNUf0GRJFoasb7KAbmyfV..z12ZGiHSJgVQ.SByQwOefGjka6HzNG",
         userType: "user",
         updatedAt: "2022-11-10 17:52:34",
-        createdAt: "2022-11-10 17:52:34"
+        createdAt: "2022-11-10 17:52:34",
+        isDelete: 0
       },
       {
         name: "Nguyễn Văn Hải",
@@ -71,7 +76,8 @@ module.exports = {
         password: "$2a$10$kVpC7YZYKBulNjo6scqgEus5JbQuHLCOcuA6e2H439czq99Gu6OfS",
         userType: "user",
         updatedAt: "2022-11-10 17:52:34",
-        createdAt: "2022-11-10 17:52:34"
+        createdAt: "2022-11-10 17:52:34",
+        isDelete: 0
       },
 
       //password: abcd1234

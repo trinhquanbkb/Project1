@@ -12,7 +12,7 @@ const register = async (req, res) => {
         //generate password
         const hashPassword = bcrypt.hashSync(password, salt)
         if (userType == "user" || userType == "userOtherSchool") {
-            const newUser = await Users.create({ name, mssv, phoneNumber, email, password: hashPassword, userType })
+            const newUser = await Users.create({ name, mssv, phoneNumber, email, password: hashPassword, userType, isDelete: 0 })
             res.status(201).send(newUser)
         }
         else {
@@ -26,7 +26,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     const { mssv, password } = req.body
     try {
-        const results = await Users.findOne({ where: { mssv } })
+        const results = await Users.findOne({ where: { mssv, isDelete: 0 } })
         if (results) {
             //giải băm mật khẩu và trả về true hoặc false
             const isAuthen = bcrypt.compareSync(password, results.dataValues.password)
@@ -37,11 +37,11 @@ const login = async (req, res) => {
             } else {
                 throw new Error(`Password is not exist`)
             }
-        }else{
+        } else {
             throw new Error(`Mssv is not exist`)
         }
     } catch (error) {
-        res.status(400).send( `${error}` )
+        res.status(400).send(`${error}`)
     }
 }
 
@@ -179,7 +179,7 @@ const updateStudentById = async (req, res) => {
         mssv = (mssv == '') ? student.dataValues.mssv : mssv
         phoneNumber = (phoneNumber == '') ? student.dataValues.phoneNumber : phoneNumber
         email = (email == '') ? student.dataValues.email : email
-        const updateStudent = await Users.update({name: name, mssv: mssv, phoneNumber: phoneNumber, email:email}, {
+        const updateStudent = await Users.update({ name: name, mssv: mssv, phoneNumber: phoneNumber, email: email }, {
             where: {
                 id,
                 userType: {
@@ -187,29 +187,47 @@ const updateStudentById = async (req, res) => {
                 }
             }
         })
-        if(updateStudent){
+        if (updateStudent) {
             res.status(201).send(`Update student succes`)
-        }else{
+        } else {
             throw new Error('Error update student')
         }
     }
-    catch(err){
+    catch (err) {
         res.status(500).send(err)
     }
 }
 
 const deleteStudentById = async (req, res) => {
-    const {id} = req.params
-    try{
-        const deleteStudent = await Users.update({isDelete: 1},{
-            where:{
+    const { id } = req.query
+    try {
+        const deleteStudent = await Users.update({ isDelete: 1 }, {
+            where: {
                 id
             }
         })
-        if(deleteStudent){
+        if (deleteStudent) {
             res.status(201).send('Delete student success')
-        }else{
+        } else {
             throw new Error('Error delete student')
+        }
+    } catch (err) {
+        res.status(500).send(err)
+    }
+}
+
+const updateAccount = async (req, res) => {
+    const { id } = req.query
+    try {
+        const account = await Users.update({ isDelete: 0 }, {
+            where: {
+                id
+            }
+        })
+        if(account){
+            res.status(201).send('update account student success')
+        }else{
+            throw new Error('Error update account student')
         }
     }catch(err){
         res.status(500).send(err)
@@ -225,5 +243,6 @@ module.exports = {
     getAllStudent,
     updateStudentById,
     deleteStudentById,
+    updateAccount
 }
 

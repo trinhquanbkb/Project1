@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import './Register.css'
 import Swal from 'sweetalert2'
+import { useDispatch } from 'react-redux'
 
 export default function Signin() {
+
+    const dispatch = useDispatch()
+
     const [data, setData] = useState({
         values: {
             firstName: '',
@@ -124,6 +128,24 @@ export default function Signin() {
             Swal.fire({
                 title: "Bạn cần nhập đầy đủ dữ liệu!",
                 icon: 'error',
+                confirmButtonText: 'Chấp nhận'
+            })
+        }
+        else{
+            dispatch({
+                type: 'REGISTER_USER',
+                dataRegister: {
+                    "name": data.values.firstName + ' ' +data.values.lastName,
+                    "mssv": data.values.mssv,
+                    "phoneNumber": data.values.phone,
+                    "email": data.values.email,
+                    "password": data.values.password,
+                    "userType": "user"
+                }
+            })
+            Swal.fire({
+                title: "Đăng ký người dùng thành công",
+                icon: 'success',
                 confirmButtonText: 'Chấp nhận'
             })
         }

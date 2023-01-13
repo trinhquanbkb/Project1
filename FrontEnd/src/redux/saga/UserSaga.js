@@ -1,6 +1,6 @@
 import { takeLatest, put } from 'redux-saga/effects'
-import { login, getAllStudent } from '../../services/UserService'
-import { LOGIN, GET_STUDENT_BY_ADMIN } from '../type/UserType'
+import { login, getAllStudent, deleteStudent, registerUser, updateAccount } from '../../services/UserService'
+import { LOGIN, GET_STUDENT_BY_ADMIN, DELETE_STUDENT_SAGA, UPDATE_ACCOUNT } from '../type/UserType'
 import { TOKEN } from '../../utils/constant/data'
 
 function* loginAdmin(action) {
@@ -31,7 +31,50 @@ function* getAllStudentSaga() {
     }
 }
 
+function* deleteStudentSaga(action) {
+    try {
+        let promise = yield deleteStudent(action.id)
+        yield put
+        ({
+            type: DELETE_STUDENT_SAGA,
+            data: {
+                status: promise.status,
+                iddb: action.id
+            }
+        })
+    } catch (error) {
+        
+    }
+}
+
+function* registerSaga(action){
+    try {
+        let promise = yield registerUser(action.dataRegister.name, action.dataRegister.mssv, action.dataRegister.phoneNumber, action.dataRegister.email, action.dataRegister.password, action.dataRegister.userType )
+    } catch (error) {
+        
+    }
+}
+
+function* updateStudent(action){
+    try {
+        let promise = yield updateAccount(action.id)
+        yield put
+        ({
+            type: UPDATE_ACCOUNT,
+            data: {
+                status: promise.status,
+                iddb: action.id
+            }
+        })
+    } catch (error) {
+        
+    }
+}
+
 export function* getUserSaga() {
     yield takeLatest('LOGIN_USER', loginAdmin)
     yield takeLatest('GET_ALL_STUDENT', getAllStudentSaga)
+    yield takeLatest('DELETE_STUDENT', deleteStudentSaga)
+    yield takeLatest('REGISTER_USER', registerSaga)
+    yield takeLatest('UPDATE_STUDENT', updateStudent)
 }

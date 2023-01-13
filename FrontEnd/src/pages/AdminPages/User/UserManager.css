@@ -20,9 +20,7 @@ body{
     font-size: 18px;
     line-height: 23px;
 }
-.text-muted {
-    color: #8898aa!important;
-}
+
 [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
     cursor: pointer;
 }

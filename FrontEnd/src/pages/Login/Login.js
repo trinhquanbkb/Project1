@@ -7,7 +7,7 @@ import { STATUS_CODE } from '../../utils/constant/statusCode'
 
 export default function Login() {
 
-    const { status } = useSelector(state => state.userReducer)
+    let { status } = useSelector(state => state.userReducer)
     const dispatch = useDispatch()
 
     const [user, setUser] = useState({
@@ -20,7 +20,7 @@ export default function Login() {
         let changeValues = { ...user, [name]: value }
         setUser({
             mssv: changeValues.mssv,
-            password: changeValues.password
+            password: changeValues.password,
         })
     }
 
@@ -38,8 +38,7 @@ export default function Login() {
             type: 'LOGIN_USER',
             userLogin: user
         })
-        console.log(status)
-        setTimeout(handleStatus, 400)
+        setTimeout(handleStatus, 300)
     }
 
     return (

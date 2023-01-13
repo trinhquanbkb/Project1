@@ -3,34 +3,64 @@ import './UserManager.css'
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function UserManager() {
-
     const { getAllStudent } = useSelector(state => state.userReducer)
     const dispatch = useDispatch()
-    console.log(getAllStudent)
     const handleChangeData = () => {
         return getAllStudent.map((item, index) => {
-            return <tr>
-                    <td className="pl-4">{item.id}</td>
+            if (item.isDelete === 1) {
+                return <tr key={index}>
+                    <td style={{ color: 'red', verticalAlign: 'middle' }} className="pl-4">{item.id}</td>
                     <td>
-                        <h5 className="font-medium mb-0">{item.name}</h5>
+                        <h5 style={{ color: 'red', margin: '12px 0' }} className="font-medium mb-0">{item.name}</h5>
+                    </td>
+                    <td style={{ verticalAlign: 'middle' }}>
+                        <span style={{ color: 'red' }} >{item.mssv}</span><br />
+                    </td>
+                    <td style={{ verticalAlign: 'middle' }}>
+                        <span style={{ color: 'red' }} >{item.phoneNumber}</span><br />
+                    </td>
+                    <td style={{ verticalAlign: 'middle' }}>
+                        <span style={{ color: 'red' }} >{item.email}</span><br />
                     </td>
                     <td>
-                        <span className="text-muted">{item.mssv}</span><br />
-
-                    </td>
-                    <td>
-                        <span className="text-muted">{item.phoneNumber}</span><br />
-                    </td>
-                    <td>
-                        <span className="text-muted">{item.email}</span><br />
-                    </td>
-                    <td>
-                        <button type="button" className="btn btn-outline-info btn-circle btn-lg btn-circle"><i className="fa fa-key" /> </button>
-                        <button type="button" className="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i className="fa fa-trash" /> </button>
-                        <button type="button" className="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i className="fa fa-edit" /> </button>
-                        <button type="button" className="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i className="fa fa-upload" /> </button>
+                        <button type="button" className="btn btn-outline-info btn-circle btn-lg btn-circle ml-2" onClick={() => { updateAccount(item) }} ><i class="fa fa-plus" /></button>
                     </td>
                 </tr>
+            }else{
+                return <tr key={index}>
+                    <td style={{ verticalAlign: 'middle' }} className="pl-4">{item.id}</td>
+                    <td>
+                        <h5 style={{ margin: '12px 0' }} className="font-medium mb-0">{item.name}</h5>
+                    </td>
+                    <td style={{ verticalAlign: 'middle' }}>
+                        <span style={{ color: '#8898aa'}} >{item.mssv}</span><br />
+                    </td>
+                    <td style={{ verticalAlign: 'middle' }}>
+                        <span style={{ color: '#8898aa'}} >{item.phoneNumber}</span><br />
+                    </td>
+                    <td style={{ verticalAlign: 'middle' }}>
+                        <span style={{ color: '#8898aa'}} >{item.email}</span><br />
+                    </td>
+                    <td>
+                        <button type="button" className="btn btn-outline-info btn-circle btn-lg btn-circle ml-2" onClick={() => { deleteUser(item) }} ><i className="fa fa-trash" /></button>
+                    </td>
+                </tr>
+            }
+
+        })
+    }
+
+    const updateAccount = (item) => {
+        dispatch({
+            type: 'UPDATE_STUDENT',
+            id: item.iddb
+        })
+    }
+
+    const deleteUser = (item) => {
+        dispatch({
+            type: 'DELETE_STUDENT',
+            id: item.iddb
         })
     }
 
@@ -42,7 +72,7 @@ export default function UserManager() {
 
     return (
         <div>
-            <div className="container-fluid" style={{marginTop: '50px'}}>
+            <div className="container-fluid" style={{ marginTop: '50px' }}>
                 <div className="row">
                     <div className="col-md-12">
                         <div className="card">

@@ -1,33 +1,42 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Login.css'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import './ForgotPassword.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { STATUS_CODE } from '../../utils/constant/statusCode'
 
 export default function Login() {
-
+    const navigate = useNavigate()
     let { status } = useSelector(state => state.userReducer)
     const dispatch = useDispatch()
 
     const [user, setUser] = useState({
         mssv: '',
-        password: ''
+        password: '',
+        error: '',
+        'url': '/'
     })
 
     const handleOnChange = (event) => {
         let { name, value } = event.target
         let changeValues = { ...user, [name]: value }
         setUser({
+            ...user,
             mssv: changeValues.mssv,
             password: changeValues.password,
         })
     }
 
-    const handleStatus = () => {
+    const HandleStatus = () => {
         if (status === STATUS_CODE.SUCCESS) {
             // window.location='http://localhost:3001/adminPage'
-            window.location.assign('http://localhost:3001/adminPage')
+            // window.location.assign('http://localhost:3001/adminPage')
+            navigate('/adminPage', { replace: true })
+        } else {
+            setUser({
+                ...user,
+                error: 'mssv hoặc mật khẩu bị sai'
+            })
         }
     }
 
@@ -36,10 +45,23 @@ export default function Login() {
         event.preventDefault()
         dispatch({
             type: 'LOGIN_USER',
-            userLogin: user
+            userLogin: {
+                mssv: user.mssv,
+                password: user.password
+            }
         })
-        setTimeout(handleStatus, 300)
+        HandleStatus()
     }
+
+    useEffect(() => {
+        dispatch({
+            type: 'LOGIN_USER',
+            userLogin: {
+                mssv: user.mssv === '' ? document.getElementById('mssv').value : user.mssv,
+                password: user.password === '' ? document.getElementById('password').value : user.password,
+            }
+        })
+    }, [user])
 
     return (
         <div className='container-fluid m-0 p-0' style={{ backgroundImage: 'url("./hust_background.png")', backgroundSize: 'cover', width: '100%', height: '713.5px' }}>
@@ -52,22 +74,25 @@ export default function Login() {
                         <div className='row'>
                             <div className="col-lg-11 ml-5 p-4 mr-5" style={{ backgroundColor: 'rgba(255,255,255,0.8)', borderRadius: '15px', marginTop: '40px' }}>
                                 <div className="card-body p-md-4 mx-md-3">
-                                    <form onSubmit={(event) => { submitForm(event) }}>
+                                    <form autoComplete="off" onSubmit={(event) => { submitForm(event) }}>
                                         <h1 style={{ paddingTop: '50px' }}>Đăng nhập</h1>
                                         <div className="form-outline mb-4 mt-5 mr-4 ml-3">
-                                            <input name='mssv' type="text" id="form2Example11" className="form-control" placeholder="Mssv/msnv" onChange={(event) => { handleOnChange(event) }} />
+                                            <input id="mssv" name='mssv' type="text" className="form-control" placeholder="Mssv/msnv" onChange={(event) => { handleOnChange(event) }} />
                                         </div>
                                         <div className="form-outline mb-4 mr-4 ml-3">
-                                            <input name='password' type="password" id="form2Example22" className="form-control" placeholder="Mật khẩu" onChange={(event) => { handleOnChange(event) }} />
+                                            <input id="password" name='password' type="password" autoComplete="new-password" className="form-control" placeholder="Mật khẩu" onChange={(event) => { handleOnChange(event) }} />
+                                        </div>
+                                        <div style={{ height: '30px', marginTop: '-20px' }}>
+                                            <span style={{ color: 'red' }}>{user.error}</span>
                                         </div>
                                         <div className="text-center pt-1 mb-5 pb-1" style={{ paddingLeft: '88px' }}>
-                                            <button type="submit" className="btn btn-primary btn-block fa-lg gradient-custom-2"
-                                                style={{ width: '180px', fontSize: '16px', paddingTop: '18px', paddingBottom: '18px' }} >Đăng nhập</button>
+                                            <button className="btn btn-primary btn-block fa-lg gradient-custom-2"
+                                                style={{ width: '180px', fontSize: '16px', paddingTop: '12px', paddingBottom: '12px', marginBottom: '6px' }} >Đăng nhập</button>
                                             <a className="text-muted" href="#!" style={{ fontSize: '13px', paddingRight: '88px' }} data-toggle="modal" data-target="#modelId">Quên mật khẩu?</a>
                                         </div>
                                         <div className="d-flex align-items-center justify-content-center pb-4">
-                                            <p className="mb-0 me-2" style={{ fontSize: '12px' }}>Bạn chưa có tài khoản?</p>
-                                            <button type="button" style={{ fontSize: '13px' }} className="ml-4 btn btn btn-light btn-outline-info"><NavLink className="nav-link" to="/register">Đăng ký ngay</NavLink></button>
+                                            <p className="mb-0 me-2" style={{ fontSize: '13px' }}>Bạn chưa có tài khoản?</p>
+                                            <button type="button" style={{ fontSize: '14px' }} className="ml-4 btn btn btn-light btn-outline-info"><NavLink className="nav-link" to="/register">Đăng ký ngay</NavLink></button>
                                         </div>
                                     </form>
                                     {/* Modal */}

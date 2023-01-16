@@ -2,6 +2,7 @@ import { DELETE_STUDENT_SAGA, GET_STUDENT_BY_ADMIN, LOGIN, UPDATE_ACCOUNT } from
 import { STATUS_CODE } from '../../utils/constant/statusCode'
 
 const userLoginData = {
+    dataLogin: {},
     status: 400,
     getAllStudent: []
 }
@@ -9,7 +10,8 @@ const userLoginData = {
 const userReducer = (state = userLoginData, action) => {
     switch (action.type) {
         case LOGIN: {
-            state.status = action.statusLogin
+            state.status = action.data.statusLogin
+            state.dataLogin = {...action.data.dataLogin}
             return { ...state }
         }
         case GET_STUDENT_BY_ADMIN: {

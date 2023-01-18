@@ -3,6 +3,7 @@ import { login, getAllStudent, deleteStudent, registerUser, updateAccount } from
 import { LOGIN, GET_STUDENT_BY_ADMIN, DELETE_STUDENT_SAGA, UPDATE_ACCOUNT } from '../type/UserType'
 import { TOKEN } from '../../utils/constant/data'
 
+
 function* loginAdmin(action) {
     try {
         let promise = yield login(action.userLogin.mssv, action.userLogin.password)
@@ -38,7 +39,6 @@ function* getAllStudentSaga() {
                 data: promise.data
             })
     } catch (error) {
-
     }
 }
 

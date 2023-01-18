@@ -8,11 +8,11 @@ userRouter.post('/registerUser', register)
 userRouter.post('/login', login)
 userRouter.post('/forgotPassword', forgotPassword)
 userRouter.post('/changePassword', authenticate, allAuthorize, changePassword)
-userRouter.post('/registerAdmin', authenticate, adminAuthorize, registerAdmin)
-userRouter.get('/getAllStudent', getAllStudent)
-userRouter.put('/updateStudent/:id', updateStudentById)
-userRouter.put('/deleteStudent', deleteStudentById)
-userRouter.put('/updateAccount', updateAccount)
+userRouter.post('/registerAdmin', authenticate, adminAuthorize, registerAdmin) 
+userRouter.get('/getAllStudent', authenticate, adminAuthorize, getAllStudent)
+userRouter.put('/updateStudent/:id', authenticate, adminAuthorize, updateStudentById)
+userRouter.put('/deleteAccount', authenticate, adminAuthorize, deleteStudentById)
+userRouter.put('/recreateAccount', authenticate, adminAuthorize, updateAccount)
 
 module.exports = {
     userRouter

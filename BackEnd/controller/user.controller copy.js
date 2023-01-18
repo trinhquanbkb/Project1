@@ -224,12 +224,12 @@ const updateAccount = async (req, res) => {
                 id
             }
         })
-        if (account) {
+        if(account){
             res.status(201).send('update account student success')
-        } else {
+        }else{
             throw new Error('Error update account student')
         }
-    } catch (err) {
+    }catch(err){
         res.status(500).send(err)
     }
 }

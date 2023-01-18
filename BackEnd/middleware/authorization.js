@@ -5,7 +5,7 @@ const adminAuthorize = (req, res, next) => {
         next()
     }
     else{
-        res.send("You cannot use this permission")
+        res.status(400).send("You cannot use this permission")
     }
 }
 
@@ -17,7 +17,7 @@ const userAuthorize = (req, res, next) => {
     }else if(["userOtherSchool"].findIndex(e => e === user.userType) > -1) {
         next()
     }else{
-        res.send("You cannot use this permission")
+        res.status(400).send("You cannot use this permission")
     }
 }
 
@@ -28,7 +28,7 @@ const userOtherSchoolAuthorize = (req, res, next) => {
         next()
     }
     else{
-        res.send("You cannot use this permission")
+        res.status(400).send("You cannot use this permission")
     }
 }
 
@@ -42,7 +42,7 @@ const allAuthorize = (req, res, next) => {
     }else if(["admin"].findIndex(e => e === user.userType) > -1) {
         next()
     }else{
-        res.send("You cannot use this permission")
+        res.status(400).send("You cannot use this permission")
     }
 }
 

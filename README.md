@@ -84,6 +84,20 @@ branch-23: updateStudentById (chỉnh sửa và cập nhật sinh viên với id
 
 branch-24: deleteStudentById (xóa sinh viên) (q)       -----done-----
 
+
+
+
+
 ## `FRONTEND`:
 
-HTML -> CSS -> Boostrap (style của html, css) -> Javascript DOM -> ReactJS
+
+
+## `AdminPage`
+
+### `Quản lý sinh viên`
+xem danh sách tất cả sinh viên                      ------done-------
+xóa, tạo lại sinh viên                             -------done-------
+sắp xếp sinh viên theo trường                        --------done--------
+xem danh sách các quyển sách của một sinh viên đang mượn
+nạp thẻ cho sinh viên ngoài trường
+

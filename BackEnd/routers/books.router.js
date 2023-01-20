@@ -16,7 +16,7 @@ bookRouter.put('/borrowBook/:id',authenticate,userAuthorize,borrowBook)
 bookRouter.put('/giveBook/:id',authenticate,userAuthorize,checkBook,giveBook)
 bookRouter.get('/totalBook/:name', authenticate, allAuthorize, totalBook)
 bookRouter.get('/unborrowListBook', authenticate, allAuthorize,unborrowListBook)
-bookRouter.get('/historybookborrowofstudent', authenticate, userAuthorize, historyBookBorrowOfStudent)
+bookRouter.put('/historybookborrowofstudent', authenticate, adminAuthorize, historyBookBorrowOfStudent)
 bookRouter.get('/listUser',authenticate, adminAuthorize, listUser)
 bookRouter.get('/minTime/:name', authenticate, userAuthorize,minTime)
 

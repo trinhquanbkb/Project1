@@ -123,7 +123,7 @@ const deleteCard = async (req, res) => {
 
 //rechargeCard
 const rechargeCard = async (req, res) => {
-    const { id } = req.params
+    const { id } = req.query
     const { balance } = req.body
     try {
         const card = await Card.findOne({

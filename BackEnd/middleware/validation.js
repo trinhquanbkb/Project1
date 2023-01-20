@@ -41,7 +41,7 @@ const checkPlace = async (req, res, next) => {
 
 //Kiem tra user co ton tai k
 const checkUser = async (req, res, next) => {
-    const id = req.params.id
+    const id = req.query.id
     const user = await Users.findOne({
         where: { id: id }
     })

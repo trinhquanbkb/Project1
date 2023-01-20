@@ -286,17 +286,17 @@ const unborrowListBook = async (req, res) => {
 
 //xem lịch sử mượn sách của sinh viên về sách chưa trả
 const historyBookBorrowOfStudent = async (req, res) => {
-    const { userId } = req.user
+    const { id } = req.query
     try {
         const user = await Users.findOne({
             where: {
-                id: userId
+                id: id
             }
         })
         if (user) {
             const book = await Books.findAll({
                 where: {
-                    userId: userId,
+                    userId: id,
                 }
             })
             if (book) {

@@ -27,7 +27,8 @@ const userReducer = (state = userLoginData, action) => {
                         "phoneNumber": item.phoneNumber,
                         "email": item.email,
                         "createdAt": item.createdAt,
-                        "isDelete": item.isDelete
+                        "isDelete": item.isDelete,
+                        "userType": item.userType
                     })
                     t++;
                 })
@@ -42,7 +43,8 @@ const userReducer = (state = userLoginData, action) => {
                         "phoneNumber": item.phoneNumber,
                         "email": item.email,
                         "createdAt": item.createdAt,
-                        "isDelete": item.isDelete
+                        "isDelete": item.isDelete,
+                        "userType": item.userType
                     })
                     t++;
                 })

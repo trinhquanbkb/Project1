@@ -98,6 +98,6 @@ branch-24: deleteStudentById (xóa sinh viên) (q)       -----done-----
 xem danh sách tất cả sinh viên                      ------done-------
 xóa, tạo lại sinh viên                             -------done-------
 sắp xếp sinh viên theo trường                        --------done--------
-xem danh sách các quyển sách của một sinh viên đang mượn
-nạp thẻ cho sinh viên ngoài trường
+xem danh sách các quyển sách của một sinh viên đang mượn      -------done-------
+nạp thẻ cho sinh viên ngoài trường (Chỉ sinh viên ngoài trường mới hiện button nạp thẻ)                 --------done---------
 

@@ -3,7 +3,7 @@ import { Route, Routes, Navigate } from 'react-router-dom'
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import PageNotFound from './pages/PageError/PageNotFound';
-import Header from './pages/AdminPages/Header';
+import Header from './pages/AdminPages/Header/Header';
 import IndexAdmin from './pages/AdminPages/IndexAdmin';
 import UserManager from './pages/AdminPages/User/UserManager.js'
 import React from 'react';

@@ -10,7 +10,7 @@ cardStudentRouter.get('/getAllCard', authenticate, userAuthorize, getAllCard)
 cardStudentRouter.post('/createCard', authenticate, adminAuthorize, createCard)
 cardStudentRouter.put('/updateCard/:id', authenticate, adminAuthorize, checkCardStudents, updateCard)
 cardStudentRouter.delete('/deleteCard/:id', authenticate, adminAuthorize, checkCardStudents, deleteCard)
-cardStudentRouter.put('/rechargeCard/:id',authenticate,adminAuthorize,checkUser, rechargeCard)
+cardStudentRouter.put('/rechargeCard', authenticate, adminAuthorize, checkUser, rechargeCard)
 
 module.exports = {
     cardStudentRouter,

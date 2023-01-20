@@ -1,14 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react'
-import './UserManager.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { Table, Tag, Button, Input, Space } from 'antd';
+import { Modal, Table, Tag, Button, Input, Space, Form } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
+import { GET_USERID_CLICK, SUBMIT_CHARGE } from '../../../redux/type/CardStudentType'
 
 
 
 export default function UserManager() {
     const { getAllStudent } = useSelector(state => state.userReducer)
+    const { listBookBorrowOfStudent, bookById } = useSelector(state => state.bookReducer)
+    const { userIdClick, status, clickCharge } = useSelector(state => state.cardStudentReducer)
     const dispatch = useDispatch()
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -17,6 +19,9 @@ export default function UserManager() {
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalCardOpen, setIsModalCardOpen] = useState(false);
+
 
     //chức năng tạo lại tài khoản đã xóa
     const updateAccount = (item) => {
@@ -37,6 +42,9 @@ export default function UserManager() {
     useEffect(() => {
         dispatch({
             type: 'GET_ALL_STUDENT'
+        })
+        dispatch({
+            type: 'GET_BOOK_BORROW_STUDENT',
         })
     }, [])
 
@@ -59,13 +67,13 @@ export default function UserManager() {
                 return {
                     ...item,
                     idSort: item.iddb,
-                    id: <p style={{ fontSize: '17px', fontWeight: '500', height: '14px' }}>{item.id}</p>,
-                    name: <p id={idName} style={{ fontSize: '17px', fontWeight: '500', height: '14px' }}>{item.name}</p>,
-                    mssv: <p id={idMssv} style={{ fontSize: '17px', fontWeight: '500', height: '14px' }}>{item.mssv}</p>,
-                    phoneNumber: <p style={{ fontSize: '17px', fontWeight: '500', height: '14px' }}>{item.phoneNumber}</p>,
-                    email: <p style={{ fontSize: '17px', fontWeight: '500', height: '14px' }}>{item.email}</p>,
+                    id: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px' }}>{item.id}</p>,
+                    name: <p id={idName} style={{ fontSize: '17px', fontWeight: '450', height: '14px' }}>{item.name}</p>,
+                    mssv: <p id={idMssv} style={{ fontSize: '17px', fontWeight: '450', height: '14px' }}>{item.mssv}</p>,
+                    phoneNumber: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px' }}>{item.phoneNumber}</p>,
+                    email: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px' }}>{item.email}</p>,
                     isDelete: item.isDelete,
-                    tags: ['delete', 'getBooks', 'chargeCard', item.iddb],
+                    tags: ['delete', 'getBooks', 'chargeCard', item.iddb, item.userType],
                     mssvSearch: item.mssv,
                     nameSearch: item.name,
                 }
@@ -74,11 +82,11 @@ export default function UserManager() {
                 return {
                     ...item,
                     idSort: item.iddb,
-                    id: <p id={item.id} style={{ fontSize: '17px', fontWeight: '500', height: '14px', color: 'red' }}>{item.id}</p>,
-                    name: <p id={idName} style={{ fontSize: '17px', fontWeight: '500', height: '14px', color: 'red' }}>{item.name}</p>,
-                    mssv: <p id={idMssv} style={{ fontSize: '17px', fontWeight: '500', height: '14px', color: 'red' }}>{item.mssv}</p>,
-                    phoneNumber: <p style={{ fontSize: '17px', fontWeight: '500', height: '14px', color: 'red' }}>{item.phoneNumber}</p>,
-                    email: <p style={{ fontSize: '17px', fontWeight: '500', height: '14px', color: 'red' }}>{item.email}</p>,
+                    id: <p id={item.id} style={{ fontSize: '17px', fontWeight: '450', height: '14px', color: 'red' }}>{item.id}</p>,
+                    name: <p id={idName} style={{ fontSize: '17px', fontWeight: '450', height: '14px', color: 'red' }}>{item.name}</p>,
+                    mssv: <p id={idMssv} style={{ fontSize: '17px', fontWeight: '450', height: '14px', color: 'red' }}>{item.mssv}</p>,
+                    phoneNumber: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px', color: 'red' }}>{item.phoneNumber}</p>,
+                    email: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px', color: 'red' }}>{item.email}</p>,
                     isDelete: item.isDelete,
                     tags: ['recreate', item.iddb],
                     mssvSearch: item.mssv,
@@ -86,7 +94,8 @@ export default function UserManager() {
                 }
             }
         })
-    }
+    } 
+
 
     // (từ đây)các chức năng để tìm kiếm
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -149,9 +158,9 @@ export default function UserManager() {
         ),
         onFilter: (value, record) => {
             if (dataIndex === 'mssv') {
-                return record.mssvSearch === value
-            }else if(dataIndex === 'name'){
-                console.log(record.nameSearch)
+                return record.mssvSearch.includes(value)
+            } else if (dataIndex === 'name') {
+
                 return record.nameSearch.trim().toLowerCase().includes(value.trim().toLowerCase())
             }
         },
@@ -177,41 +186,42 @@ export default function UserManager() {
     });
     //(đến đây) các chức năng tìm kiếm
 
+
     const columns = [
         {
-            key: '1',
-            title: 'ID',
+            key: 'userId',
+            title: 'Id',
             dataIndex: 'id',
-            width: 70,
+            width: 60,
         },
         {
-            key: '2',
-            title: 'NAME',
+            key: 'nameUser',
+            title: 'Tên',
             dataIndex: 'name',
-            width: 260,
+            width: 240,
             ...getColumnSearchProps('name'),
         },
         {
-            key: '3',
-            title: 'MSSV',
+            key: 'mssv',
+            title: 'Mssv',
             dataIndex: 'mssv',
-            width: 170,
+            width: 150,
             ...getColumnSearchProps('mssv'),
         },
         {
-            key: '4',
-            title: 'PHONE',
+            key: 'phoneNumber',
+            title: 'Số điện thoại',
             dataIndex: 'phoneNumber',
-            width: 170,
+            width: 150,
         },
         {
-            key: '5',
-            title: 'EMAIL',
+            key: 'email',
+            title: 'Email',
             dataIndex: 'email',
-            width: 260,
+            width: 230,
         },
         {
-            title: 'Tags',
+            title: 'Quản lý',
             key: 'tags',
             dataIndex: 'tags',
             render: (_, { tags }) => (
@@ -221,33 +231,49 @@ export default function UserManager() {
                         if (tag === 'delete') {
                             color = 'red';
                             return (
-                                <Button onClick={() => { deleteAccount(tags[3]) }} style={{ border: 'none', background: 'none' }} ><Tag color={color} key={tag}>
-                                    DELETE
+                                <Button onClick={() => { deleteAccount(tags[3]) }} style={{ border: 'none', background: 'none', height: '40px' }} ><Tag style={{ paddingTop: '4px', paddingBottom: '4px', paddingLeft: '12px', paddingRight: '12px' }} color={color} key={tag}>
+                                    Xóa
                                 </Tag></Button>
                             )
                         } else if (tag === 'getBooks') {
-                            color = 'green'
-                            return (
-                                <Button style={{ border: 'none', background: 'none' }} ><Tag color={color} key={tag}>
-                                    GETBOOKS
-                                </Tag></Button>
-                            )
-                        } else if (tag === 'chargeCard') {
                             color = 'yellow'
                             return (
-                                <Button style={{ border: 'none', background: 'none' }} ><Tag color={color} key={tag}>
-                                    CHARGECARD
-                                </Tag></Button>
+                                <Button onClick={() => {
+                                    let arrayAdd = []
+                                    listBookBorrowOfStudent.forEach(item => {
+                                        if (tags[3] === item.userId) {
+                                            arrayAdd.push(item)
+                                        }
+                                    })
+                                    dispatch({
+                                        type: 'GET_DATA_BOOK_BY_USERID',
+                                        data: arrayAdd
+                                    }); showModal()
+                                }} style={{ border: 'none', background: 'none', height: '40px' }} ><Tag style={{ paddingTop: '3px', paddingBottom: '3px', paddingLeft: '12px', paddingRight: '12px' }} color={color} key={tag}>
+                                        Xem sách
+                                    </Tag></Button>
+                            )
+                        } else if (tag === 'chargeCard' && tags[4] === "userOtherSchool") {
+                            color = 'yellow'
+                            return (
+                                <Button onClick={() => {
+                                    dispatch({
+                                        type: GET_USERID_CLICK,
+                                        data: tags[3]
+                                    })
+                                    showModalCard()
+                                }} style={{ border: 'none', background: 'none', height: '40px' }} ><Tag style={{ paddingTop: '3px', paddingBottom: '3px', paddingLeft: '12px', paddingRight: '12px' }} color={color} key={tag}>
+                                        Nạp thẻ
+                                    </Tag></Button>
                             )
                         } else if (tag === 'recreate') {
                             color = 'black'
                             return (
-                                <Button onClick={() => { updateAccount(tags[1]) }} style={{ border: 'none', background: 'none' }} ><Tag color={color} key={tag}>
-                                    RECREATE
+                                <Button onClick={() => { updateAccount(tags[1]) }} style={{ border: 'none', background: 'none', height: '40px' }} ><Tag style={{ paddingTop: '3px', paddingBottom: '3px', paddingLeft: '12px', paddingRight: '12px' }} color={color} key={tag}>
+                                    Tạo lại
                                 </Tag></Button>
                             )
                         }
-
                     })}
                 </>
             ),
@@ -261,19 +287,153 @@ export default function UserManager() {
         }
     ];
 
+
+    //modal
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+    const showModalCard = () => {
+        setIsModalCardOpen(true);
+    };
+    const handleCardOk = () => {
+        dispatch({
+            type: SUBMIT_CHARGE,
+            data: 0
+        })
+        setIsModalCardOpen(false);
+    };
+    const handleCardCancel = () => {
+        dispatch({
+            type: SUBMIT_CHARGE,
+            data: 0
+        })
+        setIsModalCardOpen(false);
+    };
+
+    //table modal
+    const columnsModal = [
+        {
+            title: 'Tên sách',
+            dataIndex: 'name',
+            key: 'name',
+        },
+        {
+            title: 'Tác giả',
+            dataIndex: 'author',
+            key: 'author',
+        },
+        {
+            title: 'Số trang',
+            dataIndex: 'countPage',
+            key: 'countPage',
+        },
+        {
+            title: 'Vị trí',
+            key: 'positionBook',
+            dataIndex: 'positionBook',
+        },
+        {
+            title: 'Tiêu đề',
+            key: 'title',
+            dataIndex: 'title',
+        },
+        {
+            title: 'Năm xuất bản',
+            key: 'year',
+            dataIndex: 'year',
+        },
+    ];
+    const dataModal = [...bookById]
+
+    //thông báo thành công hoặc lỗi khi rechargeCard
+    const onFinish = (values) => {
+        dispatch({
+            type: 'RECHARGE_CARD_BY_USERID',
+            data: {
+                balance: values,
+                userId: userIdClick
+            }
+        })
+    };
+    const onFinishFailed = (errorInfo) => {
+        // console.log('Failed:', errorInfo);
+    };
+
     return (
-        <div style={{ width: '1320px', margin: 'auto' }} >
-            <h1 style={{ marginTop: '50px', marginBottom: '30px', fontWeight: 'bold' }}>Trang quản lý người dùng</h1>
-            <Table size="large" columns={columns} dataSource={data} pagination={{
-                current: page,
-                pageSize: pageSize,
-                total: dataTable.length,
-                onChange: (page, pageSize) => {
-                    setPage(page)
-                    setPageSize(pageSize)
-                }
-            }}
-                loading={loading} />
+        <div style={{ width: '1200px', margin: 'auto' }} >
+            <h3 style={{ marginTop: '12px', marginBottom: '20px', marginLeft: '-900px', fontWeight: '600' }}>Trang quản lý người dùng</h3>
+            <>
+                <Table size="large" rowKey={(record) => record.id} columns={columns} dataSource={data} pagination={{
+                    current: page,
+                    pageSize: pageSize,
+                    total: dataTable.length,
+                    onChange: (page, pageSize) => {
+                        setPage(page)
+                        setPageSize(pageSize)
+                    }
+                }}
+                    loading={loading} />
+            </>
+            <Modal title="Danh sách sách của sinh viên" width={850} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                <Table columns={columnsModal} dataSource={dataModal} />
+            </Modal>
+            <Modal title="Nạp thẻ cho sinh viên" width={600} open={isModalCardOpen} onOk={handleCardOk} onCancel={handleCardCancel}>
+                <Form
+                    name="basic"
+                    labelCol={{
+                        span: 10,
+                    }}
+                    wrapperCol={{
+                        span: 15,
+                    }}
+                    style={{
+                        maxWidth: 400
+                    }}
+                    initialValues={{
+                        remember: true,
+                    }}
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
+                    autoComplete="off"
+                >
+                    <Form.Item
+                        style={{ marginTop: '30px' }}
+                        label="Số tiền cần nạp"
+                        name="rechargeCard"
+                        rules={[
+                            {
+                                required: true,
+                                pattern: new RegExp(/^[0-9]+$/),
+                                message: 'Cần nhập giá trị số !',
+                            },
+                        ]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        wrapperCol={{
+                            offset: 15,
+                            span: 10,
+                        }}
+                    >
+                        <Button onClick={() => {
+                            dispatch({
+                                type: SUBMIT_CHARGE,
+                                data: 1
+                            })
+                        }} type="primary" htmlType="submit">
+                            Submit
+                        </Button>
+                    </Form.Item>
+                </Form>
+                {(clickCharge === 0) ? <span></span> : ((status === 500) ? <span style={{ color: 'red', marginLeft: '234px' }}>Nạp tiền thất bại!</span> : <span style={{ color: 'grey', marginLeft: '234px' }}>Nạp tiền thành công</span>)}
+            </Modal>
         </div>
     )
 }

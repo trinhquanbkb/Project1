@@ -17,3 +17,28 @@ export const getAllBooks = async () => {
         }
     })
 }
+
+export const deleteBookById = async (id) => {
+    return await Axios.put(`${DOMAIN_SERVER}/books/deleteBook?id=${id}`, { params: { id: id } }, {
+        headers: {
+            token: localStorage.getItem(TOKEN)
+        }
+    })
+}
+
+export const recreateBookById = async (id) => {
+    return await Axios.put(`${DOMAIN_SERVER}/books/recreateBookById?id=${id}`, { params: { id: id } }, {
+        headers: {
+            token: localStorage.getItem(TOKEN)
+        }
+    })
+}
+
+export const updateBookById = async (id, values) => {
+    return await Axios.put(`${DOMAIN_SERVER}/books/updateBook?id=${id}`, { name: values.name, author: values.author, title: values.title, countPage: values.countPage, year: values.year, positionBook: values.positionBook },
+        {
+            headers: {
+                token: localStorage.getItem(TOKEN)
+            }
+        })
+}

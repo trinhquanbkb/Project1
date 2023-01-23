@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     year: DataTypes.INTEGER,
     positionBook: DataTypes.STRING,
     dayBorrow: DataTypes.DATE,
+    //status cho biết sách đã bị xóa hay chưa, active là 0 deleted là 1
     status: DataTypes.STRING,
     endDate: DataTypes.DATE,
   }, {

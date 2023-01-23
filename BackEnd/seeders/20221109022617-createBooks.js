@@ -70,6 +70,34 @@ module.exports = {
         userId: 2
       },
       {
+        name: 'Sherlock holmes',
+        author: 'Conan Doyle',
+        title: 'Trinh thám',
+        countPage: 2300,
+        year: 1876,
+        positionBook: '3T',
+        dayBorrow: null,
+        createdAt: '2022-01-17 04:33:12',
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0',
+        endDate: '2023-01-17 04:33:12',
+        userId: null
+      },
+      {
+        name: 'Sherlock holmes',
+        author: 'Conan Doyle',
+        title: 'Trinh thám',
+        countPage: 2300,
+        year: 1876,
+        positionBook: '3T',
+        dayBorrow: null,
+        createdAt: '2022-01-17 04:33:12',
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0',
+        endDate: '2023-01-17 04:33:12',
+        userId: null
+      },
+      {
         name: 'Dragonball tập 1',
         author: 'Toriyama Akira',
         title: 'võ thuật',
@@ -95,6 +123,7 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
+        userId:null
       },
       {
         name: 'Dragonball tập 3',
@@ -108,6 +137,7 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
+        userId: null
       },
       {
         name: 'Conan tập 1',
@@ -121,6 +151,7 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
+        userId: null
       },
       {
         name: 'Conan tập 2',
@@ -134,6 +165,7 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
+        userId: 2
       },
       {
         name: 'Conan tập 12',
@@ -142,11 +174,26 @@ module.exports = {
         countPage: 200,
         year: 1994,
         positionBook: '12F',
-        dayBorrow: null,
+        dayBorrow: '2022-11-17 04:33:12',
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
+        userId: 3
+      },
+      {
+        name: 'Conan tập 12',
+        author: 'Aoyama Gōshō',
+        title: 'trinh thám',
+        countPage: 200,
+        year: 1994,
+        positionBook: '12F',
+        dayBorrow: '2022-11-17 04:33:12',
+        createdAt: '2022-01-17 04:33:12',
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0',
+        endDate: null,
+        userId: 5
       },
       {
         name: 'Những kẻ khốn khổ',
@@ -160,6 +207,21 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
+        userId: null
+      },
+      {
+        name: 'Những kẻ khốn khổ',
+        author: 'Victor Hugo',
+        title: 'tiểu thuyết',
+        countPage: 5243,
+        year: 1862,
+        positionBook: '1B',
+        dayBorrow: '2022-02-17 04:33:12',
+        createdAt: '2022-01-17 04:33:12',
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0',
+        endDate: null,
+        userId: 5
       },
     ], {});
   },

@@ -50,7 +50,7 @@ const createBook = async (req, res) => {
 }
 
 const updateBook = async (req, res) => {
-    const { id } = req.params
+    const { id } = req.query
     const { name, author, title, countPage, year, positionBook } = req.body
     try {
         const book = await Books.update({ name: name, author: author, title: title, countPage: countPage, year: year, positionBook: positionBook }, {
@@ -70,8 +70,8 @@ const updateBook = async (req, res) => {
 
 const deleteBook = async (req, res) => {
     try {
-        const { id } = req.params
-        const deleteBook = await Books.destroy({
+        const { id } = req.query
+        const deleteBook = await Books.update({status: '1'},{
             where: {
                 id: id
             }
@@ -297,6 +297,7 @@ const historyBookBorrowOfStudent = async (req, res) => {
             const book = await Books.findAll({
                 where: {
                     userId: id,
+                    status: '0'
                 }
             })
             if (book) {
@@ -419,6 +420,24 @@ const minTime = async (req, res) => {
 
 }
 
+const recreateBookById = async(req, res) => {
+    const {id} = req.query
+    try {
+        const recreateBook = await Books.update({status: '0'}, {
+            where: {
+                id,
+            }
+        })
+        if(recreateBook){
+            res.status(200).send(`Recreate book with id=${id} success`)
+        }else{
+            throw new Error('Recreate book error')
+        }
+    } catch (error) {
+        res.status(500).send(`Cannot recreate book with id = ${id}`)
+    }
+}
+
 module.exports = {
     createBook,
     deleteBook,
@@ -432,5 +451,6 @@ module.exports = {
     unborrowListBook,
     historyBookBorrowOfStudent,
     listUser,
-    minTime
+    minTime,
+    recreateBookById,
 }

@@ -2,7 +2,7 @@ const { Books, Card, Users, Places } = require('../models')
 
 //check xem dữ liệu đầu vào id của book có tồn tại hay không
 const checkBook = async (req, res, next) => {
-    const id = req.params.id
+    const id = req.query.id
     const book = await Books.findOne({
         where: {
             id: id

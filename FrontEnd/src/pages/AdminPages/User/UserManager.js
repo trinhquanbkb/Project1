@@ -192,7 +192,7 @@ export default function UserManager() {
             key: 'userId',
             title: 'Id',
             dataIndex: 'id',
-            width: 60,
+            width: 50,
         },
         {
             key: 'nameUser',
@@ -241,14 +241,15 @@ export default function UserManager() {
                                 <Button onClick={() => {
                                     let arrayAdd = []
                                     listBookBorrowOfStudent.forEach(item => {
-                                        if (tags[3] === item.userId) {
+                                        if (tags[3] === item.userId && item.status === '0') {
                                             arrayAdd.push(item)
                                         }
                                     })
                                     dispatch({
                                         type: 'GET_DATA_BOOK_BY_USERID',
                                         data: arrayAdd
-                                    }); showModal()
+                                    }); 
+                                    showModal()
                                 }} style={{ border: 'none', background: 'none', height: '40px' }} ><Tag style={{ paddingTop: '3px', paddingBottom: '3px', paddingLeft: '12px', paddingRight: '12px' }} color={color} key={tag}>
                                         Xem sách
                                     </Tag></Button>
@@ -366,7 +367,7 @@ export default function UserManager() {
     };
 
     return (
-        <div style={{ width: '1200px', margin: 'auto' }} >
+        <div style={{ width: '1175px', margin: 'auto' }} >
             <h3 style={{ marginTop: '12px', marginBottom: '20px', marginLeft: '-900px', fontWeight: '600' }}>Trang quản lý người dùng</h3>
             <>
                 <Table size="large" rowKey={(record) => record.id} columns={columns} dataSource={data} pagination={{

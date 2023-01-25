@@ -35,7 +35,16 @@ export const recreateBookById = async (id) => {
 }
 
 export const updateBookById = async (id, values) => {
-    return await Axios.put(`${DOMAIN_SERVER}/books/updateBook?id=${id}`, { name: values.name, author: values.author, title: values.title, countPage: values.countPage, year: values.year, positionBook: values.positionBook },
+    return await Axios.put(`${DOMAIN_SERVER}/books/updateBook?id=${id}`, values,
+        {
+            headers: {
+                token: localStorage.getItem(TOKEN)
+            }
+        })
+}
+
+export const createBook = async (values) => {
+    return await Axios.post(`${DOMAIN_SERVER}/books/createBook`, { name: values.name, author: values.author, title: values.title, countPage: values.countPage, year: values.year, positionBook: values.positionBook },
         {
             headers: {
                 token: localStorage.getItem(TOKEN)

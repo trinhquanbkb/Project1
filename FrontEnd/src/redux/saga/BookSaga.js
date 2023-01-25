@@ -1,6 +1,6 @@
 import { takeLatest, put } from 'redux-saga/effects'
 import { DELETE_BOOK_BY_ID, GET_BOOK_BORROW_BY_STUDENTID, RECREATE_BOOK_BY_ID, UPDATE_BOOK_BY_ID } from '../type/BookType'
-import { deleteBookById, getAllBooks, recreateBookById, updateBookById } from '../../services/BookService'
+import { deleteBookById, getAllBooks, recreateBookById, updateBookById, createBook } from '../../services/BookService'
 import { STATUS_CODE } from '../../utils/constant/statusCode'
 
 
@@ -52,11 +52,26 @@ function* recreateBook(action) {
 
 function* updateBook(action) {
     try {
-        let promise = yield updateBookById(action.data.bookId, action.data.values)
-        yield put({
-            type: UPDATE_BOOK_BY_ID,
-            data: promise.status
-        })
+        if (action.data.values === 'errorInput') {
+            yield put({
+                type: UPDATE_BOOK_BY_ID,
+                data: 500
+            })
+        } else {
+            let promise = yield updateBookById(action.data.bookId, action.data.values)
+            yield put({
+                type: UPDATE_BOOK_BY_ID,
+                data: promise.status
+            })
+        }
+    } catch (error) {
+
+    }
+}
+
+function* createNewBook(action){
+    try {
+        yield createBook(action.data)
     } catch (error) {
         
     }
@@ -68,4 +83,5 @@ export function* getBookSaga() {
     yield takeLatest('DELETE_BOOK', deleteBook)
     yield takeLatest('RECREATE_BOOK', recreateBook)
     yield takeLatest('UPDATE_BOOK', updateBook)
+    yield takeLatest('CONFIRM_CREATE_BOOK', createNewBook)
 }

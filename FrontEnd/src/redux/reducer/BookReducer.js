@@ -12,7 +12,9 @@ const bookData = {
     //lấy ra dữ liệu của quyển sách đang muốn update để ném vào value inpit
     book: {
         
-    }
+    },
+    //values là giá trị của sách mới chuẩn bị được tạo ra
+    newBook: {}
 }
 const bookReducer = (state = bookData, action) => {
     switch (action.type) {
@@ -126,6 +128,10 @@ const bookReducer = (state = bookData, action) => {
                 state.statusUpdate = STATUS_CODE.SERVER_ERROR
             }
             return { ...state }
+        }
+        case 'VALUE_CREATE_BOOK': {
+            state.newBook = action.data
+            return {...state}
         }
         default: {
             return { ...state }

@@ -100,7 +100,7 @@ module.exports = {
       {
         name: 'Dragonball tập 1',
         author: 'Toriyama Akira',
-        title: 'võ thuật',
+        title: 'Võ thuật',
         countPage: 167,
         year: 1923,
         positionBook: '4T',
@@ -114,7 +114,7 @@ module.exports = {
       {
         name: 'Dragonball tập 2',
         author: 'Toriyama Akira',
-        title: 'võ thuật',
+        title: 'Võ thuật',
         countPage: 159,
         year: 1923,
         positionBook: '5T',
@@ -128,7 +128,7 @@ module.exports = {
       {
         name: 'Dragonball tập 3',
         author: 'Toriyama Akira',
-        title: 'võ thuật',
+        title: 'Võ thuật',
         countPage: 163,
         year: 1923,
         positionBook: '6T',
@@ -142,7 +142,7 @@ module.exports = {
       {
         name: 'Conan tập 1',
         author: 'Aoyama Gōshō',
-        title: 'trinh thám',
+        title: 'Trinh thám',
         countPage: 213,
         year: 1994,
         positionBook: '2G',
@@ -156,7 +156,7 @@ module.exports = {
       {
         name: 'Conan tập 2',
         author: 'Aoyama Gōshō',
-        title: 'trinh thám',
+        title: 'Trinh thám',
         countPage: 210,
         year: 1994,
         positionBook: '5G',
@@ -170,7 +170,7 @@ module.exports = {
       {
         name: 'Conan tập 12',
         author: 'Aoyama Gōshō',
-        title: 'trinh thám',
+        title: 'Trinh thám',
         countPage: 200,
         year: 1994,
         positionBook: '12F',
@@ -184,7 +184,7 @@ module.exports = {
       {
         name: 'Conan tập 12',
         author: 'Aoyama Gōshō',
-        title: 'trinh thám',
+        title: 'Trinh thám',
         countPage: 200,
         year: 1994,
         positionBook: '12F',
@@ -198,7 +198,7 @@ module.exports = {
       {
         name: 'Những kẻ khốn khổ',
         author: 'Victor Hugo',
-        title: 'tiểu thuyết',
+        title: 'Tiểu thuyết',
         countPage: 5243,
         year: 1862,
         positionBook: '1B',
@@ -212,7 +212,7 @@ module.exports = {
       {
         name: 'Những kẻ khốn khổ',
         author: 'Victor Hugo',
-        title: 'tiểu thuyết',
+        title: 'Tiểu thuyết',
         countPage: 5243,
         year: 1862,
         positionBook: '1B',
@@ -222,6 +222,34 @@ module.exports = {
         status:'0',
         endDate: null,
         userId: 5
+      },
+      {
+        name: 'Cuộc đi săn của bầy cừu',
+        author: 'Victor Hugo',
+        title: 'Tiểu thuyết',
+        countPage: 523,
+        year: 1987,
+        positionBook: '12G',
+        dayBorrow: null,
+        createdAt: '2022-01-17 04:33:12',
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0',
+        endDate: null,
+        userId: null
+      },
+      {
+        name: 'Những chú chim biển',
+        author: 'Yashen',
+        title: 'Tiểu thuyết',
+        countPage: 983,
+        year: 2001,
+        positionBook: '17G',
+        dayBorrow: null,
+        createdAt: '2022-01-17 04:33:12',
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0',
+        endDate: null,
+        userId: null
       },
     ], {});
   },

@@ -279,8 +279,8 @@ export default function UserManager() {
                 </>
             ),
             filters: [
-                { text: 'Deleted', value: 1 },
-                { text: 'Active', value: 0 }
+                { text: 'Đã xóa', value: 1 },
+                { text: 'Còn hiệu lực', value: 0 }
             ],
             onFilter: (value, record) => {
                 return record.isDelete === value

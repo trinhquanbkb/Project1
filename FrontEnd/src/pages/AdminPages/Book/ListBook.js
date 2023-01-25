@@ -73,13 +73,13 @@ export default function ListBook() {
                     ...item,
                     nameSearch: item.name,
                     authorSearch: item.author,
-                    id: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px' }}>{item.id}</p>,
-                    name: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px' }}>{item.name}</p>,
-                    author: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px' }}>{item.author}</p>,
-                    countPage: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px' }}>{item.countPage}</p>,
-                    positionBook: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px' }}>{item.positionBook}</p>,
-                    title: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px' }}>{item.title}</p>,
-                    year: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px' }}>{item.year}</p>,
+                    id: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px', color: 'red' }}>{item.id}</p>,
+                    name: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px', color: 'red' }}>{item.name}</p>,
+                    author: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px', color: 'red' }}>{item.author}</p>,
+                    countPage: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px', color: 'red' }}>{item.countPage}</p>,
+                    positionBook: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px', color: 'red' }}>{item.positionBook}</p>,
+                    title: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px', color: 'red' }}>{item.title}</p>,
+                    year: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px', color: 'red' }}>{item.year}</p>,
                     tags: ['recreate', item.id],
                     status: item.status
                 }
@@ -256,8 +256,8 @@ export default function ListBook() {
                 </>
             ),
             filters: [
-                { text: 'Deleted', value: '1' },
-                { text: 'Active', value: '0' }
+                { text: 'Đã xóa', value: '1' },
+                { text: 'Còn hiệu lực', value: '0' }
             ],
             onFilter: (value, record) => {
                 return record.status === value
@@ -298,7 +298,13 @@ export default function ListBook() {
         })
     };
     const onFinishFailed = (errorInfo) => {
-        // console.log('Failed:', errorInfo);
+        dispatch({
+            type: 'UPDATE_BOOK',
+            data: {
+                values: 'errorInput',
+                bookId: idBookDb
+            }
+        })
     };
 
 
@@ -317,7 +323,7 @@ export default function ListBook() {
                 }}
                     loading={loading} />
             </>
-            <Modal title="Cập nhật sách" width={800} open={isModalBookOpen} onOk={handleBookOk} onCancel={handleBookCancel}>
+            <Modal title="Cập nhật sách" width={600} open={isModalBookOpen} onOk={handleBookOk} onCancel={handleBookCancel}>
                 <Form
                     name="basic"
                     labelCol={{
@@ -436,7 +442,7 @@ export default function ListBook() {
                         </Button>
                     </Form.Item>
                 </Form>
-                {(clickBook === 0) ? <span></span> : ((statusUpdate === 500) ? <span style={{ color: 'red', marginLeft: '234px' }}>Cập nhật sách thất bại!</span> : <span style={{ color: 'grey', marginLeft: '234px' }}>Cập nhật sách thành công</span>)}
+                {(clickBook === 0) ? <span></span> : ((statusUpdate === 500) ? <span style={{ color: 'red', marginLeft: '220px' }}>Cập nhật sách thất bại!</span> : <span style={{ color: 'grey', marginLeft: '210px' }}>Cập nhật sách thành công</span>)}
             </Modal>
         </div >
     )

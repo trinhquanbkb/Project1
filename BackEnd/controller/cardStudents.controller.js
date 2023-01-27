@@ -157,6 +157,22 @@ const rechargeCard = async (req, res) => {
     }
 }
 
+const findByUserId = async (req, res) => {
+    const { userId } = req.query
+    try {
+        const cardStudent = await Card.findOne({
+            where: { userId: userId }
+        })
+        if (cardStudent) {
+            res.status(200).send(cardStudent.dataValues)
+        } else {
+            throw new Error(`cannot find by userId = ${userId}`)
+        }
+    } catch (err) {
+        res.status(500).send(err)
+    }
+}
+
 //Export
 module.exports = {
     findById,
@@ -164,5 +180,6 @@ module.exports = {
     createCard,
     updateCard,
     deleteCard,
-    rechargeCard
+    rechargeCard,
+    findByUserId,
 }

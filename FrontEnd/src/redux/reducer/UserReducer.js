@@ -1,10 +1,14 @@
-import { DELETE_STUDENT_SAGA, GET_STUDENT_BY_ADMIN, LOGIN, UPDATE_ACCOUNT } from "../type/UserType"
+import { DELETE_STUDENT_SAGA, GET_STUDENT_BY_ADMIN, LOGIN, STATUS_REGISTER_ADMIN, UPDATE_ACCOUNT, VALUE_REGISTER_ADMIN } from "../type/UserType"
 import { STATUS_CODE } from '../../utils/constant/statusCode'
 
 const userLoginData = {
     dataLogin: {},
     status: 400,
-    getAllStudent: []
+    getAllStudent: [],
+    //valueRegisterAdmin cho biết dữ liệu điền vào form đăng ký admin
+    valueRegisterAdmin: {},
+    //statusRegisterAdmin cho biết status trả về khi đăng ký admin
+    statusRegisterAdmin: null
 }
 
 const userReducer = (state = userLoginData, action) => {
@@ -58,6 +62,14 @@ const userReducer = (state = userLoginData, action) => {
                 })
             }
             state.getAllStudent = [...array]
+            return { ...state }
+        }
+        case VALUE_REGISTER_ADMIN: {
+            state.valueRegisterAdmin = action.data
+            return { ...state }
+        }
+        case STATUS_REGISTER_ADMIN: {
+            state.statusRegisterAdmin = action.data
             return { ...state }
         }
         default: {

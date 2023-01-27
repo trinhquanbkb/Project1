@@ -9,3 +9,12 @@ export const rechargeCard = async (id, balance) => {
         }
     })
 }
+
+export const findCardByUserId = async (userId) => {
+    return await Axios.get(`${DOMAIN_SERVER}/cardStudents/findByUserId?userId=${userId}`, {
+        headers: {
+            token: localStorage.getItem(TOKEN)
+        }
+    })
+}
+

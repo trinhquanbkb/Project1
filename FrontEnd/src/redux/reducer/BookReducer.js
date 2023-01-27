@@ -16,7 +16,7 @@ const bookData = {
     //values là giá trị của sách mới chuẩn bị được tạo ra
     newBook: {},
     //statusBorrow cho biết khi mượn sách sẽ thành công hay đã có người mượn
-    statusBorrow: null
+    statusBorrow: null,
 }
 const bookReducer = (state = bookData, action) => {
     switch (action.type) {

@@ -9,7 +9,6 @@ import UserManager from './pages/AdminPages/User/UserManager.js'
 import React from 'react';
 import ListBook from './pages/AdminPages/Book/ListBook';
 import CreateBook from './pages/AdminPages/Book/CreateBook';
-import EmptyBook from './pages/AdminPages/Book/EmptyBook';
 import RegisterBook from './pages/AdminPages/Book/RegisterBook';
 
 function App() {
@@ -27,7 +26,6 @@ function App() {
              <Route path="listBook" element={<ListBook/>} />
              <Route path="createBook" element={<CreateBook/>} />
              <Route path="registerBook" element={<RegisterBook/>} />
-             <Route path="emptyBook" element={<EmptyBook/>} />
           </Route>
         </Route>
         <Route path="*" element={<PageNotFound />} />

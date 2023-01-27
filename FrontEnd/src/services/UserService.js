@@ -42,3 +42,12 @@ export const getUserByMssv = async (mssv) => {
             }
         })
 }
+
+export const registerAdmin = async (values) => {
+    return await Axios.post(`${DOMAIN_SERVER}/users/registerAdmin`, { name: values.name, mssv: values.mssv, phoneNumber: values.phoneNumber, email: values.email, password: values.password },
+        {
+            headers: {
+                token: localStorage.getItem(TOKEN)
+            }
+        })
+}

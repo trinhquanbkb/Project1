@@ -1,7 +1,8 @@
 import { takeLatest, put } from 'redux-saga/effects'
-import { login, getAllStudent, deleteStudent, registerUser, updateAccount } from '../../services/UserService'
-import { LOGIN, GET_STUDENT_BY_ADMIN, DELETE_STUDENT_SAGA, UPDATE_ACCOUNT } from '../type/UserType'
+import { login, getAllStudent, deleteStudent, registerUser, updateAccount, registerAdmin } from '../../services/UserService'
+import { LOGIN, GET_STUDENT_BY_ADMIN, DELETE_STUDENT_SAGA, UPDATE_ACCOUNT, STATUS_REGISTER_ADMIN } from '../type/UserType'
 import { TOKEN } from '../../utils/constant/data'
+import { STATUS_CODE } from '../../utils/constant/statusCode'
 
 
 
@@ -96,6 +97,30 @@ function* getBookById(action) {
     }
 }
 
+function* registerAdminSaga(action){
+    try {
+        const values = {
+            name: action.data.name,
+            password: action.data.password,
+            email: action.data.email,
+            phoneNumber: action.data.phoneNumber,
+            mssv: action.data.mssv
+        }
+        let promise = yield registerAdmin(values)
+        if(promise.status === STATUS_CODE.SUCCESS_PUT){
+            yield put({
+                type: STATUS_REGISTER_ADMIN,
+                data: STATUS_CODE.SUCCESS_PUT
+            })
+        }
+    } catch (error) {
+        yield put({
+            type: STATUS_REGISTER_ADMIN,
+            data: STATUS_CODE.SERVER_ERROR
+        })
+    }
+}
+
 export function* getUserSaga() {
     yield takeLatest('LOGIN_USER', loginAdmin)
     yield takeLatest('GET_ALL_STUDENT', getAllStudentSaga)
@@ -103,4 +128,5 @@ export function* getUserSaga() {
     yield takeLatest('REGISTER_USER', registerSaga)
     yield takeLatest('UPDATE_STUDENT', updateStudent)
     yield takeLatest('GET_DATA_BOOK_BY_USERID', getBookById)
+    yield takeLatest('CONFIRM_REGISTER_ADMIN', registerAdminSaga)
 }

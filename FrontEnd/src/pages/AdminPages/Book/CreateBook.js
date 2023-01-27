@@ -88,8 +88,7 @@ export default function CreateBook() {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         style={{
-          maxWidth: 650,
-          marginLeft: '-30px',
+          maxWidth: 880,
           marginTop: '40px'
         }}
         validateMessages={validateMessages}
@@ -181,6 +180,7 @@ export default function CreateBook() {
             ...layout.wrapperCol,
             offset: 8,
           }}
+          style={{ marginTop: '30px' }}
         >
           <Popconfirm
             title="Tạo sách"

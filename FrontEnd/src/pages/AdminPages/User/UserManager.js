@@ -10,7 +10,7 @@ import { GET_USERID_CLICK, SUBMIT_CHARGE } from '../../../redux/type/CardStudent
 export default function UserManager() {
     const { getAllStudent } = useSelector(state => state.userReducer)
     const { listBookBorrowOfStudent, bookById } = useSelector(state => state.bookReducer)
-    const { userIdClick, status, clickCharge } = useSelector(state => state.cardStudentReducer)
+    const { userIdClick, status, clickCharge, balance } = useSelector(state => state.cardStudentReducer)
     const dispatch = useDispatch()
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -50,7 +50,12 @@ export default function UserManager() {
 
     useEffect(() => {
         fetchData()
-    }, [getAllStudent])
+        dispatch({
+            type: 'GET_BALANCE',
+            data: userIdClick
+        })
+    }, [getAllStudent, balance])
+
 
     const fetchData = () => {
         setLoading(true)
@@ -94,7 +99,7 @@ export default function UserManager() {
                 }
             }
         })
-    } 
+    }
 
 
     // (từ đây)các chức năng để tìm kiếm
@@ -248,7 +253,7 @@ export default function UserManager() {
                                     dispatch({
                                         type: 'GET_DATA_BOOK_BY_USERID',
                                         data: arrayAdd
-                                    }); 
+                                    });
                                     showModal()
                                 }} style={{ border: 'none', background: 'none', height: '40px' }} ><Tag style={{ paddingTop: '3px', paddingBottom: '3px', paddingLeft: '12px', paddingRight: '12px' }} color={color} key={tag}>
                                         Xem sách
@@ -260,6 +265,10 @@ export default function UserManager() {
                                 <Button onClick={() => {
                                     dispatch({
                                         type: GET_USERID_CLICK,
+                                        data: tags[3]
+                                    })
+                                    dispatch({
+                                        type: 'GET_BALANCE',
                                         data: tags[3]
                                     })
                                     showModalCard()
@@ -403,6 +412,7 @@ export default function UserManager() {
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
                 >
+                    <span style={{ color: 'green' }}>Số dư tài khoản: {balance}</span>
                     <Form.Item
                         style={{ marginTop: '30px' }}
                         label="Số tiền cần nạp"
@@ -428,12 +438,18 @@ export default function UserManager() {
                                 type: SUBMIT_CHARGE,
                                 data: 1
                             })
+                            setTimeout(() => {
+                                dispatch({
+                                    type: 'GET_BALANCE',
+                                    data: userIdClick
+                                })
+                            }, 200)
                         }} type="primary" htmlType="submit">
                             Submit
                         </Button>
                     </Form.Item>
                 </Form>
-                {(clickCharge === 0) ? <span></span> : ((status === 500) ? <span style={{ color: 'red', marginLeft: '234px' }}>Nạp tiền thất bại!</span> : <span style={{ color: 'grey', marginLeft: '234px' }}>Nạp tiền thành công</span>)}
+                {(clickCharge === 0) ? <span></span> : ((status === 500) ? <span style={{ color: 'red', marginLeft: '224px' }}>Nạp tiền thất bại!</span> : <span style={{ color: 'grey', marginLeft: '223px' }}>Nạp tiền thành công</span>)}
             </Modal>
         </div>
     )

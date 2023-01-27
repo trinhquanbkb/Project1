@@ -1,7 +1,7 @@
 import { takeLatest, put } from 'redux-saga/effects'
 import { STATUS_CODE } from '../../utils/constant/statusCode'
-import { rechargeCard } from '../../services/CardStudentService'
-import { CHARGE_CARD_USERID } from '../type/CardStudentType'
+import { rechargeCard, findCardByUserId } from '../../services/CardStudentService'
+import { BALANCE_OF_USERID, CHARGE_CARD_USERID } from '../type/CardStudentType'
 
 function* rechargeCardStudent(action) {
     try {
@@ -21,6 +21,19 @@ function* rechargeCardStudent(action) {
     }
 }
 
+function* getBalanceById(action){
+    try {
+        let promise = yield findCardByUserId(action.data)
+        yield put({
+            type: BALANCE_OF_USERID,
+            data: promise.data.balance
+        })
+    } catch (error) {
+        
+    }
+}
+
 export function* getCardStudentSaga() {
     yield takeLatest('RECHARGE_CARD_BY_USERID', rechargeCardStudent)
+    yield takeLatest('GET_BALANCE', getBalanceById)
 }

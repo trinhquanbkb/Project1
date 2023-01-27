@@ -48,13 +48,13 @@ export default function RegisterBook() {
       message.success('Thành công!');
     } else if (statusBorrow === STATUS_CODE.CLIENT_ERROR) {
       message.error('Đã có người mượn quyển sách này!')
-    } else if (statusBorrow === null){
+    } else if (statusBorrow === null) {
 
     }
     dispatch({
       type: BORROW_BOOK_BY_USERID,
       data: null
-  })
+    })
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -78,9 +78,8 @@ export default function RegisterBook() {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         style={{
-          maxWidth: 500,
-          marginLeft: '200px',
-          marginTop: '40px'
+          maxWidth: 880,
+          marginTop: '100px'
         }}
         validateMessages={validateMessages}
       >
@@ -111,12 +110,15 @@ export default function RegisterBook() {
           style={{ height: '40px' }}
         >
           <Input style={{ marginLeft: '15px' }} />
+          <span style={{ color: 'green', marginLeft: '20px' }}>Tham khảo ở trang 'Danh sách các quyển sách'</span>
         </Form.Item>
+
         <Form.Item
           wrapperCol={{
             ...layout.wrapperCol,
             offset: 8,
           }}
+          style={{ marginTop: '50px' }}
         >
           <Popconfirm
             title="Đăng ký mượn sách"
@@ -135,6 +137,7 @@ export default function RegisterBook() {
           </Popconfirm>
         </Form.Item>
       </Form>
+
     </div>
   )
 }

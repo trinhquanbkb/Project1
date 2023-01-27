@@ -234,6 +234,24 @@ const updateAccount = async (req, res) => {
     }
 }
 
+const getUserByMssv = async (req, res) => {
+    const { mssv } = req.query
+    try {
+        const acc = await Users.findOne({
+            where: {
+                mssv: mssv
+            }
+        })
+        if (acc) {
+            res.status(200).send(acc.dataValues)
+        } else {
+            throw new Error('Cannot find mssv')
+        }
+    } catch (err) {
+        res.status(400).send(err)
+    }
+}
+
 module.exports = {
     register,
     login,
@@ -243,6 +261,7 @@ module.exports = {
     getAllStudent,
     updateStudentById,
     deleteStudentById,
-    updateAccount
+    updateAccount,
+    getUserByMssv,
 }
 

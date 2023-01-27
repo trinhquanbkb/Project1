@@ -175,14 +175,13 @@ const extendBook = async (req, res) => {
 }
 //Mượn sách borrowBook( mượn sách theo idBook)
 const borrowBook = async (req, res) => {
-    const { id } = req.params
-    const { userId } = req.user
+    const { idBook, userId } = req.query
     const dateNow = new Date()
     const newEndDate = new Date(dateNow).getTime() + 60 * 24 * 3600 * 1000
     try {
         const book = await Books.findOne({
             where: {
-                id: id,
+                id: idBook,
             }
         })
         if (book) {
@@ -191,7 +190,7 @@ const borrowBook = async (req, res) => {
                 //Chưa được mượn--cập nhật dayBorrow, userId, endDate
                 const updateBook = await Books.update({ userId: userId, dayBorrow: dateNow, endDate: newEndDate }, {
                     where: {
-                        id: id,
+                        id: idBook,
                     }
                 })
                 if (updateBook) {

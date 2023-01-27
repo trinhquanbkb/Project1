@@ -51,3 +51,13 @@ export const createBook = async (values) => {
             }
         })
 }
+
+export const borrowBook = async (idBook, userId) => {
+    return await Axios.put(`${DOMAIN_SERVER}/books/borrowBook?userId=${userId}&idBook=${idBook}`, { params: { userId: userId, idBook: idBook } },
+        {
+            headers: {
+                token: localStorage.getItem(TOKEN)
+            }
+        })
+}
+

@@ -1,4 +1,4 @@
-import { DELETE_BOOK_BY_ID, GET_BOOK_BORROW_BY_STUDENTID, RECREATE_BOOK_BY_ID, SUBMIT_UPDATE_BOOK, UPDATE_BOOK_BY_ID } from '../type/BookType'
+import { BORROW_BOOK_BY_USERID, DELETE_BOOK_BY_ID, GET_BOOK_BORROW_BY_STUDENTID, RECREATE_BOOK_BY_ID, SUBMIT_UPDATE_BOOK, UPDATE_BOOK_BY_ID } from '../type/BookType'
 import { STATUS_CODE } from '../../utils/constant/statusCode'
 
 const bookData = {
@@ -8,13 +8,15 @@ const bookData = {
     //clickBook cho biết đã ấn vào nút cập nhật sách chưa, nếu ấn vào thì sẽ là 1, nếu chưa ấn sẽ là 0
     clickBook: 0,
     //statusUpdate cho biết đã tạo thành công hay chưa, thành công là 201
-    statusUpdate: 500,
+    statusUpdate: STATUS_CODE.SERVER_ERROR,
     //lấy ra dữ liệu của quyển sách đang muốn update để ném vào value inpit
     book: {
         
     },
     //values là giá trị của sách mới chuẩn bị được tạo ra
-    newBook: {}
+    newBook: {},
+    //statusBorrow cho biết khi mượn sách sẽ thành công hay đã có người mượn
+    statusBorrow: null
 }
 const bookReducer = (state = bookData, action) => {
     switch (action.type) {
@@ -132,6 +134,16 @@ const bookReducer = (state = bookData, action) => {
         case 'VALUE_CREATE_BOOK': {
             state.newBook = action.data
             return {...state}
+        }
+        case BORROW_BOOK_BY_USERID: {
+            if(action.data === STATUS_CODE.SUCCESS_PUT){
+                state.statusBorrow = STATUS_CODE.SUCCESS_PUT
+            }else if(action.data === STATUS_CODE.CLIENT_ERROR){
+                state.statusBorrow = STATUS_CODE.CLIENT_ERROR
+            } else{
+                state.statusBorrow = null
+            }
+            return { ...state }
         }
         default: {
             return { ...state }

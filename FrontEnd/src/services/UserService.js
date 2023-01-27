@@ -34,3 +34,11 @@ export const updateAccount = async (iddb) => {
     })
 }
 
+export const getUserByMssv = async (mssv) => {
+    return await Axios.get(`${DOMAIN_SERVER}/users/getUserByMssv?mssv=${mssv}`,
+        {
+            headers: {
+                token: localStorage.getItem(TOKEN)
+            }
+        })
+}

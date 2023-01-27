@@ -65,7 +65,8 @@ export default function ListBook() {
                     title: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px' }}>{item.title}</p>,
                     year: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px' }}>{item.year}</p>,
                     tags: ['delete', 'update', item.id],
-                    status: item.status
+                    status: item.status,
+                    titleSearch: item.title
                 }
             }
             else if (item.status === '1') {
@@ -81,7 +82,8 @@ export default function ListBook() {
                     title: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px', color: 'red' }}>{item.title}</p>,
                     year: <p style={{ fontSize: '17px', fontWeight: '450', height: '14px', color: 'red' }}>{item.year}</p>,
                     tags: ['recreate', item.id],
-                    status: item.status
+                    status: item.status,
+                    titleSearch: item.title
                 }
             }
         })
@@ -152,6 +154,9 @@ export default function ListBook() {
             } else if (dataIndex === 'name') {
 
                 return record.nameSearch.trim().toLowerCase().includes(value.trim().toLowerCase())
+            } else if (dataIndex === 'title') {
+
+                return record.titleSearch.trim().toLowerCase().includes(value.trim().toLowerCase())
             }
         },
         onFilterDropdownOpenChange: (visible) => {
@@ -215,6 +220,7 @@ export default function ListBook() {
             key: 'title',
             dataIndex: 'title',
             width: 180,
+            ...getColumnSearchProps('title'),
         },
         {
             title: 'Quản lý',

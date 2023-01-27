@@ -34,6 +34,7 @@ export default function CreateBook() {
   useEffect(() => {
     setTimeout(confirm, 400)
   }, [newBook])
+  
   const onFinish = (values) => {
     dispatch({
       type: 'VALUE_CREATE_BOOK',
@@ -54,6 +55,7 @@ export default function CreateBook() {
   function isEmptyObject(obj) {
     return JSON.stringify(obj) === '{}';
   }
+
 
   const confirm = (e) => {
     if (!isEmptyObject(newBook)) {

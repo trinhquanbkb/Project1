@@ -1,20 +1,20 @@
 import { takeLatest, put } from 'redux-saga/effects'
-import { login, getAllStudent, deleteStudent, registerUser, updateAccount, registerAdmin } from '../../services/UserService'
-import { LOGIN, GET_STUDENT_BY_ADMIN, DELETE_STUDENT_SAGA, UPDATE_ACCOUNT, STATUS_REGISTER_ADMIN } from '../type/UserType'
+import { loginAdmin, getAllStudent, deleteStudent, registerUser, updateAccount, registerAdmin, changePasswordAdmin } from '../../services/UserService'
+import { LOGIN, GET_STUDENT_BY_ADMIN, DELETE_STUDENT_SAGA, UPDATE_ACCOUNT, STATUS_REGISTER_ADMIN, STATUS_CHANGE_PASSWORD_ADMIN } from '../type/UserType'
 import { TOKEN } from '../../utils/constant/data'
 import { STATUS_CODE } from '../../utils/constant/statusCode'
 
 
 
-function* loginAdmin(action) {
+function* loginAdminSaga(action) {
     try {
-        let promise = yield login(action.userLogin.mssv, action.userLogin.password)
+        let promise = yield loginAdmin(action.userLogin.mssv, action.userLogin.password)
         if (promise) {
             localStorage.setItem(TOKEN, promise.data.token)
             yield put({
                 type: LOGIN,
                 data: {
-                    statusLogin: promise.status,
+                    statusLogin: 'ADMIN',
                     dataLogin: {
                         token: promise.data.token
                     }
@@ -26,7 +26,7 @@ function* loginAdmin(action) {
         yield put({
             type: LOGIN,
             data: {
-                statusLogin: '400',
+                statusLogin: STATUS_CODE.CLIENT_ERROR,
             }
         })
     }
@@ -121,12 +121,35 @@ function* registerAdminSaga(action){
     }
 }
 
+function* changePassword(action){
+    try {
+        const values = {
+            oldPassword: action.data.oldPassword,
+            newPassword: action.data.newPassword,
+            refillnewPassword: action.data.reNewPassword
+        }
+        let promise = yield changePasswordAdmin(values)
+        if(promise){
+            yield put({
+                type: STATUS_CHANGE_PASSWORD_ADMIN,
+                data: STATUS_CODE.SUCCESS_PUT
+            })
+        }
+    } catch (error) {
+        yield put({
+            type: STATUS_CHANGE_PASSWORD_ADMIN,
+            data: STATUS_CODE.SERVER_ERROR
+        })
+    }
+}
+
 export function* getUserSaga() {
-    yield takeLatest('LOGIN_USER', loginAdmin)
+    yield takeLatest('LOGIN_USER', loginAdminSaga)
     yield takeLatest('GET_ALL_STUDENT', getAllStudentSaga)
     yield takeLatest('DELETE_STUDENT', deleteStudentSaga)
     yield takeLatest('REGISTER_USER', registerSaga)
     yield takeLatest('UPDATE_STUDENT', updateStudent)
     yield takeLatest('GET_DATA_BOOK_BY_USERID', getBookById)
     yield takeLatest('CONFIRM_REGISTER_ADMIN', registerAdminSaga)
+    yield takeLatest('CONFIRM_CHANGE_PASSWORD_ADMIN', changePassword)
 }

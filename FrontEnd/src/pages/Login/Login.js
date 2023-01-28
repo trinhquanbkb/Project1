@@ -28,11 +28,14 @@ export default function Login() {
     }
 
     const HandleStatus = () => {
-        if (status === STATUS_CODE.SUCCESS) {
+        if (status === 'ADMIN') {
             // window.location='http://localhost:3001/adminPage'
             // window.location.assign('http://localhost:3001/adminPage')
             navigate('/adminPage', { replace: true })
-        } else {
+        } else if (status === 'USER') {
+            // sau này làm sau
+        }
+        else if(status === STATUS_CODE.CLIENT_ERROR){
             setUser({
                 ...user,
                 error: 'mssv hoặc mật khẩu bị sai'

@@ -23,10 +23,32 @@ const register = async (req, res) => {
     }
 }
 
-const login = async (req, res) => {
+const loginUser = async (req, res) => {
     const { mssv, password } = req.body
     try {
-        const results = await Users.findOne({ where: { mssv, isDelete: 0 } })
+        const results = await Users.findOne({ where: { mssv, isDelete: 0, userType: {[Op.or]: ['user', 'userOtherSchool']} } })
+        if (results) {
+            //giải băm mật khẩu và trả về true hoặc false
+            const isAuthen = bcrypt.compareSync(password, results.dataValues.password)
+            if (isAuthen === true) {
+                //đăng nhập sẽ nhận được token
+                const token = jwt.sign({ userId: results.id, userType: results.userType }, "trinhhoangquan", { expiresIn: 60 * 60 })
+                res.status(200).send({ message: "Login success", token })
+            } else {
+                throw new Error(`Password is not exist`)
+            }
+        } else {
+            throw new Error(`Mssv is not exist`)
+        }
+    } catch (error) {
+        res.status(400).send(`${error}`)
+    }
+}
+
+const loginAdmin = async (req, res) => {
+    const { mssv, password } = req.body
+    try {
+        const results = await Users.findOne({ where: { mssv, isDelete: 0, userType: 'admin' } })
         if (results) {
             //giải băm mật khẩu và trả về true hoặc false
             const isAuthen = bcrypt.compareSync(password, results.dataValues.password)
@@ -93,11 +115,11 @@ const forgotPassword = async (req, res) => {
 //sử dụng khi đã login và authentication sẽ decode ra một req.user chứa mssv và userType
 const changePassword = async (req, res) => {
     const { oldPassword, newPassword, refillnewPassword } = req.body
-    const { mssv } = req.user
+    const { userId } = req.user
     try {
         const user = await Users.findOne({
             where: {
-                mssv
+                id: userId
             }
         })
         if (user) {
@@ -111,7 +133,7 @@ const changePassword = async (req, res) => {
                     const hashPassword = bcrypt.hashSync(newPassword, salt)
                     const updatePassword = await Users.update({ password: hashPassword }, {
                         where: {
-                            mssv,
+                            id: userId
                         }
                     })
                     if (updatePassword) {
@@ -120,10 +142,10 @@ const changePassword = async (req, res) => {
                         res.status(500).send("Change password failure")
                     }
                 } else {
-                    throw new Error("New password with re-fill new password unlike")
+                    res.status(400).send("New password with re-fill new password unlike")
                 }
             } else {
-                throw new Error("Entered wrong old password")
+                res.status(400).send("Entered wrong old password")
             }
         }
     } catch (error) {
@@ -138,7 +160,7 @@ const registerAdmin = async (req, res) => {
         const salt = bcrypt.genSaltSync(10)
         //generate password
         const hashPassword = bcrypt.hashSync(password, salt)
-        const newUser = await Users.create({ name, mssv, phoneNumber, email, password: hashPassword, userType: "admin" })
+        const newUser = await Users.create({ name, mssv, phoneNumber, email, password: hashPassword, userType: "admin", isDelete: 0 })
         res.status(201).send(newUser)
     } catch (error) {
         res.status(500).send(error)
@@ -254,7 +276,8 @@ const getUserByMssv = async (req, res) => {
 
 module.exports = {
     register,
-    login,
+    loginUser,
+    loginAdmin,
     forgotPassword,
     changePassword,
     registerAdmin,

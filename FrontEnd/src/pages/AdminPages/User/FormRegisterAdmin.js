@@ -77,7 +77,7 @@ export default function FormRegisterAdmin() {
                     })
                 }, 200)
             } else {
-                message.error('Cần điền hai mật khẩu trùng nhau!')
+                message.error('Lỗi: Mật khẩu nhập lại chưa trùng khớp!')
             }
         }
     }
@@ -189,7 +189,7 @@ export default function FormRegisterAdmin() {
                 >
                     <Popconfirm
                         title="Đăng ký tài khoản admin"
-                        description="Bạn có chắc chắn tạo tài khoản nàyy?"
+                        description="Bạn có chắc chắn tạo tài khoản này?"
                         onConfirm={() => {
                             form.submit()
                         }

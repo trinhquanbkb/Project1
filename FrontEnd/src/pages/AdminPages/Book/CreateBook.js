@@ -2,12 +2,15 @@ import React, { useEffect } from 'react'
 import { Button, Form, Input, Select, message, Popconfirm } from 'antd';
 import listTitleOption from './listTitleOption.json'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { TOKEN_ADMIN } from '../../../utils/constant/data';
 
 export default function CreateBook() {
   const { Option } = Select
   const dispatch = useDispatch()
   const { newBook } = useSelector(state => state.bookReducer)
   const [form] = Form.useForm();
+  const navigate = useNavigate()
 
   const layout = {
     labelCol: {
@@ -30,6 +33,13 @@ export default function CreateBook() {
     },
   };
   /* eslint-enable no-template-curly-in-string */
+
+  useEffect(() => {
+    if (!localStorage.getItem(TOKEN_ADMIN)) {
+      navigate('/login', { replace: true })
+    }
+
+  }, [])
 
   useEffect(() => {
     setTimeout(confirm, 400)

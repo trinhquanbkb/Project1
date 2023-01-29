@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { Breadcrumb, Layout, Menu, theme, Col, Row } from 'antd';
-
-import './HeaderCss.css'
 import DropDownAdmin from '../User/DropDownAdmin';
-
+import { useNavigate } from 'react-router-dom'
+import { TOKEN_ADMIN } from '../../../utils/constant/data';
 
 const { Header, Content, Sider, Footer } = Layout;
 
@@ -14,6 +13,12 @@ export default function HeaderAdmin() {
         token: { colorBgContainer },
     } = theme.useToken();
 
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (!localStorage.getItem(TOKEN_ADMIN)) {
+            navigate('/login', { replace: true })
+        }
+    }, [])
 
     return (
         <Layout>
@@ -29,7 +34,7 @@ export default function HeaderAdmin() {
                         <Col className="gutter-row" span={18}>
                         </Col>
                         <Col span={2}>
-                            <DropDownAdmin/>
+                            <DropDownAdmin />
                         </Col>
                     </Row>
                 </Menu>

@@ -1,34 +1,58 @@
 import { takeLatest, put } from 'redux-saga/effects'
-import { loginAdmin, getAllStudent, deleteStudent, registerUser, updateAccount, registerAdmin, changePasswordAdmin } from '../../services/UserService'
+import { loginAdmin, loginUser, getAllStudent, deleteStudent, registerUser, updateAccount, registerAdmin, changePasswordAdmin } from '../../services/UserService'
 import { LOGIN, GET_STUDENT_BY_ADMIN, DELETE_STUDENT_SAGA, UPDATE_ACCOUNT, STATUS_REGISTER_ADMIN, STATUS_CHANGE_PASSWORD_ADMIN } from '../type/UserType'
-import { TOKEN } from '../../utils/constant/data'
+import { TOKEN_ADMIN, TOKEN_USER } from '../../utils/constant/data'
 import { STATUS_CODE } from '../../utils/constant/statusCode'
 
 
 
 function* loginAdminSaga(action) {
-    try {
-        let promise = yield loginAdmin(action.userLogin.mssv, action.userLogin.password)
-        if (promise) {
-            localStorage.setItem(TOKEN, promise.data.token)
+    let t = 0
+    //check xem có phải tài khoản admin không
+    if (t === 0) {
+        try {
+            let promiseAdmin = yield loginAdmin(action.userLogin.mssv, action.userLogin.password)
+            t++
+            if (promiseAdmin) {
+                localStorage.setItem(TOKEN_ADMIN, promiseAdmin.data.token)
+                yield put({
+                    type: LOGIN,
+                    data: {
+                        statusLogin: 'ADMIN',
+                        dataLogin: {
+                            token: promiseAdmin.data.token
+                        }
+                    }
+                })
+            }
+        } catch (err) {
+        }
+    }
+    //check xem có phải tài khoản user không
+    if (t !== 1) {
+        try {
+            let promiseUser = yield loginUser(action.userLogin.mssv, action.userLogin.password)
+            if (promiseUser) {
+                localStorage.setItem(TOKEN_USER, promiseUser.data.token)
+                yield put({
+                    type: LOGIN,
+                    data: {
+                        statusLogin: 'USER',
+                        dataLogin: {
+                            token: promiseUser.data.token
+                        }
+                    }
+                })
+            }
+        } catch (error) {
+            localStorage.removeItem(TOKEN_ADMIN)
             yield put({
                 type: LOGIN,
                 data: {
-                    statusLogin: 'ADMIN',
-                    dataLogin: {
-                        token: promise.data.token
-                    }
+                    statusLogin: STATUS_CODE.CLIENT_ERROR,
                 }
             })
         }
-    } catch (err) {
-        localStorage.removeItem(TOKEN)
-        yield put({
-            type: LOGIN,
-            data: {
-                statusLogin: STATUS_CODE.CLIENT_ERROR,
-            }
-        })
     }
 }
 
@@ -97,7 +121,7 @@ function* getBookById(action) {
     }
 }
 
-function* registerAdminSaga(action){
+function* registerAdminSaga(action) {
     try {
         const values = {
             name: action.data.name,
@@ -107,7 +131,7 @@ function* registerAdminSaga(action){
             mssv: action.data.mssv
         }
         let promise = yield registerAdmin(values)
-        if(promise.status === STATUS_CODE.SUCCESS_PUT){
+        if (promise.status === STATUS_CODE.SUCCESS_PUT) {
             yield put({
                 type: STATUS_REGISTER_ADMIN,
                 data: STATUS_CODE.SUCCESS_PUT
@@ -121,7 +145,7 @@ function* registerAdminSaga(action){
     }
 }
 
-function* changePassword(action){
+function* changePassword(action) {
     try {
         const values = {
             oldPassword: action.data.oldPassword,
@@ -129,7 +153,7 @@ function* changePassword(action){
             refillnewPassword: action.data.reNewPassword
         }
         let promise = yield changePasswordAdmin(values)
-        if(promise){
+        if (promise) {
             yield put({
                 type: STATUS_CHANGE_PASSWORD_ADMIN,
                 data: STATUS_CODE.SUCCESS_PUT

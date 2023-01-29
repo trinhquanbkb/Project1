@@ -2,13 +2,16 @@ import React, { useEffect } from 'react'
 import { Button, Form, Input, message, Popconfirm } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
 import { STATUS_CODE } from '../../../utils/constant/statusCode';
+import { useNavigate } from 'react-router-dom'
 import { BORROW_BOOK_BY_USERID } from '../../../redux/type/BookType';
+import { TOKEN_ADMIN } from '../../../utils/constant/data';
 
 export default function RegisterBook() {
 
   const dispatch = useDispatch()
   const [form] = Form.useForm();
   const { statusBorrow } = useSelector(state => state.bookReducer)
+  const navigate = useNavigate()
 
   const layout = {
     labelCol: {
@@ -31,6 +34,12 @@ export default function RegisterBook() {
     },
   };
   /* eslint-enable no-template-curly-in-string */
+
+  useEffect(() => {
+    if (!localStorage.getItem(TOKEN_ADMIN)) {
+      navigate('/login', { replace: true })
+    }
+  }, [])
 
   useEffect(() => {
     setTimeout(confirm, 400)

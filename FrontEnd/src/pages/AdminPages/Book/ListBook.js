@@ -4,6 +4,8 @@ import { Modal, Table, Tag, Button, Input, Space, Form } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import { SUBMIT_UPDATE_BOOK } from '../../../redux/type/BookType';
+import { useNavigate } from 'react-router-dom'
+import { TOKEN_ADMIN } from '../../../utils/constant/data';
 
 
 export default function ListBook() {
@@ -18,9 +20,12 @@ export default function ListBook() {
     const searchInput = useRef(null);
     const { listBookBorrowOfStudent, idBookDb, clickBook, statusUpdate, book } = useSelector(state => state.bookReducer)
     const [isModalBookOpen, setIsModalBookOpen] = useState(false);
-
+    const navigate = useNavigate()
 
     useEffect(() => {
+        if (!localStorage.getItem(TOKEN_ADMIN)) {
+            navigate('/login', { replace: true })
+          }
         dispatch({
             type: 'GET_BOOK_BORROW_STUDENT',
         })

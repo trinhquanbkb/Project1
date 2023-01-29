@@ -33,7 +33,7 @@ export default function Login() {
             // window.location.assign('http://localhost:3001/adminPage')
             navigate('/adminPage', { replace: true })
         } else if (status === 'USER') {
-            // sau này làm sau
+            navigate('/userPage', { replace: true })
         }
         else if(status === STATUS_CODE.CLIENT_ERROR){
             setUser({

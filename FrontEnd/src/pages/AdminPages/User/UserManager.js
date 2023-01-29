@@ -2,8 +2,10 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Modal, Table, Tag, Button, Input, Space, Form } from 'antd';
 import Highlighter from 'react-highlight-words';
+import { useNavigate } from 'react-router-dom'
 import { SearchOutlined } from '@ant-design/icons';
 import { GET_USERID_CLICK, SUBMIT_CHARGE } from '../../../redux/type/CardStudentType'
+import { TOKEN_ADMIN } from '../../../utils/constant/data';
 
 
 
@@ -21,6 +23,7 @@ export default function UserManager() {
     const searchInput = useRef(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalCardOpen, setIsModalCardOpen] = useState(false);
+    const navigate = useNavigate()
 
 
     //chức năng tạo lại tài khoản đã xóa
@@ -40,6 +43,9 @@ export default function UserManager() {
     }
 
     useEffect(() => {
+        if(!localStorage.getItem(TOKEN_ADMIN)){
+            navigate('/login', {replace: true})
+        }
         dispatch({
             type: 'GET_ALL_STUDENT'
         })

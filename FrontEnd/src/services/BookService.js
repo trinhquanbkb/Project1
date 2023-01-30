@@ -47,7 +47,7 @@ export const createBook = async (values) => {
     return await Axios.post(`${DOMAIN_SERVER}/books/createBook`, { name: values.name, author: values.author, title: values.title, countPage: values.countPage, year: values.year, positionBook: values.positionBook },
         {
             headers: {
-                TOKEN_ADMIN: localStorage.getItem(TOKEN_ADMIN)
+                token: localStorage.getItem(TOKEN_ADMIN)
             }
         })
 }
@@ -56,7 +56,7 @@ export const borrowBook = async (idBook, userId) => {
     return await Axios.put(`${DOMAIN_SERVER}/books/borrowBook?userId=${userId}&idBook=${idBook}`, { params: { userId: userId, idBook: idBook } },
         {
             headers: {
-                TOKEN_ADMIN: localStorage.getItem(TOKEN_ADMIN)
+                token: localStorage.getItem(TOKEN_ADMIN)
             }
         })
 }

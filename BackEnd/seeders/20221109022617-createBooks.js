@@ -251,6 +251,48 @@ module.exports = {
         endDate: null,
         userId: null
       },
+      {
+        name: 'Ánh Sao và Bầu trời',
+        author: 'Huy Nam',
+        title: 'Tiểu thuyết',
+        countPage: 125,
+        year: 2008,
+        positionBook: '22G',
+        dayBorrow: null,
+        createdAt: '2022-01-17 04:33:12',
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0',
+        endDate: null,
+        userId: null
+      },
+      {
+        name: 'Em và Tôi',
+        author: 'Cù Văn Hậu',
+        title: 'Phiêu lưu',
+        countPage: 1251,
+        year: 1992,
+        positionBook: '3T',
+        dayBorrow: null,
+        createdAt: '2022-01-17 04:33:12',
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0',
+        endDate: null,
+        userId: null
+      },
+      {
+        name: 'Tâm Lý Học - Phác Họa Chân Dung Kẻ Phạm Tội',
+        author: 'Diệp Hồng Vũ',
+        title: 'Trinh thám',
+        countPage: 422,
+        year: 2020,
+        positionBook: '8K',
+        dayBorrow: null,
+        createdAt: '2022-01-17 04:33:12',
+        updatedAt: '2022-01-17 04:33:12',
+        status:'0',
+        endDate: null,
+        userId: null
+      },
     ], {});
   },
 

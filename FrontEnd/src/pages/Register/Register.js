@@ -158,7 +158,7 @@ export default function Signin() {
                     <div className='row'>
                         <div className='col-6'>
                             <div className="group">
-                                <input type="text" name="firstName" required onChange={(event) => { handleOnChange(event) }} />
+                                <input autocomplete="off" type="text" name="firstName" required onChange={(event) => { handleOnChange(event) }} />
                                 <span className="highlight" />
                                 <span className="bar" />
                                 <label>firstName</label>
@@ -167,7 +167,7 @@ export default function Signin() {
                         </div>
                         <div className='col-6'>
                             <div className="group">
-                                <input type="text" name="lastName" required onChange={(event) => { handleOnChange(event) }} />
+                                <input autocomplete="off" type="text" name="lastName" required onChange={(event) => { handleOnChange(event) }} />
                                 <span className="highlight" />
                                 <span className="bar" />
                                 <label>lastName</label>
@@ -180,7 +180,7 @@ export default function Signin() {
                     <div className='row'>
                         <div className='col-12'>
                             <div className="group">
-                                <input className='input-full' name='mssv' type="text" required onChange={(event) => { handleOnChange(event) }} />
+                                <input autocomplete="off" className='input-full' name='mssv' type="text" required onChange={(event) => { handleOnChange(event) }} />
                                 <span className="highlight" />
                                 <span className="bar-full" />
                                 <label>Mssv</label>
@@ -193,7 +193,7 @@ export default function Signin() {
                     <div className='row'>
                         <div className='col-12'>
                             <div className="group">
-                                <input className='input-full' name='phone' type="text" required onChange={(event) => { handleOnChange(event) }} />
+                                <input autocomplete="off" className='input-full' name='phone' type="text" required onChange={(event) => { handleOnChange(event) }} />
                                 <span className="highlight" />
                                 <span className="bar-full" />
                                 <label>Phone</label>
@@ -206,7 +206,7 @@ export default function Signin() {
                     <div className='row'>
                         <div className='col-12'>
                             <div className="group">
-                                <input className='input-full' name='email' type="email" required onChange={(event) => { handleOnChange(event) }} />
+                                <input autocomplete="off" className='input-full' name='email' type="email" required onChange={(event) => { handleOnChange(event) }} />
                                 <span className="highlight" />
                                 <span className="bar-full" />
                                 <label>Email</label>
@@ -219,7 +219,7 @@ export default function Signin() {
                     <div className='row' style={{ height:'70px'}}>
                         <div className='col-6'>
                             <div className="group">
-                                <input type="password" name='password' required onChange={(event) => { handleOnChange(event) }} />
+                                <input autocomplete="off" type="password" name='password' required onChange={(event) => { handleOnChange(event) }} />
                                 <span className="highlight" />
                                 <span className="bar" />
                                 <label>password</label>
@@ -229,7 +229,7 @@ export default function Signin() {
                         </div>
                         <div className='col-6'>
                             <div className="group">
-                                <input type="password" name='passwordConfirm' required onChange={(event) => { handleOnChange(event) }} />
+                                <input type="password" autocomplete="off" name='passwordConfirm' required onChange={(event) => { handleOnChange(event) }} />
                                 <span className="highlight" />
                                 <span className="bar" />
                                 <label>passwordConfirm</label>

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import { useNavigate } from 'react-router-dom'
 import { TOKEN_USER } from '../../../utils/constant/data';
@@ -15,9 +15,9 @@ export default function HeaderUser() {
 
     useEffect(() => {
         if (!localStorage.getItem(TOKEN_USER)) {
-          navigate('/login', { replace: true })
+            navigate('/login', { replace: true })
         }
-      }, [])
+    }, [])
 
     return (
         <Layout>
@@ -52,21 +52,13 @@ export default function HeaderUser() {
                 className="site-layout"
                 style={{
                     padding: '0 50px',
+                    marginTop: '50px'
                 }}
             >
-                <Breadcrumb
-                    style={{
-                        margin: '16px 0',
-                    }}
-                >
-                    <Breadcrumb.Item>Home</Breadcrumb.Item>
-                    <Breadcrumb.Item>List</Breadcrumb.Item>
-                    <Breadcrumb.Item>App</Breadcrumb.Item>
-                </Breadcrumb>
                 <div
                     style={{
                         padding: 24,
-                        minHeight: 380,
+                        minHeight: 530,
                         background: colorBgContainer,
                     }}
                 >

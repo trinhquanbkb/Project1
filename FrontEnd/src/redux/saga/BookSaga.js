@@ -72,6 +72,7 @@ function* updateBook(action) {
 
 function* createNewBook(action){
     try {
+        console.log(action.data)
         yield createBook(action.data)
     } catch (error) {
         

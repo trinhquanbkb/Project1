@@ -80,10 +80,10 @@ export default function Login() {
                                     <form autoComplete="off" onSubmit={(event) => { submitForm(event) }}>
                                         <h1 style={{ paddingTop: '50px' }}>Đăng nhập</h1>
                                         <div className="form-outline mb-4 mt-5 mr-4 ml-3">
-                                            <input id="mssv" name='mssv' type="text" className="form-control" placeholder="Mssv/msnv" onChange={(event) => { handleOnChange(event) }} />
+                                            <input autocomplete="off" id="mssv" name='mssv' type="text" className="form-control" placeholder="Mssv/msnv" onChange={(event) => { handleOnChange(event) }} />
                                         </div>
                                         <div className="form-outline mb-4 mr-4 ml-3">
-                                            <input id="password" name='password' type="password" autoComplete="new-password" className="form-control" placeholder="Mật khẩu" onChange={(event) => { handleOnChange(event) }} />
+                                            <input autocomplete="off" id="password" name='password' type="password" autoComplete="new-password" className="form-control" placeholder="Mật khẩu" onChange={(event) => { handleOnChange(event) }} />
                                         </div>
                                         <div style={{ height: '30px', marginTop: '-20px' }}>
                                             <span style={{ color: 'red' }}>{user.error}</span>

@@ -46,6 +46,7 @@ export default function RegisterBook() {
   }, [statusBorrow])
 
   const onFinish = (values) => {
+    console.log(values)
     dispatch({
       type: 'BORROW_BOOK',
       data: values
@@ -119,15 +120,14 @@ export default function RegisterBook() {
           style={{ height: '40px' }}
         >
           <Input style={{ marginLeft: '15px' }} />
-          <span style={{ color: 'green', marginLeft: '20px' }}>Tham khảo ở trang 'Danh sách các quyển sách'</span>
         </Form.Item>
-
+        <span style={{ color: 'green', marginLeft: '-30px' }}>Chú ý: Id sách tham khảo ở trang 'Danh sách các quyển sách'</span>
         <Form.Item
           wrapperCol={{
             ...layout.wrapperCol,
             offset: 8,
           }}
-          style={{ marginTop: '50px' }}
+          style={{ marginTop: '20px' }}
         >
           <Popconfirm
             title="Đăng ký mượn sách"

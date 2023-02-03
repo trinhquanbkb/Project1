@@ -1,4 +1,4 @@
-import { DELETE_STUDENT_SAGA, GET_STUDENT_BY_ADMIN, LOGIN, STATUS_CHANGE_PASSWORD_ADMIN, STATUS_REGISTER_ADMIN, UPDATE_ACCOUNT, VALUE_CHANGE_PASSWORD_ADMIN, VALUE_REGISTER_ADMIN } from "../type/UserType"
+import { CHECK_MSSV_REDUCER, DELETE_STUDENT_SAGA, GET_STUDENT_BY_ADMIN, LOGIN, STATUS_CHANGE_PASSWORD_ADMIN, STATUS_REGISTER_ADMIN, UPDATE_ACCOUNT, VALUE_CHANGE_PASSWORD_ADMIN, VALUE_REGISTER_ADMIN } from "../type/UserType"
 import { STATUS_CODE } from '../../utils/constant/statusCode'
 
 const userLoginData = {
@@ -14,6 +14,8 @@ const userLoginData = {
     valueChangePasswordAdmin: {},
     //statusRegisterAdmin cho biết status trả về khi đăng ký admin
     statusChangePasswordAdmin: null,
+    //check mssv
+    checkMssv: null,
 }
 
 const userReducer = (state = userLoginData, action) => {
@@ -83,6 +85,10 @@ const userReducer = (state = userLoginData, action) => {
         }
         case STATUS_CHANGE_PASSWORD_ADMIN: {
             state.statusChangePasswordAdmin = action.data
+            return { ...state }
+        }
+        case CHECK_MSSV_REDUCER: {
+            state.checkMssv = action.data
             return { ...state }
         }
         default: {

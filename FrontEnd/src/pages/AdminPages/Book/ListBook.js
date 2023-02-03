@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Modal, Table, Tag, Button, Input, Space, Form } from 'antd';
+import { Modal, Select, Table, Tag, Button, Input, Space, Form } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import { SUBMIT_UPDATE_BOOK } from '../../../redux/type/BookType';
 import { useNavigate } from 'react-router-dom'
 import { TOKEN_ADMIN } from '../../../utils/constant/data';
+import listTitleOption from './listTitleOption.json'
 
 
 export default function ListBook() {
@@ -21,11 +22,12 @@ export default function ListBook() {
     const { listBookBorrowOfStudent, idBookDb, clickBook, statusUpdate, book } = useSelector(state => state.bookReducer)
     const [isModalBookOpen, setIsModalBookOpen] = useState(false);
     const navigate = useNavigate()
+    const { Option } = Select
 
     useEffect(() => {
         if (!localStorage.getItem(TOKEN_ADMIN)) {
             navigate('/login', { replace: true })
-          }
+        }
         dispatch({
             type: 'GET_BOOK_BORROW_STUDENT',
         })
@@ -318,6 +320,12 @@ export default function ListBook() {
         })
     };
 
+    const renderOptionTitle = () => {
+        return listTitleOption.map(item => {
+            return <Option value={item.title}>{item.title}</Option>
+        })
+    }
+
 
     return (
         <div style={{ width: '1175px', margin: 'auto' }}>
@@ -369,7 +377,7 @@ export default function ListBook() {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input style={{ textAlign: 'left', marginLeft: '15px' }} />
                     </Form.Item>
                     <Form.Item
                         style={{ marginTop: '30px' }}
@@ -382,20 +390,22 @@ export default function ListBook() {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input style={{ textAlign: 'left', marginLeft: '15px' }}/>
                     </Form.Item>
                     <Form.Item
-                        style={{ marginTop: '30px' }}
+                        name='title'
                         label="Tiêu đề"
-                        name="title"
                         rules={[
                             {
                                 required: true,
-                                message: 'Cần nhập giá trị!',
+                                message: 'Xin hãy chọn tiêu đề!',
                             },
                         ]}
+                        style={{ textAlign: 'left', height: '40px' }}
                     >
-                        <Input />
+                        <Select style={{ textAlign: 'left', marginLeft: '15px' }} placeholder="Chọn tiêu đề ...">
+                            {renderOptionTitle()}
+                        </Select>
                     </Form.Item>
                     <Form.Item
                         style={{ marginTop: '30px' }}
@@ -409,7 +419,7 @@ export default function ListBook() {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input style={{ textAlign: 'left', marginLeft: '15px' }}/>
                     </Form.Item>
                     <Form.Item
                         style={{ marginTop: '30px' }}
@@ -423,7 +433,7 @@ export default function ListBook() {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input style={{ textAlign: 'left', marginLeft: '15px' }}/>
                     </Form.Item>
                     <Form.Item
                         style={{ marginTop: '30px' }}
@@ -435,7 +445,7 @@ export default function ListBook() {
                                 message: 'Cần nhập giá trị!',
                             },
                         ]}
-                    ><Input />
+                    ><Input style={{ textAlign: 'left', marginLeft: '15px' }}/>
                     </Form.Item>
                     <Form.Item
                         wrapperCol={{

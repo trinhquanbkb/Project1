@@ -5,10 +5,15 @@ const { rootRouter } = require('./routers/index')
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json')
 var cors = require('cors')
+const path = require('path')
 
 
-//CORS
+//CORS 
 app.use(cors())
+
+//cài static file
+const pathPublic = path.join(__dirname, './public')
+app.use(express.static(pathPublic))
 
 //swagger
 app.use('/api-docs', swaggerUi.serve);

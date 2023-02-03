@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import React, { useEffect, useState } from 'react'
+import { Layout, Menu, theme, Row, Col } from 'antd';
 import { useNavigate } from 'react-router-dom'
 import { TOKEN_USER } from '../../../utils/constant/data';
-
+import DropDownUser from '../User/DropDownUser';
+import { BookOutlined } from '@ant-design/icons';
 
 
 export default function HeaderUser() {
@@ -19,34 +20,66 @@ export default function HeaderUser() {
         }
     }, [])
 
+    const items = [{
+        label: 'Sách',
+        key: 'book',
+        icon: <BookOutlined style={{ fontSize: '20px' }} />,
+        children: [
+            {
+                type: 'group',
+                label: 'Item 1',
+                children: [
+                    {
+                        label: 'Option 1',
+                        key: 'setting:1',
+                    },
+                    {
+                        label: 'Option 2',
+                        key: 'setting:2',
+                    },
+                ],
+            },
+            {
+                type: 'group',
+                label: 'Item 2',
+                children: [
+                    {
+                        label: 'Option 3',
+                        key: 'setting:3',
+                    },
+                    {
+                        label: 'Option 4',
+                        key: 'setting:4',
+                    },
+                ],
+            },
+        ],
+    }]
+    const [current, setCurrent] = useState('mail');
     return (
         <Layout>
-            <Header
-                style={{
-                    position: 'sticky',
-                    top: 0,
-                    zIndex: 1,
-                    width: '100%',
-                }}
-            >
-                <div
-                    style={{
-                        float: 'left',
-                        width: 120,
-                        height: 31,
-                        margin: '16px 24px 16px 0',
-                        background: 'rgba(255, 255, 255, 0.2)',
-                    }}
-                />
-                <Menu
-                    theme="dark"
-                    mode="horizontal"
-                    defaultSelectedKeys={['2']}
-                    items={new Array(3).fill(null).map((_, index) => ({
-                        key: String(index + 1),
-                        label: `nav ${index + 1}`,
-                    }))}
-                />
+            <Header className="header">
+                <div className="logo" />
+                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+                    <Row justify="start" style={{ width: '100%' }}>
+                        <Col span={5}>
+                            <p style={{ fontSize: '16px', marginBottom: '0' }}>
+                                Thư viện Đại học Bách Khoa Hà Nội
+                            </p>
+                        </Col>
+                        <Col className="gutter-row" span={17}>
+                            <Row>
+                                <Col span={5}></Col>
+                                <Col span={3}>
+                                    <Menu theme='dark' style={{ color: 'white', fontWeight: '600', fontSize: '18px' }} selectedKeys={[current]} mode="horizontal" items={items} />
+                                </Col>
+                            </Row>
+                        </Col>
+                        <Col span={2}>
+                            <DropDownUser />
+                        </Col>
+                    </Row>
+                </Menu>
             </Header>
             <Content
                 className="site-layout"

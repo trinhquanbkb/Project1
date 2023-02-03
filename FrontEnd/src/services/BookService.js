@@ -61,3 +61,11 @@ export const borrowBook = async (idBook, userId) => {
         })
 }
 
+export const getBookById = async (id) => {
+    return await Axios.get(`${DOMAIN_SERVER}/books/findById?id=${id}`, {
+        headers: {
+            token: localStorage.getItem(TOKEN_ADMIN)
+        }
+    })
+}
+

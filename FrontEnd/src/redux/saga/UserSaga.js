@@ -1,9 +1,18 @@
 import { takeLatest, put } from 'redux-saga/effects'
-import { loginAdmin, loginUser, getAllStudent, deleteStudent, registerUser, updateAccount, registerAdmin, changePasswordAdmin } from '../../services/UserService'
-import { LOGIN, GET_STUDENT_BY_ADMIN, DELETE_STUDENT_SAGA, UPDATE_ACCOUNT, STATUS_REGISTER_ADMIN, STATUS_CHANGE_PASSWORD_ADMIN } from '../type/UserType'
+import {
+    loginAdmin,
+    loginUser,
+    getAllStudent,
+    deleteStudent,
+    registerUser,
+    updateAccount,
+    registerAdmin,
+    changePasswordAdmin,
+    getUserByMssv,
+} from '../../services/UserService'
+import { LOGIN, GET_STUDENT_BY_ADMIN, DELETE_STUDENT_SAGA, UPDATE_ACCOUNT, STATUS_REGISTER_ADMIN, STATUS_CHANGE_PASSWORD_ADMIN, CHECK_MSSV_REDUCER } from '../type/UserType'
 import { TOKEN_ADMIN, TOKEN_USER } from '../../utils/constant/data'
 import { STATUS_CODE } from '../../utils/constant/statusCode'
-
 
 
 function* loginAdminSaga(action) {
@@ -46,6 +55,7 @@ function* loginAdminSaga(action) {
             }
         } catch (error) {
             localStorage.removeItem(TOKEN_ADMIN)
+            localStorage.removeItem(TOKEN_USER)
             yield put({
                 type: LOGIN,
                 data: {
@@ -167,6 +177,21 @@ function* changePassword(action) {
     }
 }
 
+function* checkMssv(action) {
+    try {
+        yield getUserByMssv(action.data)
+        yield put({
+            type: CHECK_MSSV_REDUCER,
+            data: true
+        })
+    } catch (error) {
+        yield put({
+            type: CHECK_MSSV_REDUCER,
+            data: false
+        })
+    }
+}
+
 export function* getUserSaga() {
     yield takeLatest('LOGIN_USER', loginAdminSaga)
     yield takeLatest('GET_ALL_STUDENT', getAllStudentSaga)
@@ -176,4 +201,5 @@ export function* getUserSaga() {
     yield takeLatest('GET_DATA_BOOK_BY_USERID', getBookById)
     yield takeLatest('CONFIRM_REGISTER_ADMIN', registerAdminSaga)
     yield takeLatest('CONFIRM_CHANGE_PASSWORD_ADMIN', changePassword)
+    yield takeLatest('CHECK_MSSV', checkMssv)
 }

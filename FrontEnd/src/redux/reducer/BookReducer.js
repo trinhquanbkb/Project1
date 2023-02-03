@@ -1,4 +1,4 @@
-import { BORROW_BOOK_BY_USERID, DELETE_BOOK_BY_ID, GET_BOOK_BORROW_BY_STUDENTID, RECREATE_BOOK_BY_ID, SUBMIT_UPDATE_BOOK, UPDATE_BOOK_BY_ID } from '../type/BookType'
+import { BORROW_BOOK_BY_USERID, CHECK_ID_BOOK_REDUCER, DELETE_BOOK_BY_ID, GET_BOOK_BORROW_BY_STUDENTID, RECREATE_BOOK_BY_ID, SUBMIT_UPDATE_BOOK, UPDATE_BOOK_BY_ID } from '../type/BookType'
 import { STATUS_CODE } from '../../utils/constant/statusCode'
 
 const bookData = {
@@ -11,13 +11,16 @@ const bookData = {
     statusUpdate: STATUS_CODE.SERVER_ERROR,
     //lấy ra dữ liệu của quyển sách đang muốn update để ném vào value inpit
     book: {
-        
+
     },
     //values là giá trị của sách mới chuẩn bị được tạo ra
     newBook: {},
     //statusBorrow cho biết khi mượn sách sẽ thành công hay đã có người mượn
     statusBorrow: null,
+    //check id book
+    checkIdBook: null,
 }
+
 const bookReducer = (state = bookData, action) => {
     switch (action.type) {
         case GET_BOOK_BORROW_BY_STUDENTID: {
@@ -47,7 +50,7 @@ const bookReducer = (state = bookData, action) => {
             let array = [...state.listBookBorrowOfStudent]
             let newArray = []
             array.forEach((item) => {
-                if (item.id === action.data.id && action.data.status === STATUS_CODE.SUCCESS){
+                if (item.id === action.data.id && action.data.status === STATUS_CODE.SUCCESS) {
                     newArray.push({
                         id: item.id,
                         author: item.author,
@@ -60,7 +63,7 @@ const bookReducer = (state = bookData, action) => {
                         year: item.year,
                         status: '1'
                     })
-                }else{
+                } else {
                     newArray.push({
                         id: item.id,
                         author: item.author,
@@ -82,7 +85,7 @@ const bookReducer = (state = bookData, action) => {
             let array = [...state.listBookBorrowOfStudent]
             let newArray = []
             array.forEach((item) => {
-                if (item.id === action.data.id && action.data.status === STATUS_CODE.SUCCESS){
+                if (item.id === action.data.id && action.data.status === STATUS_CODE.SUCCESS) {
                     newArray.push({
                         id: item.id,
                         author: item.author,
@@ -95,7 +98,7 @@ const bookReducer = (state = bookData, action) => {
                         year: item.year,
                         status: '0'
                     })
-                }else{
+                } else {
                     newArray.push({
                         id: item.id,
                         author: item.author,
@@ -117,11 +120,11 @@ const bookReducer = (state = bookData, action) => {
             state.idBookDb = action.data
             const bookArray = state.listBookBorrowOfStudent.filter(item => item.id === state.idBookDb)
             state.book = bookArray[0]
-            return {...state}
+            return { ...state }
         }
         case SUBMIT_UPDATE_BOOK: {
             state.clickBook = action.data
-            return {...state}
+            return { ...state }
         }
         case UPDATE_BOOK_BY_ID: {
             if (action.data === STATUS_CODE.SUCCESS_PUT) {
@@ -133,16 +136,22 @@ const bookReducer = (state = bookData, action) => {
         }
         case 'VALUE_CREATE_BOOK': {
             state.newBook = action.data
-            return {...state}
+            return { ...state }
         }
         case BORROW_BOOK_BY_USERID: {
-            if(action.data === STATUS_CODE.SUCCESS_PUT){
+            if (action.data === STATUS_CODE.SUCCESS_PUT) {
                 state.statusBorrow = STATUS_CODE.SUCCESS_PUT
-            }else if(action.data === STATUS_CODE.CLIENT_ERROR){
+            } else if (action.data === STATUS_CODE.CLIENT_ERROR) {
                 state.statusBorrow = STATUS_CODE.CLIENT_ERROR
-            } else{
+            } else if (action.data === STATUS_CODE.NOT_FOUND) {
+                state.statusBorrow = STATUS_CODE.NOT_FOUND
+            } else {
                 state.statusBorrow = null
             }
+            return { ...state }
+        }
+        case CHECK_ID_BOOK_REDUCER: {
+            state.checkIdBook = action.data
             return { ...state }
         }
         default: {

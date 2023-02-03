@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Modal, Table, Tag, Button, Input, Space, Form } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { useNavigate } from 'react-router-dom'
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined, ExclamationCircleFilled } from '@ant-design/icons';
 import { GET_USERID_CLICK, SUBMIT_CHARGE } from '../../../redux/type/CardStudentType'
 import { TOKEN_ADMIN } from '../../../utils/constant/data';
 
@@ -43,8 +43,8 @@ export default function UserManager() {
     }
 
     useEffect(() => {
-        if(!localStorage.getItem(TOKEN_ADMIN)){
-            navigate('/login', {replace: true})
+        if (!localStorage.getItem(TOKEN_ADMIN)) {
+            navigate('/login', { replace: true })
         }
         dispatch({
             type: 'GET_ALL_STUDENT'
@@ -368,14 +368,35 @@ export default function UserManager() {
     const dataModal = [...bookById]
 
     //thông báo thành công hoặc lỗi khi rechargeCard
+    const { confirm } = Modal;
     const onFinish = (values) => {
-        dispatch({
-            type: 'RECHARGE_CARD_BY_USERID',
-            data: {
-                balance: values,
-                userId: userIdClick
-            }
-        })
+        confirm({
+            title: 'Bạn chắc chắn muốn nạp tiền cho tài khoản này?',
+            icon: <ExclamationCircleFilled />,
+            onOk() {
+                //dispatch dữ liệu để đăng ký
+                dispatch({
+                    type: 'RECHARGE_CARD_BY_USERID',
+                    data: {
+                        balance: values,
+                        userId: userIdClick
+                    }
+                })
+                setTimeout(() => {
+                    dispatch({
+                        type: SUBMIT_CHARGE,
+                        data: 1
+                    })
+                    dispatch({
+                        type: 'GET_BALANCE',
+                        data: userIdClick
+                    })
+                }, 200)
+            },
+            onCancel() {
+
+            },
+        });
     };
     const onFinishFailed = (errorInfo) => {
         // console.log('Failed:', errorInfo);
@@ -440,10 +461,6 @@ export default function UserManager() {
                         }}
                     >
                         <Button onClick={() => {
-                            dispatch({
-                                type: SUBMIT_CHARGE,
-                                data: 1
-                            })
                             setTimeout(() => {
                                 dispatch({
                                     type: 'GET_BALANCE',

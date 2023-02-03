@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react'
-import { Button, Form, Input, Select, message, Popconfirm } from 'antd';
+import { Button, Form, Input, Select, message, Popconfirm, Upload } from 'antd';
 import listTitleOption from './listTitleOption.json'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { TOKEN_ADMIN } from '../../../utils/constant/data';
+import { UploadOutlined } from '@ant-design/icons';
+import Axios from 'axios'
+import { DOMAIN_SERVER } from '../../../utils/constant/domain'
 
 export default function CreateBook() {
   const { Option } = Select
@@ -44,7 +47,7 @@ export default function CreateBook() {
   useEffect(() => {
     setTimeout(confirm, 400)
   }, [newBook])
-  
+
   const onFinish = (values) => {
     dispatch({
       type: 'VALUE_CREATE_BOOK',
@@ -85,6 +88,26 @@ export default function CreateBook() {
     message.error('Chưa xác nhận!');
   };
 
+  //upload
+  const uploadChange = async (e) => {
+    // var bodyFormData = new FormData()
+    // bodyFormData.append('image', ) 
+    // Axios.post("http://localhost:3000/api/v1/books/uploadImage", { avatar: formData }, {
+    //   headers: {
+    //     token: localStorage.getItem(TOKEN_ADMIN)
+    //   }
+    // })
+    const fromData = new FormData();
+    fromData.append("file", e.target.files[0]);
+    let response = await Axios.post("http://localhost:3000/api/v1/books/uploadImage", fromData, {
+      headers: {
+        token: localStorage.getItem(TOKEN_ADMIN),
+        "Content-Type": "multipart/form-data",
+      }
+    })
+    console.log(response)
+  }
+
 
   return (
     <div>
@@ -112,7 +135,7 @@ export default function CreateBook() {
               message: 'Xin hãy nhập tên sách!',
             },
           ]}
-          style={{height: '40px'}}
+          style={{ height: '40px' }}
         >
           <Input style={{ marginLeft: '15px' }} />
         </Form.Item>
@@ -125,7 +148,7 @@ export default function CreateBook() {
               message: 'Xin hãy nhập tên tác giả!',
             },
           ]}
-          style={{height: '40px'}}
+          style={{ height: '40px' }}
         >
           <Input style={{ marginLeft: '15px' }} />
         </Form.Item>
@@ -184,6 +207,21 @@ export default function CreateBook() {
           style={{ height: '40px' }}
         >
           <Input style={{ marginLeft: '15px' }} />
+        </Form.Item>
+        <Form.Item
+          name='upload'
+          label="Chọn ảnh"
+          rules={[
+            {
+              required: true,
+              message: 'Xin hãy lấy một ảnh làm ảnh của sách!',
+            },
+          ]}
+          style={{ minHeight: '40px', textAlign: 'left' }}
+        >
+          <form onChange={uploadChange} enctype="multipart/form-data">
+            <input type="file" name="file" />
+          </form>
         </Form.Item>
         <Form.Item
           wrapperCol={{

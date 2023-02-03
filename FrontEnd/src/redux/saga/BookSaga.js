@@ -1,6 +1,14 @@
 import { takeLatest, put } from 'redux-saga/effects'
-import { BORROW_BOOK_BY_USERID, DELETE_BOOK_BY_ID, GET_BOOK_BORROW_BY_STUDENTID, RECREATE_BOOK_BY_ID, UPDATE_BOOK_BY_ID } from '../type/BookType'
-import { deleteBookById, getAllBooks, recreateBookById, updateBookById, createBook, borrowBook} from '../../services/BookService'
+import { BORROW_BOOK_BY_USERID, CHECK_ID_BOOK_REDUCER, DELETE_BOOK_BY_ID, GET_BOOK_BORROW_BY_STUDENTID, RECREATE_BOOK_BY_ID, UPDATE_BOOK_BY_ID } from '../type/BookType'
+import {
+    deleteBookById,
+    getAllBooks,
+    recreateBookById,
+    updateBookById,
+    createBook,
+    borrowBook,
+    getBookById
+} from '../../services/BookService'
 import { getUserByMssv } from '../../services/UserService'
 import { STATUS_CODE } from '../../utils/constant/statusCode'
 
@@ -70,36 +78,51 @@ function* updateBook(action) {
     }
 }
 
-function* createNewBook(action){
+function* createNewBook(action) {
     try {
-        console.log(action.data)
         yield createBook(action.data)
     } catch (error) {
-        
+
     }
 }
 
-function* borrowBookSaga(action){
+function* borrowBookSaga(action) {
     try {
         let acc = yield getUserByMssv(action.data.mssv)
         let promise = yield borrowBook(action.data.idBook, acc.data.id)
-        if(promise.status === STATUS_CODE.SUCCESS_PUT){
+        if (promise.status === STATUS_CODE.SUCCESS_PUT) {
             yield put({
                 type: BORROW_BOOK_BY_USERID,
                 data: STATUS_CODE.SUCCESS_PUT
             })
-        }else if(promise.status === STATUS_CODE.SUCCESS){
+        } else if (promise.status === STATUS_CODE.SUCCESS) {
             yield put({
                 type: BORROW_BOOK_BY_USERID,
                 data: STATUS_CODE.CLIENT_ERROR
             })
         }
-        // yield borrowBook(action.data)
     } catch (error) {
-        
+        yield put({
+            type: BORROW_BOOK_BY_USERID,
+            data: STATUS_CODE.NOT_FOUND
+        })
     }
 }
 
+function* checkIdBook(action) {
+    try {
+        yield getBookById(action.data)
+        yield put({
+            type: CHECK_ID_BOOK_REDUCER,
+            data: true
+        })
+    } catch (error) {
+        yield put({
+            type: CHECK_ID_BOOK_REDUCER,
+            data: false
+        })
+    }
+}
 
 export function* getBookSaga() {
     yield takeLatest('GET_BOOK_BORROW_STUDENT', getBookBorrowStudent)
@@ -108,4 +131,5 @@ export function* getBookSaga() {
     yield takeLatest('UPDATE_BOOK', updateBook)
     yield takeLatest('CONFIRM_CREATE_BOOK', createNewBook)
     yield takeLatest('BORROW_BOOK', borrowBookSaga)
+    yield takeLatest('CHECK_BOOK_ID', checkIdBook)
 }

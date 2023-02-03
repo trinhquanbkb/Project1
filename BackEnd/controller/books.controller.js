@@ -17,7 +17,7 @@ const getAllBook = async (req, res) => {
 }
 
 const getBookById = async (req, res) => {
-    const { id } = req.params
+    const { id } = req.query
     try {
         const book = await Books.findOne({
             where: {

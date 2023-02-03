@@ -3,14 +3,16 @@ import { Button, Form, Input, message, Popconfirm } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
 import { STATUS_CODE } from '../../../utils/constant/statusCode';
 import { useNavigate } from 'react-router-dom'
-import { BORROW_BOOK_BY_USERID } from '../../../redux/type/BookType';
+import { BORROW_BOOK_BY_USERID, CHECK_ID_BOOK_REDUCER } from '../../../redux/type/BookType';
 import { TOKEN_ADMIN } from '../../../utils/constant/data';
+import { CHECK_MSSV_REDUCER } from '../../../redux/type/UserType';
 
 export default function RegisterBook() {
 
   const dispatch = useDispatch()
   const [form] = Form.useForm();
-  const { statusBorrow } = useSelector(state => state.bookReducer)
+  const { statusBorrow, checkIdBook } = useSelector(state => state.bookReducer)
+  const { checkMssv } = useSelector(state => state.userReducer)
   const navigate = useNavigate()
 
   const layout = {
@@ -42,29 +44,53 @@ export default function RegisterBook() {
   }, [])
 
   useEffect(() => {
-    setTimeout(confirm, 400)
+    setTimeout(confirm, 100)
   }, [statusBorrow])
 
   const onFinish = (values) => {
-    console.log(values)
+    //check mssv
+    dispatch({
+      type: 'CHECK_MSSV',
+      data: values.mssv
+    })
+    //check id book
+    dispatch({
+      type: 'CHECK_BOOK_ID',
+      data: values.idBook
+    })
+    //send data check status register book
     dispatch({
       type: 'BORROW_BOOK',
       data: values
     })
   };
 
+
   const confirm = (e) => {
-    if (statusBorrow === STATUS_CODE.SUCCESS_PUT) {
+    if (statusBorrow === STATUS_CODE.SUCCESS_PUT && checkIdBook === true && checkMssv === true) {
       message.success('Thành công!');
     } else if (statusBorrow === STATUS_CODE.CLIENT_ERROR) {
       message.error('Đã có người mượn quyển sách này!')
+    } else if (checkIdBook === false && statusBorrow === STATUS_CODE.NOT_FOUND) {
+      message.error('Không tồn tại id của quyển sách này!')
+    } else if (checkMssv === false && statusBorrow === STATUS_CODE.NOT_FOUND) {
+      message.error('Không tồn tại mssv của người dùng này!')
     } else if (statusBorrow === null) {
-
     }
-    dispatch({
-      type: BORROW_BOOK_BY_USERID,
-      data: null
-    })
+    setTimeout(() => {
+      dispatch({
+        type: BORROW_BOOK_BY_USERID,
+        data: null
+      })
+      dispatch({
+        type: CHECK_MSSV_REDUCER,
+        data: null
+      })
+      dispatch({
+        type: CHECK_ID_BOOK_REDUCER,
+        data: null
+      })
+    }, 100)
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -132,7 +158,7 @@ export default function RegisterBook() {
           <Popconfirm
             title="Đăng ký mượn sách"
             description="Bạn có chắc chắn cho sinh viên này mượn sách?"
-            onConfirm={() => {
+            onConfirm={(e) => {
               form.submit()
             }
             }

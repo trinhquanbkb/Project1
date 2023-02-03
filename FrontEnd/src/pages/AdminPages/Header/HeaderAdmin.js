@@ -27,9 +27,9 @@ export default function HeaderAdmin() {
                 <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
                     <Row justify="start" style={{ width: '100%' }}>
                         <Col span={4}>
-                            <Menu.Item style={{ fontSize: '16px' }}>
+                            <p style={{ fontSize: '16px' }}>
                                 Thư viện Đại học Bách Khoa Hà Nội
-                            </Menu.Item>
+                            </p>
                         </Col>
                         <Col className="gutter-row" span={18}>
                         </Col>
@@ -91,6 +91,7 @@ export default function HeaderAdmin() {
                             margin: 0,
                             minHeight: 550,
                             background: colorBgContainer,
+                            backgroundColor: 'white'
                         }}
                     >
                         <Outlet />

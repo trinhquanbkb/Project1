@@ -1,11 +1,18 @@
 import React, { useState } from 'react'
 import './Register.css'
 import Swal from 'sweetalert2'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { Modal } from 'antd';
+import { ExclamationCircleFilled } from '@ant-design/icons';
+import { CHECK_MSSV_REDUCER } from '../../redux/type/UserType'
 
-export default function Signin() {
+
+export default function Register() {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const { checkMssv } = useSelector(state => state.userReducer)
 
     const [data, setData] = useState({
         values: {
@@ -27,6 +34,49 @@ export default function Signin() {
             passwordConfirm: ''
         }
     })
+
+    //modal confirm
+    const { confirm } = Modal;
+    const showConfirm = () => {
+        confirm({
+            title: 'Bạn chắc chắn muốn đăng ký tài khoản này?',
+            icon: <ExclamationCircleFilled />,
+            onOk() {
+                //dispatch dữ liệu để đăng ký
+                dispatch({
+                    type: 'REGISTER_USER',
+                    dataRegister: {
+                        "name": data.values.firstName + ' ' + data.values.lastName,
+                        "mssv": data.values.mssv,
+                        "phoneNumber": data.values.phone,
+                        "email": data.values.email,
+                        "password": data.values.password,
+                        "userType": "user"
+                    }
+                })
+                //sử dụng tài khoản vừa đăng nhập để tiến hành login
+                setTimeout(() => {
+                    dispatch({
+                        type: 'LOGIN_USER',
+                        userLogin: {
+                            mssv: data.values.mssv,
+                            password: data.values.password
+                        }
+                    })
+                    dispatch({
+                        type: CHECK_MSSV_REDUCER,
+                        data: null
+                    })
+                }, 500)
+                setTimeout(() => {
+                    navigate('/userPage', { replace: true })
+                }, 600)
+            },
+            onCancel() {
+
+            },
+        });
+    };
 
     const handleOnChange = (event) => {
         let { name, value, type } = event.target
@@ -54,16 +104,22 @@ export default function Signin() {
         }
         //check mssv có 8 chữ số
         if (name === 'mssv') {
+            //ném giá trị mssv để check xem đã tồn tại hay chưa
+
             //regex của mssv
             const regexMssv = /^([0-9]{8})$/g
             //dùng regex test mssv
             if (value.trim() === '') {
                 changeErrors[name] = name + ' không được bỏ trống!'
-            } else if (!regexMssv.test(value)) {
+            } else if (!regexMssv.test(value.trim())) {
                 changeErrors[name] = name + ' không hợp lệ!'
             } else {
                 changeErrors[name] = ''
             }
+            dispatch({
+                type: 'CHECK_MSSV',
+                data: value.trim()
+            })
         }
         //check phone
         if (name === 'phone') {
@@ -124,37 +180,39 @@ export default function Signin() {
                 valid = false
             }
         }
+        dispatch({
+            type: 'CHECK_MSSV',
+            data: values.mssv.trim()
+        })
+        console.log(checkMssv)
+        if (checkMssv) {
+            valid = false
+            let changeValues = { ...data.values }
+            let changeErrors = { ...data.error }
+            changeErrors['mssv'] = 'mssv đã tồn tại trong hệ thống!'
+            setData({
+                values: changeValues,
+                error: changeErrors
+            })
+        } else {
+            valid = true
+        }
         if (!valid) {
             Swal.fire({
-                title: "Bạn cần nhập đầy đủ dữ liệu!",
+                title: "Cần nhập đúng dữ liệu!",
                 icon: 'error',
                 confirmButtonText: 'Chấp nhận'
             })
         }
-        else{
-            dispatch({
-                type: 'REGISTER_USER',
-                dataRegister: {
-                    "name": data.values.firstName + ' ' +data.values.lastName,
-                    "mssv": data.values.mssv,
-                    "phoneNumber": data.values.phone,
-                    "email": data.values.email,
-                    "password": data.values.password,
-                    "userType": "user"
-                }
-            })
-            Swal.fire({
-                title: "Đăng ký người dùng thành công",
-                icon: 'success',
-                confirmButtonText: 'Chấp nhận'
-            })
+        else {
+            showConfirm()
         }
     }
     return (
         <div className='d-flex justify-content-center' style={{ backgroundColor: '#eeeeee', margin: '0', padding: '0', height: '800px' }}>
             <form onSubmit={(event) => { handleSubmit(event) }} style={{ backgroundColor: 'white', height: '690px', marginTop: '50px', width: '650px', fontFamily: 'Google Sans' }}>
-                <h3 className='text-center mt-5' style={{fontWeight: 'bold'}}>Đăng ký tài khoản mượn sách thư viện</h3>
-                <div className='container' style={{ marginTop: '50px', height:'90px'}}>
+                <h3 className='text-center mt-5' style={{ fontWeight: 'bold' }}>Đăng ký tài khoản mượn sách thư viện</h3>
+                <div className='container' style={{ marginTop: '50px', height: '90px' }}>
                     <div className='row'>
                         <div className='col-6'>
                             <div className="group">
@@ -176,7 +234,7 @@ export default function Signin() {
                         </div>
                     </div>
                 </div>
-                <div className='container' style={{ height:'90px'}}>
+                <div className='container' style={{ height: '90px' }}>
                     <div className='row'>
                         <div className='col-12'>
                             <div className="group">
@@ -189,7 +247,7 @@ export default function Signin() {
                         </div>
                     </div>
                 </div>
-                <div className='container' style={{ height:'90px'}}>
+                <div className='container' style={{ height: '90px' }}>
                     <div className='row'>
                         <div className='col-12'>
                             <div className="group">
@@ -202,7 +260,7 @@ export default function Signin() {
                         </div>
                     </div>
                 </div>
-                <div className='container' style={{ height:'90px'}}>
+                <div className='container' style={{ height: '90px' }}>
                     <div className='row'>
                         <div className='col-12'>
                             <div className="group">
@@ -215,16 +273,16 @@ export default function Signin() {
                         </div>
                     </div>
                 </div>
-                <div className='container' style={{ height:'90px'}}>
-                    <div className='row' style={{ height:'70px'}}>
+                <div className='container' style={{ height: '90px' }}>
+                    <div className='row' style={{ height: '70px' }}>
                         <div className='col-6'>
                             <div className="group">
                                 <input autocomplete="off" type="password" name='password' required onChange={(event) => { handleOnChange(event) }} />
                                 <span className="highlight" />
                                 <span className="bar" />
                                 <label>password</label>
-                                <span className='text text-danger'>{data.error.password}</span><br/>
-                                
+                                <span className='text text-danger'>{data.error.password}</span><br />
+
                             </div>
                         </div>
                         <div className='col-6'>
@@ -237,7 +295,7 @@ export default function Signin() {
                             </div>
                         </div>
                     </div>
-                    <span className='text text-warning text-left' style={{marginRight: '165px', marginTop: '-50px'}}>* mật khẩu cần có ít nhất 8 ký tự, có cả chữ và số</span>
+                    <span className='text text-warning text-left' style={{ marginRight: '165px', marginTop: '-50px' }}>* mật khẩu cần có ít nhất 8 ký tự, có cả chữ và số</span>
                 </div>
                 <div className='d-flex justify-content-center' style={{ marginTop: '50px' }}>
                     <button className='btn-dark' style={{ width: '200px', height: '40px', borderRadius: '4px' }}>Xác nhận</button>

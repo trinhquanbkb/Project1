@@ -14,7 +14,7 @@ userRouter.get('/getAllStudent', authenticate, adminAuthorize, getAllStudent)
 userRouter.put('/updateStudent/:id', authenticate, adminAuthorize, updateStudentById)
 userRouter.put('/deleteAccount', authenticate, adminAuthorize, deleteStudentById)
 userRouter.put('/recreateAccount', authenticate, adminAuthorize, updateAccount)
-userRouter.get('/getUserByMssv', authenticate, allAuthorize, getUserByMssv)
+userRouter.get('/getUserByMssv', getUserByMssv)
 
 module.exports = {
     userRouter

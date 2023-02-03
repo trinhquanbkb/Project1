@@ -80,7 +80,15 @@ function* updateBook(action) {
 
 function* createNewBook(action) {
     try {
-        yield createBook(action.data)
+        let promise = yield createBook(action.data)
+        yield put({
+            type: 'VALUE_CREATE_BOOK',
+            data: {}
+          })
+        yield put({
+            type: 'ID_BOOK_CREATE',
+            data: promise.data.id
+        })
     } catch (error) {
 
     }

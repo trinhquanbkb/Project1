@@ -24,6 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     //status cho biết sách đã bị xóa hay chưa, active là 0 deleted là 1
     status: DataTypes.STRING,
     endDate: DataTypes.DATE,
+    //ảnh của quyển sách
+    urlImage: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Books',

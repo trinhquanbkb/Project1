@@ -30,6 +30,9 @@ module.exports = {
       dayBorrow: {
         type: Sequelize.DATE
       },
+      urlImage: {
+        type: Sequelize.STRING
+      },
       userId: {
         type: Sequelize.INTEGER,
         references: {

@@ -71,7 +71,7 @@ const updateBook = async (req, res) => {
 const deleteBook = async (req, res) => {
     try {
         const { id } = req.query
-        const deleteBook = await Books.update({status: '1'},{
+        const deleteBook = await Books.update({ status: '1' }, {
             where: {
                 id: id
             }
@@ -320,7 +320,7 @@ const listUser = async (req, res) => {
             return item.dataValues.id
         })
         let arrayRes = []
-        for(let i=0; i< arrayUserId.length;i++){
+        for (let i = 0; i < arrayUserId.length; i++) {
             const item = arrayUserId[i]
             const listBook = await Books.findAll({
                 where: {
@@ -419,21 +419,40 @@ const minTime = async (req, res) => {
 
 }
 
-const recreateBookById = async(req, res) => {
-    const {id} = req.query
+const recreateBookById = async (req, res) => {
+    const { id } = req.query
     try {
-        const recreateBook = await Books.update({status: '0'}, {
+        const recreateBook = await Books.update({ status: '0' }, {
             where: {
                 id,
             }
         })
-        if(recreateBook){
+        if (recreateBook) {
             res.status(200).send(`Recreate book with id=${id} success`)
-        }else{
+        } else {
             throw new Error('Recreate book error')
         }
     } catch (error) {
         res.status(500).send(`Cannot recreate book with id = ${id}`)
+    }
+}
+
+const uploadImageBook = async (req, res) => {
+    try {
+        const image = req.file
+        const { id } = req.query
+        const book = await Books.update({ urlImage: image.filename }, {
+            where: {
+                id,
+            }
+        })
+        if (book) {
+            res.status(201).send('upload image book success')
+        } else {
+            throw new Error('Upload image for book is error!')
+        }
+    } catch (error) {
+        res.status(401).send(error)
     }
 }
 
@@ -452,4 +471,5 @@ module.exports = {
     listUser,
     minTime,
     recreateBookById,
+    uploadImageBook,
 }

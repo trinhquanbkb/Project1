@@ -19,6 +19,8 @@ const bookData = {
     statusBorrow: null,
     //check id book
     checkIdBook: null,
+    //id của quyển sách khi được tạo ra
+    idBookCreate: null,
 }
 
 const bookReducer = (state = bookData, action) => {
@@ -152,6 +154,10 @@ const bookReducer = (state = bookData, action) => {
         }
         case CHECK_ID_BOOK_REDUCER: {
             state.checkIdBook = action.data
+            return { ...state }
+        }
+        case 'ID_BOOK_CREATE': {
+            state.idBookCreate = action.data
             return { ...state }
         }
         default: {

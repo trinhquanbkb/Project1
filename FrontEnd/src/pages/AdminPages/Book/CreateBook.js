@@ -1,19 +1,20 @@
-import React, { useEffect } from 'react'
-import { Button, Form, Input, Select, message, Popconfirm, Upload } from 'antd';
+import React, { useEffect, useState } from 'react'
+import { Button, Form, Input, Select, message, Popconfirm } from 'antd';
 import listTitleOption from './listTitleOption.json'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { TOKEN_ADMIN } from '../../../utils/constant/data';
-import { UploadOutlined } from '@ant-design/icons';
 import Axios from 'axios'
 import { DOMAIN_SERVER } from '../../../utils/constant/domain'
 
 export default function CreateBook() {
+
   const { Option } = Select
   const dispatch = useDispatch()
-  const { newBook } = useSelector(state => state.bookReducer)
+  const { newBook, idBookCreate } = useSelector(state => state.bookReducer)
   const [form] = Form.useForm();
   const navigate = useNavigate()
+  const [file, setFile] = useState();
 
   const layout = {
     labelCol: {
@@ -46,12 +47,21 @@ export default function CreateBook() {
 
   useEffect(() => {
     setTimeout(confirm, 400)
-  }, [newBook])
+  }, [newBook, idBookCreate])
 
   const onFinish = (values) => {
+    //tạo sách
+    let value = {
+      name: values.name,
+      author: values.author,
+      title: values.title,
+      countPage: values.countPage,
+      year: values.year,
+      positionBook: values.positionBook
+    }
     dispatch({
       type: 'VALUE_CREATE_BOOK',
-      data: values
+      data: value
     })
   };
 
@@ -76,11 +86,16 @@ export default function CreateBook() {
         type: 'CONFIRM_CREATE_BOOK',
         data: newBook
       })
-      dispatch({
-        type: 'VALUE_CREATE_BOOK',
-        data: {}
-      })
-      message.success('Thành công!');
+    } else if (isEmptyObject(newBook) && idBookCreate !== null) {
+      setTimeout(() => {
+        //update sách với image
+        uploadChange()
+        dispatch({
+          type: 'ID_BOOK_CREATE',
+          data: null
+        })
+        message.success('Thành công!');
+      }, 100)
     }
   };
 
@@ -89,24 +104,20 @@ export default function CreateBook() {
   };
 
   //upload
-  const uploadChange = async (e) => {
-    // var bodyFormData = new FormData()
-    // bodyFormData.append('image', ) 
-    // Axios.post("http://localhost:3000/api/v1/books/uploadImage", { avatar: formData }, {
-    //   headers: {
-    //     token: localStorage.getItem(TOKEN_ADMIN)
-    //   }
-    // })
+  const uploadChange = async () => {
     const fromData = new FormData();
-    fromData.append("file", e.target.files[0]);
-    let response = await Axios.post("http://localhost:3000/api/v1/books/uploadImage", fromData, {
+    fromData.append("file", file);
+    await Axios.put(`${DOMAIN_SERVER}/books/uploadImage?id=${idBookCreate}`, fromData, {
       headers: {
         token: localStorage.getItem(TOKEN_ADMIN),
         "Content-Type": "multipart/form-data",
       }
     })
-    console.log(response)
   }
+
+  const onChangeFile = (e) => {
+    setFile(e.target.files[0]);
+  };
 
 
   return (
@@ -219,7 +230,7 @@ export default function CreateBook() {
           ]}
           style={{ minHeight: '40px', textAlign: 'left' }}
         >
-          <form onChange={uploadChange} enctype="multipart/form-data">
+          <form style={{ marginLeft: '15px' }} onChange={onChangeFile} enctype="multipart/form-data">
             <input type="file" name="file" />
           </form>
         </Form.Item>

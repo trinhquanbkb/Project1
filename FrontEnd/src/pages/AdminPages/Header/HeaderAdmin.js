@@ -26,12 +26,12 @@ export default function HeaderAdmin() {
                 <div className="logo" />
                 <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
                     <Row justify="start" style={{ width: '100%' }}>
-                        <Col span={4}>
-                            <p style={{ fontSize: '16px' }}>
+                        <Col span={5}>
+                            <p style={{ fontSize: '16px', marginLeft: '-100px' }}>
                                 Thư viện Đại học Bách Khoa Hà Nội
                             </p>
                         </Col>
-                        <Col className="gutter-row" span={18}>
+                        <Col className="gutter-row" span={17}>
                         </Col>
                         <Col span={2}>
                             <DropDownAdmin />

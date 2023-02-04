@@ -68,7 +68,7 @@ function* updateBook(action) {
                 data: 500
             })
         } else {
-            let promise = yield updateBookById(action.data.bookId, action.data.value)
+            let promise = yield updateBookById(action.data.bookId, action.data.values)
             yield put({
                 type: UPDATE_BOOK_BY_ID,
                 data: promise.status

@@ -17,7 +17,7 @@ const uploadImage = () => {
         storage: storage,
         //filter chỉ chấp nhận những file có đuôi là .png, .jpg, .jpeg
         fileFilter: function(req, file, cb){
-            const extension = [".png", ".jpg",".jpeg"]
+            const extension = [".png", ".jpg"]
             const extensionOriginFile = file.originalname.slice(-4)
             const checkExtension = extension.includes(extensionOriginFile)
             if(checkExtension){

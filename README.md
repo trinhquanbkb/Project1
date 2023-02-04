@@ -137,6 +137,9 @@ Tạo tài khoản admin                     ------done-------
 
 
 
+## `BUG`
+Lỗi client: create book with upload chia thành 2 phần create book và upload image, nếu image có đuôi không hợp lệ thì vẫn create book mà không upload được image, thế nên cần bắt lỗi nếu image mà invalid thì không cho create book và báo lỗi
+
 
 
 

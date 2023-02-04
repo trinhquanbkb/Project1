@@ -4,8 +4,6 @@ import listTitleOption from './listTitleOption.json'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { TOKEN_ADMIN } from '../../../utils/constant/data';
-import Axios from 'axios'
-import { DOMAIN_SERVER } from '../../../utils/constant/domain'
 
 export default function CreateBook() {
 
@@ -15,6 +13,7 @@ export default function CreateBook() {
   const [form] = Form.useForm();
   const navigate = useNavigate()
   const [file, setFile] = useState();
+  const [validateFile, setValidateFile] = useState(false);
 
   const layout = {
     labelCol: {
@@ -81,21 +80,25 @@ export default function CreateBook() {
 
 
   const confirm = (e) => {
-    if (!isEmptyObject(newBook)) {
-      dispatch({
-        type: 'CONFIRM_CREATE_BOOK',
-        data: newBook
-      })
-    } else if (isEmptyObject(newBook) && idBookCreate !== null) {
-      setTimeout(() => {
-        //update sách với image
-        uploadChange()
+    if (validateFile) {
+      if (!isEmptyObject(newBook)) {
         dispatch({
-          type: 'ID_BOOK_CREATE',
-          data: null
+          type: 'CONFIRM_CREATE_BOOK',
+          data: newBook
         })
-        message.success('Thành công!');
-      }, 100)
+      } else if (isEmptyObject(newBook) && idBookCreate !== null) {
+        setTimeout(() => {
+          //update sách với image
+          uploadChange()
+          dispatch({
+            type: 'ID_BOOK_CREATE',
+            data: null
+          })
+          message.success('Thành công!');
+        }, 100)
+      }
+    } else if (!validateFile && !isEmptyObject(newBook)) {
+      message.error('File cần phải có đuôi là .png hoặc .jpg')
     }
   };
 
@@ -118,8 +121,17 @@ export default function CreateBook() {
 
   const onChangeFile = (e) => {
     setFile(e.target.files[0]);
+    setTimeout(() => {
+      const extension = [".png", ".jpg"]
+      const extensionOriginFile = e.target.files[0].name.slice(-4)
+      const checkExtension = extension.includes(extensionOriginFile)
+      if (checkExtension) {
+        setValidateFile(true)
+      } else {
+        setValidateFile(false)
+      }
+    },50)
   };
-
 
   return (
     <div>
@@ -231,8 +243,8 @@ export default function CreateBook() {
           ]}
           style={{ minHeight: '40px', textAlign: 'left' }}
         >
-          <form style={{ marginLeft: '15px' }} onChange={onChangeFile} enctype="multipart/form-data">
-            <input type="file" name="file" />
+          <form style={{ marginLeft: '15px' }} enctype="multipart/form-data">
+            <input onChange={onChangeFile} type="file" name="file" />
           </form>
         </Form.Item>
         <Form.Item

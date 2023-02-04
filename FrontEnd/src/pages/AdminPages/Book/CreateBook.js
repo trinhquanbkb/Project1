@@ -104,13 +104,14 @@ export default function CreateBook() {
   };
 
   //upload
-  const uploadChange = async () => {
+  const uploadChange = () => {
     const fromData = new FormData();
     fromData.append("file", file);
-    await Axios.put(`${DOMAIN_SERVER}/books/uploadImage?id=${idBookCreate}`, fromData, {
-      headers: {
-        token: localStorage.getItem(TOKEN_ADMIN),
-        "Content-Type": "multipart/form-data",
+    dispatch({
+      type: 'UPLOAD_IMAGE_BOOK',
+      data: {
+        id: idBookCreate,
+        file: fromData
       }
     })
   }

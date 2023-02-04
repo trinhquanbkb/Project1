@@ -25,7 +25,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: '2023-01-17 04:33:12',
-        userId: 1
+        userId: 1,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Vợ nhặt',
@@ -39,7 +40,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: '2023-01-17 04:33:12',
-        userId: 1
+        userId: 1,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Đắc nhân tâm',
@@ -53,7 +55,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'1',
         endDate: '2023-01-17 04:33:12',
-        userId: 2
+        userId: 2,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Sherlock holmes',
@@ -67,7 +70,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: '2023-01-17 04:33:12',
-        userId: 2
+        userId: 2,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Sherlock holmes',
@@ -81,7 +85,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: '2023-01-17 04:33:12',
-        userId: null
+        userId: null,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Sherlock holmes',
@@ -95,7 +100,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: '2023-01-17 04:33:12',
-        userId: null
+        userId: null,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Dragonball tập 1',
@@ -109,7 +115,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: '2023-01-17 04:33:12',
-        userId: 2
+        userId: 2,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Dragonball tập 2',
@@ -123,7 +130,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
-        userId:null
+        userId:null,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Dragonball tập 3',
@@ -137,7 +145,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
-        userId: null
+        userId: null,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Conan tập 1',
@@ -151,7 +160,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
-        userId: null
+        userId: null,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Conan tập 2',
@@ -165,7 +175,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
-        userId: 2
+        userId: 2,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Conan tập 12',
@@ -179,7 +190,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
-        userId: 3
+        userId: 3,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Conan tập 12',
@@ -193,7 +205,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
-        userId: 5
+        userId: 5,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Những kẻ khốn khổ',
@@ -207,7 +220,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
-        userId: null
+        userId: null,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Những kẻ khốn khổ',
@@ -221,7 +235,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
-        userId: 5
+        userId: 5,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Cuộc đi săn của bầy cừu',
@@ -235,7 +250,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
-        userId: null
+        userId: null,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Những chú chim biển',
@@ -249,7 +265,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
-        userId: null
+        userId: null,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Ánh Sao và Bầu trời',
@@ -263,7 +280,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
-        userId: null
+        userId: null,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Em và Tôi',
@@ -277,7 +295,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
-        userId: null
+        userId: null,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
       {
         name: 'Tâm Lý Học - Phác Họa Chân Dung Kẻ Phạm Tội',
@@ -291,7 +310,8 @@ module.exports = {
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
         endDate: null,
-        userId: null
+        userId: null,
+        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
       },
     ], {});
   },

@@ -7,7 +7,8 @@ import {
     updateBookById,
     createBook,
     borrowBook,
-    getBookById
+    getBookById,
+    uploadImage
 } from '../../services/BookService'
 import { getUserByMssv } from '../../services/UserService'
 import { STATUS_CODE } from '../../utils/constant/statusCode'
@@ -67,7 +68,7 @@ function* updateBook(action) {
                 data: 500
             })
         } else {
-            let promise = yield updateBookById(action.data.bookId, action.data.values)
+            let promise = yield updateBookById(action.data.bookId, action.data.value)
             yield put({
                 type: UPDATE_BOOK_BY_ID,
                 data: promise.status
@@ -132,6 +133,14 @@ function* checkIdBook(action) {
     }
 }
 
+function* uploadImageBook(action){
+    try {
+        yield uploadImage(action.data.id, action.data.file)
+    } catch (error) {
+        
+    }
+}
+
 export function* getBookSaga() {
     yield takeLatest('GET_BOOK_BORROW_STUDENT', getBookBorrowStudent)
     yield takeLatest('DELETE_BOOK', deleteBook)
@@ -140,4 +149,5 @@ export function* getBookSaga() {
     yield takeLatest('CONFIRM_CREATE_BOOK', createNewBook)
     yield takeLatest('BORROW_BOOK', borrowBookSaga)
     yield takeLatest('CHECK_BOOK_ID', checkIdBook)
+    yield takeLatest('UPLOAD_IMAGE_BOOK', uploadImageBook)
 }

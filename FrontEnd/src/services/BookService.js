@@ -69,3 +69,11 @@ export const getBookById = async (id) => {
     })
 }
 
+export const uploadImage = async (id, file) => {
+    return await Axios.put(`${DOMAIN_SERVER}/books/uploadImage?id=${id}`, file, {
+        headers: {
+            token: localStorage.getItem(TOKEN_ADMIN),
+            "Content-Type": "multipart/form-data",
+        }
+    })
+}

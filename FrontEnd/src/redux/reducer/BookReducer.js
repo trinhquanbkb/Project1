@@ -38,7 +38,8 @@ const bookReducer = (state = bookData, action) => {
                     title: item.title,
                     userId: item.userId,
                     year: item.year,
-                    status: item.status
+                    status: item.status,
+                    urlImage: item.urlImage
                 })
             })
             state.listBookBorrowOfStudent = [...array]

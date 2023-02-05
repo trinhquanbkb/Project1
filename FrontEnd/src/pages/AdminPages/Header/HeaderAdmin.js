@@ -28,7 +28,7 @@ export default function HeaderAdmin() {
                     <Row justify="start" style={{ width: '100%' }}>
                         <Col span={5}>
                             <p style={{ fontSize: '16px', marginLeft: '-100px' }}>
-                                Thư viện Đại học Bách Khoa Hà Nội
+                                Thư viện Tạ Quang Bửu
                             </p>
                         </Col>
                         <Col className="gutter-row" span={17}>

@@ -1,6 +1,15 @@
-import React from 'react'
-
+import React, { useEffect } from 'react'
+import { TOKEN_USER } from '../../../utils/constant/data'
+import { useNavigate } from 'react-router-dom'
 export default function Contact() {
+
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!localStorage.getItem(TOKEN_USER)) {
+      navigate('/login', { replace: true })
+    }
+  }, [])
+
   return (
     <div>
       <h3 style={{ color: 'red', marginTop: '60px', marginLeft: '180px', fontWeight: '600', textAlign: 'left' }}>Lịch sử hình thành và phát triển</h3>

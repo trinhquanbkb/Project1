@@ -57,26 +57,26 @@ export default function HeaderUser() {
     const [current, setCurrent] = useState('mail');
     return (
         <Layout className="layout" style={{ width: '100%' }}>
-            <Header style={{ width: '107%', marginLeft: '-50px', height: '70px' }} className="header">
+            <Header className="header" style={{ width: '107%', marginLeft: '-55px', height: '64px', position: 'sticky', top: '0', zIndex: '1' }}>
                 <div className="logo" />
                 <Menu theme="light" mode="horizontal" defaultSelectedKeys={['2']}>
-                    <Row justify="start" style={{ width: '100%', height: '70px' }}>
+                    <Row justify="start" style={{ width: '100%', height: '64px' }}>
                         <Col span={5}>
                             <p style={{ fontSize: '16px', marginBottom: '0', marginLeft: '-10px' }}>
-                                Thư viện Đại học Bách Khoa Hà Nội
+                                Thư viện Tạ Quang Bửu
                             </p>
                         </Col>
                         <Col className="gutter-row" span={17}>
                             <Row>
-                                <Col span={5} style={{ height: '70px' }}></Col>
-                                <Col span={3} style={{ height: '70px' }}>
-                                    <Menu><NavLink className="nav-link" to="/userPage" style={{ color: 'black', fontWeight: '600', fontSize: '18px', padding: '0', marginTop: '10px' }}>Trang chủ</NavLink></Menu>
+                                <Col span={5} style={{ height: '64px' }}></Col>
+                                <Col span={3} style={{ height: '64px' }}>
+                                    <Menu><NavLink className="nav-link" to="/userPage" style={{ color: 'black', fontWeight: '600', fontSize: '18px', padding: '0', borderRight: '1px solid #bdbdbd' }}>Trang chủ</NavLink></Menu>
                                 </Col>
-                                <Col span={3} style={{ height: '70px' }}>
-                                    <Menu><NavLink className="nav-link" to="/userPage/introduce" style={{ color: 'black', fontWeight: '600', fontSize: '18px', padding: '0', marginTop: '10px' }} >Giới thiệu</NavLink></Menu>
+                                <Col span={3} style={{ height: '64px' }}>
+                                    <Menu theme='light' style={{ color: 'black', fontWeight: '600', fontSize: '18px', paddingLeft: '32px', paddingBottom: '1px', borderRight: '1px solid #bdbdbd', borderBottom: '1px solid white' }} selectedKeys={[current]} mode="horizontal" items={items} />
                                 </Col>
-                                <Col span={3} style={{ height: '70px' }}>
-                                    <Menu theme='light' style={{ color: 'black', fontWeight: '600', fontSize: '18px', marginTop: '10px', paddingLeft: '32px' }} selectedKeys={[current]} mode="horizontal" items={items} />
+                                <Col span={3} style={{ height: '64px' }}>
+                                    <Menu><NavLink className="nav-link" to="/userPage/introduce" style={{ color: 'black', fontWeight: '600', fontSize: '18px', padding: '0', borderRight: '1px solid #bdbdbd' }} >Giới thiệu</NavLink></Menu>
                                 </Col>
                             </Row>
                         </Col>

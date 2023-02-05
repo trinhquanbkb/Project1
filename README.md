@@ -106,26 +106,38 @@ giao diện đăng ký và đánh validate cho từng input (tránh cả việc 
 ## `AdminPage`
 
 
-###`Trang chủ admin`
+### `Trang chủ admin`
 ghi nội dung của project 1, phương thức liên hệ           --------done--------
 
 ### `Quản lý sinh viên`
 xem danh sách tất cả sinh viên                      ------done-------
+
 xóa, tạo lại sinh viên                             -------done-------
+
 sắp xếp sinh viên theo trường                        --------done--------
+
 xem danh sách các quyển sách của một sinh viên đang mượn      -------done-------
-nạp thẻ cho sinh viên ngoài trường (Chỉ sinh viên ngoài trường mới hiện button nạp thẻ) và hiển thị số dư sau khi nạp                --------done---------
+
+nạp thẻ cho sinh viên ngoài trường (Chỉ sinh viên ngoài trường mới hiện button nạp thẻ) và hiển thị số dư sau khi nạp thẻ --------done---------
+
 
 ### `Quản lý sách`
 Xem danh sách các quyển sách                       ------done------- 
+
 Tạo lại sách                                        ------done-------
+
 Cập nhật sách                                      ------done-------
+
 Xóa sách                                               ------done-------
+
 Tạo sách mới                                      ------done-------
+
 Mượn sách theo id của sách và id của user                      ------done-------
+
 
 ### `Thay đổi thông tin người dùng admin`
 Thay đổi mật khẩu                       ------done-------
+
 
 ### `Tạo tài khoản admin do chính admin tự tạo`
 Tạo tài khoản admin                     ------done-------
@@ -133,6 +145,7 @@ Tạo tài khoản admin                     ------done-------
 
 
 ## `UserPage`
+
 
 ### `Header && Footer`                  
 ------done-------

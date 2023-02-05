@@ -14,7 +14,7 @@ export default function DropDownUser() {
     }
 
     return (
-        <Menu.SubMenu theme="light" icon=<UserOutlined style={{ fontSize: '25px', marginLeft: '80px' }} />>
+        <Menu.SubMenu theme="light" icon=<UserOutlined style={{ fontSize: '25px', marginLeft: '40px' }} />>
             <Menu.Item onClick={() => logout()} style={{ fontSize: '15px', fontWeight: '500', color: '#303f9f', paddingTop:'5px', paddingLeft: '31px', boxSizing: 'border-box' }}>Đăng xuất</Menu.Item>
         </Menu.SubMenu>
     );

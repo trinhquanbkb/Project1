@@ -3,7 +3,7 @@ import { Layout, Menu, theme, Row, Col } from 'antd';
 import { useNavigate } from 'react-router-dom'
 import { TOKEN_USER } from '../../../utils/constant/data';
 import DropDownUser from '../User/DropDownUser';
-import { BookOutlined } from '@ant-design/icons';
+import { NavLink, Outlet } from 'react-router-dom'
 
 
 export default function HeaderUser() {
@@ -23,7 +23,6 @@ export default function HeaderUser() {
     const items = [{
         label: 'Sách',
         key: 'book',
-        icon: <BookOutlined style={{ fontSize: '20px' }} />,
         children: [
             {
                 type: 'group',
@@ -57,21 +56,27 @@ export default function HeaderUser() {
     }]
     const [current, setCurrent] = useState('mail');
     return (
-        <Layout>
-            <Header className="header">
+        <Layout className="layout" style={{ width: '100%' }}>
+            <Header style={{ width: '107%', marginLeft: '-50px', height: '70px' }} className="header">
                 <div className="logo" />
-                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-                    <Row justify="start" style={{ width: '100%' }}>
+                <Menu theme="light" mode="horizontal" defaultSelectedKeys={['2']}>
+                    <Row justify="start" style={{ width: '100%', height: '70px' }}>
                         <Col span={5}>
-                            <p style={{ fontSize: '16px', marginBottom: '0' }}>
+                            <p style={{ fontSize: '16px', marginBottom: '0', marginLeft: '-10px' }}>
                                 Thư viện Đại học Bách Khoa Hà Nội
                             </p>
                         </Col>
                         <Col className="gutter-row" span={17}>
                             <Row>
-                                <Col span={5}></Col>
-                                <Col span={3}>
-                                    <Menu theme='dark' style={{ color: 'white', fontWeight: '600', fontSize: '18px' }} selectedKeys={[current]} mode="horizontal" items={items} />
+                                <Col span={5} style={{ height: '70px' }}></Col>
+                                <Col span={3} style={{ height: '70px' }}>
+                                    <Menu><NavLink className="nav-link" to="/userPage" style={{ color: 'black', fontWeight: '600', fontSize: '18px', padding: '0', marginTop: '10px' }}>Trang chủ</NavLink></Menu>
+                                </Col>
+                                <Col span={3} style={{ height: '70px' }}>
+                                    <Menu><NavLink className="nav-link" to="/userPage/introduce" style={{ color: 'black', fontWeight: '600', fontSize: '18px', padding: '0', marginTop: '10px' }} >Giới thiệu</NavLink></Menu>
+                                </Col>
+                                <Col span={3} style={{ height: '70px' }}>
+                                    <Menu theme='light' style={{ color: 'black', fontWeight: '600', fontSize: '18px', marginTop: '10px', paddingLeft: '32px' }} selectedKeys={[current]} mode="horizontal" items={items} />
                                 </Col>
                             </Row>
                         </Col>
@@ -84,26 +89,35 @@ export default function HeaderUser() {
             <Content
                 className="site-layout"
                 style={{
-                    padding: '0 50px',
-                    marginTop: '50px'
+                    marginTop: 0,
+                    minHeight: 580,
+                    backgroundColor: 'rgba(255,255,255,0.7)',
                 }}
             >
-                <div
-                    style={{
-                        padding: 24,
-                        minHeight: 530,
-                        background: colorBgContainer,
-                    }}
-                >
-                    Content
-                </div>
+                <Outlet />
             </Content>
             <Footer
                 style={{
                     textAlign: 'center',
+                    padding: 0,
+                    margin: 0,
                 }}
             >
-                Ant Design ©2023 Created by Ant UED
+                <div>
+                    <div>
+                        <Row style={{ height: '200px' }}>
+                            <Col span={6}>
+                                <img src='https://upload.wikimedia.org/wikipedia/commons/a/a1/Logo_Hust.png' alt='icon_layout' style={{ width: '93px', height: '130px', marginTop: '30px' }} />
+                            </Col>
+                            <Col span={16} style={{ textAlign: 'left', paddingTop: '20px' }}>
+                                <h4 style={{ color: '#b71c1c', fontWeight: '600' }}>THƯ VIỆN TẠ QUANG BỬU - TRƯỜNG ĐẠI HỌC BÁCH KHOA HÀ NỘI</h4>
+                                <p style={{ marginTop: '40px' }}>Số 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội</p>
+                                <p style={{ marginTop: '-5px' }}>Điện thoại: (84-24) 3869 2243, Email: tvtqb@hust.edu.vn</p>
+                            </Col>
+                        </Row>
+                    </div>
+                    <div style={{ color: 'grey', backgroundColor: 'black', height: '50px', paddingTop: '15px' }}>Bản quyền © 2023, Thư viện Tạ Quang Bửu - Trường Đại học Bách khoa Hà Nội.</div>
+                </div>
             </Footer>
         </Layout>
     )

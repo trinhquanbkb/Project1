@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import { TOKEN_ADMIN } from '../utils/constant/data'
+import { TOKEN_ADMIN, TOKEN_USER } from '../utils/constant/data'
 import { DOMAIN_SERVER } from '../utils/constant/domain'
 
 export const historyBookBorrowOfStudent = async (id) => {
@@ -74,6 +74,22 @@ export const uploadImage = async (id, file) => {
         headers: {
             token: localStorage.getItem(TOKEN_ADMIN),
             "Content-Type": "multipart/form-data",
+        }
+    })
+}
+
+export const findBookByTitle = async (title) => {
+    return await Axios.get(`${DOMAIN_SERVER}/books/findBookByTitle?title=${title}`, {
+        headers: {
+            token: localStorage.getItem(TOKEN_USER)
+        }
+    })
+}
+
+export const listBookStudentBorrow = async () => {
+    return await Axios.get(`${DOMAIN_SERVER}/books/listBookStudentBorrow`, {
+        headers: {
+            token: localStorage.getItem(TOKEN_USER)
         }
     })
 }

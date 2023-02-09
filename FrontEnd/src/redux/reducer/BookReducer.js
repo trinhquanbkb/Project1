@@ -1,7 +1,8 @@
-import { BORROW_BOOK_BY_USERID, CHECK_ID_BOOK_REDUCER, DELETE_BOOK_BY_ID, GET_BOOK_BORROW_BY_STUDENTID, RECREATE_BOOK_BY_ID, SUBMIT_UPDATE_BOOK, UPDATE_BOOK_BY_ID } from '../type/BookType'
+import { BORROW_BOOK_BY_USERID, CHECK_ID_BOOK_REDUCER, DELETE_BOOK_BY_ID, FIND_BOOK_BY_TITLE, FIND_MY_BOOK, GET_BOOK_BORROW_BY_STUDENTID, RECREATE_BOOK_BY_ID, SUBMIT_UPDATE_BOOK, UPDATE_BOOK_BY_ID } from '../type/BookType'
 import { STATUS_CODE } from '../../utils/constant/statusCode'
 
 const bookData = {
+    //-------------------------------ADMIN---------------------------------
     listBookBorrowOfStudent: [],
     bookById: [],
     idBookDb: null,
@@ -21,6 +22,11 @@ const bookData = {
     checkIdBook: null,
     //id của quyển sách khi được tạo ra
     idBookCreate: null,
+    //tổng hợp những quyển sách theo từng title và tổng các quyển sách trong một title đó 
+    totalBookTitle: [],
+    //-------------------------------USER---------------------------------
+    //myBook chứa danh sách những quyển sách của người đăng nhâpj
+    myBook: [],
 }
 
 const bookReducer = (state = bookData, action) => {
@@ -160,6 +166,27 @@ const bookReducer = (state = bookData, action) => {
         case 'ID_BOOK_CREATE': {
             state.idBookCreate = action.data
             return { ...state }
+        }
+        case FIND_BOOK_BY_TITLE: {
+            let arrayBook = state.totalBookTitle
+            arrayBook.forEach(item => {
+                if(item.title === action.data.title){
+                    const index = arrayBook.indexOf(item)
+                    arrayBook.splice(index, 1)
+                }
+            })
+            arrayBook.push({
+                title: action.data.title,
+                listBook: action.data.listBook,
+                countBook: action.data.countBook
+            })
+            state.totalBookTitle = arrayBook
+            return { ...state }
+        }
+        case FIND_MY_BOOK: {
+            state.myBook = action.data
+            console.log(state.myBook)
+            return {...state}
         }
         default: {
             return { ...state }

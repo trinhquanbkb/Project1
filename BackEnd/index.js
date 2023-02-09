@@ -12,8 +12,9 @@ const path = require('path')
 app.use(cors())
 
 //cài static file
-const pathPublic = path.join(__dirname, './public')
-app.use(express.static(pathPublic))
+app.use(express.static('public')); 
+app.use('/avatarBook', express.static('avatarBook'));
+
 
 //swagger
 app.use('/api-docs', swaggerUi.serve);

@@ -12,8 +12,8 @@ export default function Contact() {
 
   return (
     <div>
-      <h3 style={{ color: 'red', marginTop: '60px', marginLeft: '180px', fontWeight: '600', textAlign: 'left' }}>Lịch sử hình thành và phát triển</h3>
-      <div style={{ padding: '50px 30px', width: '58%', marginLeft: '170px', backgroundColor: '#f5f5f5', marginTop: '30px', borderRadius: '0px 80px 0px 80px', marginBottom: '100px' }}>
+      <h3 style={{ color: 'red', marginTop: '60px', marginLeft: '150px', fontWeight: '600', textAlign: 'left' }}>Lịch sử hình thành và phát triển</h3>
+      <div style={{ padding: '50px 30px', width: '58%', marginLeft: '150px', backgroundColor: '#f7f7f7', marginTop: '30px', borderRadius: '0px 90px 0px 90px', marginBottom: '100px' }}>
         <p style={{ fontSize: '18px', textAlign: 'left' }}> <span style={{ color: '#b71c1c', fontWeight: '500' }}>Thư viện Trường Đại học Bách Khoa Hà Nội</span> được thành lập từ năm 1956 (ngay sau ngày thành lập trường). Trải qua quá trình xây dựng và phát triển, Thư viện đã có nhiều đóng góp quan trọng vào việc đào tạo đội ngũ cán bộ khoa học kỹ thuật đông đảo, đóng góp tích cực vào sự nghiệp phát triển kinh tế - khoa học - kỹ thuật của đất nước.
         </p><br />
         <p style={{ fontSize: '18px', textAlign: 'left' }}> Nhìn lại chặng đường đã qua, trong những năm đầu mới thành lập, với số vốn tài liệu ban đầu là 5000 cuốn sách, cơ sở vật chất nghèo nàn và 2 cán bộ phụ trách không có nghiệp vụ thư viện, Thư viện là một bộ phận trực thuộc Phòng Giáo vụ. Có thể nói điều kiện hoạt động của Thư viện lúc bấy giờ rất khó khăn, cơ sở vật chất thiếu thốn do tình hình chung của Trường và đất nước trong những năm tháng chiến tranh. Tuy nhiên, Thư viện vẫn không ngừng phấn đấu để đảm bảo phục vụ tốt cho cán bộ và sinh viên trong trường, kể cả trong thời gian sơ tán.

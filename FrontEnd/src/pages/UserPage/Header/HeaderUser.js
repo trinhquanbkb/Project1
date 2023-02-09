@@ -26,41 +26,21 @@ export default function HeaderUser() {
         children: [
             {
                 type: 'group',
-                label: 'Item 1',
-                children: [
-                    {
-                        label: 'Option 1',
-                        key: 'setting:1',
-                    },
-                    {
-                        label: 'Option 2',
-                        key: 'setting:2',
-                    },
-                ],
+                label: <NavLink className="nav-link" to="/userPage/book/myBook" style={{ fontSize: '17px', fontWeight: '500', textAlign: 'left' }}>Sách của tôi</NavLink>,
             },
             {
                 type: 'group',
-                label: 'Item 2',
-                children: [
-                    {
-                        label: 'Option 3',
-                        key: 'setting:3',
-                    },
-                    {
-                        label: 'Option 4',
-                        key: 'setting:4',
-                    },
-                ],
+                label: <NavLink className="nav-link" to="/userPage/book/bookLibrary" style={{ fontSize: '17px', fontWeight: '500', textAlign: 'left', paddingTop: '0' }}>Sách thư viện</NavLink>,
             },
         ],
     }]
     const [current, setCurrent] = useState('mail');
     return (
         <Layout className="layout" style={{ width: '100%' }}>
-            <Header className="header" style={{ width: '107%', marginLeft: '-55px', height: '64px', position: 'sticky', top: '0', zIndex: '1' }}>
+            <Header className="header" style={{ width: '107%', marginLeft: '-55px', height: '65px', position: 'sticky', top: '0', zIndex: '1' }}>
                 <div className="logo" />
-                <Menu theme="light" mode="horizontal" defaultSelectedKeys={['2']}>
-                    <Row justify="start" style={{ width: '100%', height: '64px' }}>
+                <Menu theme="light" mode="horizontal" defaultSelectedKeys={['2']} >
+                    <Row justify="start" style={{ width: '100%', height: '65px' }}>
                         <Col span={5}>
                             <p style={{ fontSize: '16px', marginBottom: '0', marginLeft: '-10px' }}>
                                 Thư viện Tạ Quang Bửu
@@ -68,14 +48,14 @@ export default function HeaderUser() {
                         </Col>
                         <Col className="gutter-row" span={17}>
                             <Row>
-                                <Col span={5} style={{ height: '64px' }}></Col>
-                                <Col span={3} style={{ height: '64px' }}>
+                                <Col span={5} style={{ height: '65px' }}></Col>
+                                <Col span={3} style={{ height: '65px' }}>
                                     <Menu><NavLink className="nav-link" to="/userPage" style={{ color: 'black', fontWeight: '600', fontSize: '18px', padding: '0', borderRight: '1px solid #bdbdbd' }}>Trang chủ</NavLink></Menu>
                                 </Col>
-                                <Col span={3} style={{ height: '64px' }}>
+                                <Col span={3} style={{ height: '65px' }}>
                                     <Menu theme='light' style={{ color: 'black', fontWeight: '600', fontSize: '18px', paddingLeft: '32px', paddingBottom: '1px', borderRight: '1px solid #bdbdbd', borderBottom: '1px solid white' }} selectedKeys={[current]} mode="horizontal" items={items} />
                                 </Col>
-                                <Col span={3} style={{ height: '64px' }}>
+                                <Col span={3} style={{ height: '65px' }}>
                                     <Menu><NavLink className="nav-link" to="/userPage/introduce" style={{ color: 'black', fontWeight: '600', fontSize: '18px', padding: '0', borderRight: '1px solid #bdbdbd' }} >Giới thiệu</NavLink></Menu>
                                 </Col>
                             </Row>

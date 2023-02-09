@@ -1,5 +1,10 @@
 
 # Getting Started with Project I 
+
+--cd ./BackEnd
+## `Config database`
+./config/config.json
+
 ## `Start project`: 
 npm start
 
@@ -12,7 +17,9 @@ sequelize db:seed:all
 ## `Delete table in database`: 
 sequelize db:migrate:undo:all 
 
-
+--cd ./FrontEnd
+## `Start project`: 
+npm start
 
 
 

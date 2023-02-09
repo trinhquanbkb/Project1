@@ -1,5 +1,5 @@
-import { takeLatest, put } from 'redux-saga/effects'
-import { BORROW_BOOK_BY_USERID, CHECK_ID_BOOK_REDUCER, DELETE_BOOK_BY_ID, GET_BOOK_BORROW_BY_STUDENTID, RECREATE_BOOK_BY_ID, UPDATE_BOOK_BY_ID } from '../type/BookType'
+import { takeLatest, put, takeEvery } from 'redux-saga/effects'
+import { BORROW_BOOK_BY_USERID, CHECK_ID_BOOK_REDUCER, DELETE_BOOK_BY_ID, FIND_BOOK_BY_TITLE, FIND_MY_BOOK, GET_BOOK_BORROW_BY_STUDENTID, RECREATE_BOOK_BY_ID, UPDATE_BOOK_BY_ID } from '../type/BookType'
 import {
     deleteBookById,
     getAllBooks,
@@ -8,7 +8,9 @@ import {
     createBook,
     borrowBook,
     getBookById,
-    uploadImage
+    uploadImage,
+    findBookByTitle,
+    listBookStudentBorrow,
 } from '../../services/BookService'
 import { getUserByMssv } from '../../services/UserService'
 import { STATUS_CODE } from '../../utils/constant/statusCode'
@@ -85,7 +87,7 @@ function* createNewBook(action) {
         yield put({
             type: 'VALUE_CREATE_BOOK',
             data: {}
-          })
+        })
         yield put({
             type: 'ID_BOOK_CREATE',
             data: promise.data.id
@@ -133,11 +135,43 @@ function* checkIdBook(action) {
     }
 }
 
-function* uploadImageBook(action){
+function* uploadImageBook(action) {
     try {
         yield uploadImage(action.data.id, action.data.file)
     } catch (error) {
-        
+
+    }
+}
+
+function* getBookByTitle(action) {
+    try {
+        let response = yield findBookByTitle(action.data)
+        if (response) {
+            yield put({
+                type: FIND_BOOK_BY_TITLE,
+                data: {
+                    title: action.data,
+                    listBook: response.data.listBook,
+                    countBook: response.data.countBook
+                }
+            })
+        }
+    } catch (error) {
+
+    }
+}
+
+function* listBookStudent(action) {
+    try {
+        let response= yield listBookStudentBorrow()
+        if (response) {
+            yield put({
+                type: FIND_MY_BOOK,
+                data: response.data
+            })
+        }
+    } catch (error) {
+
     }
 }
 
@@ -150,4 +184,6 @@ export function* getBookSaga() {
     yield takeLatest('BORROW_BOOK', borrowBookSaga)
     yield takeLatest('CHECK_BOOK_ID', checkIdBook)
     yield takeLatest('UPLOAD_IMAGE_BOOK', uploadImageBook)
+    yield takeEvery('GET_DATA_BOOK_BY_TITLE', getBookByTitle)
+    yield takeLatest('MY_BOOK', listBookStudent)
 }

@@ -7,6 +7,8 @@ import UserManager from "../../pages/AdminPages/User/UserManager";
 import Login from "../../pages/Login/Login";
 import PageNotFound from "../../pages/PageError/PageNotFound";
 import Register from "../../pages/Register/Register";
+import BookLibrary from "../../pages/UserPage/Book/BookLibrary";
+import MyBook from "../../pages/UserPage/Book/MyBook";
 import Contact from "../../pages/UserPage/Contact/Contact";
 import HeaderUser from "../../pages/UserPage/Header/HeaderUser";
 import IndexUser from "../../pages/UserPage/Index/IndexUser";
@@ -27,6 +29,8 @@ export const publicRoutes = [
     { path: '/adminPage/bookManager/registerBook', component: RegisterBook, layout: HeaderAdmin, pathLayout: '/adminPage' },
     { path: '/userPage', component: IndexUser, layout: HeaderUser, pathLayout: '/userPage' },
     { path: '/userPage/introduce', component: Contact, layout: HeaderUser, pathLayout: '/userPage' },
+    { path: '/userPage/book/myBook', component: MyBook, layout: HeaderUser, pathLayout: '/userPage' },
+    { path: '/userPage/book/bookLibrary', component: BookLibrary, layout: HeaderUser, pathLayout: '/userPage' },
     { path: '*', component: PageNotFound },
 ];
 

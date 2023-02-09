@@ -456,6 +456,61 @@ const uploadImageBook = async (req, res) => {
     }
 }
 
+const findBookByTitle = async (req, res) => {
+    try {
+        const { title } = req.query
+        const books = await Books.findAll({
+            where: {
+                title,
+            }
+        })
+        let resBook = books.map((item) => {
+            return item.dataValues
+        })
+        if (resBook) {
+            let response = {
+                listBook: resBook,
+                countBook: resBook.length
+            }
+            res.status(200).send(response)
+        } else {
+            throw new Error('Cannot find book by title')
+        }
+    } catch (error) {
+        res.status(401).send(error)
+    }
+}
+
+//xem danh sách mượn sách của sinh viên khi sinh viên đăng nhập
+const listBookStudentBorrow = async (req, res) => {
+    const { userId} = req.user
+    try {
+        const user = await Users.findOne({
+            where: {
+                id: userId
+            }
+        })
+        if (user) {
+            const book = await Books.findAll({
+                where: {
+                    userId: userId,
+                    status: '0'
+                }
+            })
+            if (book) {
+                res.status(200).send(book)
+            }
+            else {
+                res.status(500).send("Can't find books user borrow")
+            }
+        } else {
+            throw new Error("Can't find id of user")
+        }
+    } catch (e) {
+        res.status(500).send(e)
+    }
+}
+
 module.exports = {
     createBook,
     deleteBook,
@@ -472,4 +527,6 @@ module.exports = {
     minTime,
     recreateBookById,
     uploadImageBook,
+    findBookByTitle,
+    listBookStudentBorrow,
 }

@@ -2,27 +2,43 @@ import React, { useEffect } from 'react'
 import { Carousel, Button, Col, Row, Badge, Avatar } from 'antd';
 import { NavLink } from 'react-router-dom';
 import befinit from '../../../assets/book/book-image-1.png'
+import bookTitle from '../../../assets/book/bookTitle.png'
 import { BulbTwoTone, TrophyTwoTone, FileTextTwoTone, CustomerServiceTwoTone } from '@ant-design/icons';
 import { TOKEN_USER } from '../../../utils/constant/data';
 import { useNavigate } from 'react-router-dom'
 import listTitleOption from '../../AdminPages/Book/listTitleOption.json'
+import { useDispatch, useSelector } from 'react-redux';
+
 
 
 export default function IndexUser() {
+
+  const dispatch = useDispatch()
+  const { totalBookTitle } = useSelector(state => state.bookReducer)
 
   const navigate = useNavigate()
   useEffect(() => {
     if (!localStorage.getItem(TOKEN_USER)) {
       navigate('/login', { replace: true })
     }
+    for (let i = 0; i < listTitleOption.length; i++) {
+      setTimeout(() => {
+        dispatch({
+          type: 'GET_DATA_BOOK_BY_TITLE',
+          data: listTitleOption[i].title
+        })
+      },20)
+    }
   }, [])
 
   const renderTitleBook = () => {
-    return listTitleOption.map((item) => {
+    return totalBookTitle.map((item) => {
       return <Col style={{ marginTop: '20px', marginBottom: '20px' }} span={4}>
-        <Badge count={5}>
-          <Avatar style={{ width: '150px', height: '140px', backgroundImage: 'radial-gradient(circle, rgba(20,27,105,0.8800770308123249) 0%, rgba(88,84,98,0.9360994397759104) 100%)', color: 'white', paddingTop: '50px', fontWeight: '500', fontSize: '17px' }} shape="square" size="large">{item.title}</Avatar>
-        </Badge>
+        <NavLink>
+          <Badge count={item.countBook}>
+            <Avatar style={{ width: '150px', height: '140px', backgroundImage: `url(${bookTitle})`, backgroundSize: '100% 100%', color: 'white', paddingTop: '25px', fontWeight: '500', fontSize: '17px', borderRadius: '14px' }} shape="square" size="large">{item.title}</Avatar>
+          </Badge>
+        </NavLink>
       </Col>
     })
   }
@@ -89,13 +105,13 @@ export default function IndexUser() {
 
 
       {/* Befinit */}
-      <h1 style={{ fontWeight: '700', marginTop: '170px' }}>Lợi ích của việc đọc sách</h1>
+      <p style={{ fontWeight: 'bold', marginTop: '150px', fontFamily: 'Poppins', fontSize: '33px' }}>Lợi ích của việc đọc sách</p>
       <p style={{ fontWeight: '400', fontSize: '20px', padding: '0px 280px' }}>Đọc sách vẫn luôn là một thói quen bổ ích được nhiều người yêu thích nhưng bên cạnh việc cung cấp tri thức đọc sách còn mang lại nhiều lợi ích hơn thế</p>
-      <Row style={{ width: '100%', height: '1000px', marginTop: '40px' }}>
-        <Col className="gutter-row" span={12} style={{ textAlign: 'left', paddingLeft: '70px' }}>
+      <Row style={{ width: '100%', height: '940px', marginTop: '40px' }}>
+        <Col className="gutter-row" span={14} style={{ textAlign: 'left', paddingLeft: '120px' }}>
           <Row style={{ width: '100%', marginTop: '40px' }}>
-            <Col span={6}>
-              <BulbTwoTone style={{ fontSize: '100px' }} />
+            <Col span={4}>
+              <BulbTwoTone style={{ fontSize: '80px' }} />
             </Col>
             <Col span={18}>
               <p style={{ fontSize: '23px', fontWeight: '700' }}>Nâng cao kiến thức</p>
@@ -103,8 +119,8 @@ export default function IndexUser() {
             </Col>
           </Row>
           <Row style={{ width: '100%', marginTop: '30px' }}>
-            <Col span={6}>
-              <TrophyTwoTone style={{ fontSize: '100px' }} />
+            <Col span={4}>
+              <TrophyTwoTone style={{ fontSize: '80px' }} />
             </Col>
             <Col span={18}>
               <p style={{ fontSize: '23px', fontWeight: '700' }}>Tăng cường kỹ năng tư duy, phân tích</p>
@@ -112,8 +128,8 @@ export default function IndexUser() {
             </Col>
           </Row>
           <Row style={{ width: '100%', marginTop: '30px' }}>
-            <Col span={6}>
-              <FileTextTwoTone style={{ fontSize: '100px' }} />
+            <Col span={4}>
+              <FileTextTwoTone style={{ fontSize: '80px' }} />
             </Col>
             <Col span={18}>
               <p style={{ fontSize: '23px', fontWeight: '700' }}>Mở rộng vốn từ ngữ</p>
@@ -121,8 +137,8 @@ export default function IndexUser() {
             </Col>
           </Row>
           <Row style={{ width: '100%', marginTop: '30px' }}>
-            <Col span={6}>
-              <CustomerServiceTwoTone style={{ fontSize: '100px' }} />
+            <Col span={4}>
+              <CustomerServiceTwoTone style={{ fontSize: '80px' }} />
             </Col>
             <Col span={18}>
               <p style={{ fontSize: '23px', fontWeight: '700' }}>Hình thức giải trí miễn phí</p>
@@ -130,18 +146,19 @@ export default function IndexUser() {
             </Col>
           </Row>
         </Col>
-        <Col span={12} style={{ marginTop: '200px' }}>
-          <div style={{ backgroundImage: `url(${befinit})`, backgroundSize: '100% 100%', width: '72%', height: '55%', marginLeft: '130px' }}></div>
+        <Col span={10} style={{ marginTop: '200px' }}>
+          <div style={{ backgroundImage: `url(${befinit})`, backgroundSize: '100% 100%', width: '72%', height: '59%', marginLeft: '80px' }}></div>
         </Col>
       </Row>
 
 
 
       {/* Our Book */}
-      <h1 style={{ fontWeight: '700', marginBottom: '40px' }}>Các thể loại sách</h1>
-      <Row style={{marginBottom: '300px'}}>
+      <p style={{ fontWeight: 'bold', marginBottom: '40px', fontFamily: 'Poppins', fontSize: '33px' }}>Các thể loại sách</p>
+      <Row style={{ marginBottom: '200px' }}>
         {renderTitleBook()}
       </Row>
+
     </div >
   )
 }

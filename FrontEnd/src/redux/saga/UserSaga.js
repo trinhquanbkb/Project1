@@ -49,7 +49,7 @@ function* loginAdminSaga(action) {
                         statusLogin: 'USER',
                         dataLogin: {
                             token: promiseUser.data.token
-                        }
+                        },
                     }
                 })
             }

@@ -67,7 +67,7 @@ export default function Register() {
                         type: CHECK_MSSV_REDUCER,
                         data: null
                     })
-                }, 500)
+                }, 200)
                 setTimeout(() => {
                     navigate('/userPage', { replace: true })
                 }, 600)

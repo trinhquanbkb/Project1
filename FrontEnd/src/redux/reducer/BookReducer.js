@@ -1,4 +1,4 @@
-import { BORROW_BOOK_BY_USERID, CHECK_ID_BOOK_REDUCER, DELETE_BOOK_BY_ID, FIND_BOOK_BY_TITLE, FIND_MY_BOOK, GET_BOOK_BORROW_BY_STUDENTID, RECREATE_BOOK_BY_ID, SUBMIT_UPDATE_BOOK, UPDATE_BOOK_BY_ID } from '../type/BookType'
+import { BOOK_TITLE, BORROW_BOOK_BY_USERID, CHECK_ID_BOOK_REDUCER, DELETE_BOOK_BY_ID, FIND_BOOK_BY_TITLE, FIND_MY_BOOK, GET_BOOK_BORROW_BY_STUDENTID, RECREATE_BOOK_BY_ID, SUBMIT_UPDATE_BOOK, UPDATE_BOOK_BY_ID } from '../type/BookType'
 import { STATUS_CODE } from '../../utils/constant/statusCode'
 
 const bookData = {
@@ -27,6 +27,8 @@ const bookData = {
     //-------------------------------USER---------------------------------
     //myBook chứa danh sách những quyển sách của người đăng nhâpj
     myBook: [],
+    //titleBook cho biết thể loại sách cần tìm để hiển thị ra danh sách của thể loại đó
+    titleBook: null,
 }
 
 const bookReducer = (state = bookData, action) => {
@@ -170,7 +172,7 @@ const bookReducer = (state = bookData, action) => {
         case FIND_BOOK_BY_TITLE: {
             let arrayBook = state.totalBookTitle
             arrayBook.forEach(item => {
-                if(item.title === action.data.title){
+                if (item.title === action.data.title) {
                     const index = arrayBook.indexOf(item)
                     arrayBook.splice(index, 1)
                 }
@@ -185,8 +187,11 @@ const bookReducer = (state = bookData, action) => {
         }
         case FIND_MY_BOOK: {
             state.myBook = action.data
-            console.log(state.myBook)
-            return {...state}
+            return { ...state }
+        }
+        case BOOK_TITLE: {
+            return { ...state,
+            titleBook: action.data }
         }
         default: {
             return { ...state }

@@ -27,15 +27,18 @@ export default function IndexUser() {
           type: 'GET_DATA_BOOK_BY_TITLE',
           data: listTitleOption[i].title
         })
-      },20)
+      }, 10)
     }
   }, [])
 
   const renderTitleBook = () => {
     return totalBookTitle.map((item) => {
       return <Col style={{ marginTop: '20px', marginBottom: '20px' }} span={4}>
-        <NavLink>
-          <Badge count={item.countBook}>
+        <NavLink className="nav-link" to="/userPage/book/title">
+          <Badge onClick={() => {
+            localStorage.setItem('title', item.title)
+            localStorage.setItem('listBookByTitle', JSON.stringify(item.listBook))
+          }} count={item.countBook}>
             <Avatar style={{ width: '150px', height: '140px', backgroundImage: `url(${bookTitle})`, backgroundSize: '100% 100%', color: 'white', paddingTop: '25px', fontWeight: '500', fontSize: '17px', borderRadius: '14px' }} shape="square" size="large">{item.title}</Avatar>
           </Badge>
         </NavLink>

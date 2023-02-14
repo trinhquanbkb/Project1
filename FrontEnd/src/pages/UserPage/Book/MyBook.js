@@ -9,7 +9,7 @@ export default function MyBook() {
   const { Meta } = Card
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { myBook } = useSelector(state => state.bookReducer)
+  const { myBook, totalBookTitle } = useSelector(state => state.bookReducer)
 
   useEffect(() => {
     if (!localStorage.getItem(TOKEN_USER)) {
@@ -24,22 +24,22 @@ export default function MyBook() {
     return myBook.map(item => {
       const endDate = new Date(item.endDate)
       const time = endDate - Date.now()
-      const info = (time < 0 ) ? null : <Meta title={item.name} description={item.author} />
+      const info = (time < 0) ? null : <Meta title={item.name} description={item.author} />
       const report = (time < 0) ? <div>
-        <span style={{color: 'red', fontSize: '22px', fontWeight: '600'}}>Hết hạn</span><br/>
+        <span style={{ color: 'red', fontSize: '22px', fontWeight: '600' }}>Hết hạn</span><br />
       </div> : null
       return <Col span={7}>
         <Card
           hoverable
           style={{
-            width: 300,
-            height: 450,
+            width: 250,
+            height: 400,
             margin: 30,
             borderRadius: 15,
             backgroundColor: '#eeeeee'
           }}
           cover={
-            <div style={{ backgroundImage: `url("${DOMAIN_FILE_SERVER}/avatarBook/${item.urlImage}")`, width: '300px', height: '350px', backgroundSize: '100% 100%', borderRadius: '15px 15px 0px 0px' }} />
+            <div style={{ backgroundImage: `url("${DOMAIN_FILE_SERVER}/avatarBook/${item.urlImage}")`, width: '250px', height: '300px', backgroundSize: '100% 100%', borderRadius: '15px 15px 0px 0px' }} />
           }
         >
           {info}
@@ -52,7 +52,7 @@ export default function MyBook() {
 
   return (
     <div>
-      <Row style={{marginLeft: '180px', marginTop:'80px'}}>
+      <Row style={{ marginLeft: '180px', marginTop: '80px' }}>
         {renderBook()}
       </Row>
     </div>

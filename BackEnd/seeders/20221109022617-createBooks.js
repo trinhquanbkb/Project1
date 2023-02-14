@@ -39,9 +39,9 @@ module.exports = {
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
-        endDate: '2023-02-17 04:33:12',
+        endDate: '2023-03-17 04:33:12',
         userId: 1,
-        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
+        urlImage: '1676386604819-238008913368d77eb57d9a8ae2da5577074d328a5.jpg',
       },
       {
         name: 'Đắc nhân tâm',
@@ -56,7 +56,7 @@ module.exports = {
         status:'1',
         endDate: '2023-02-01 04:33:12',
         userId: 2,
-        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
+        urlImage: '1676208124523-433792148doi-ngan-dung-ngu-dai.jpg',
       },
       {
         name: 'Sherlock holmes',
@@ -65,13 +65,13 @@ module.exports = {
         countPage: 2300,
         year: 1876,
         positionBook: '3T',
-        dayBorrow: '2022-11-01 04:33:12',
+        dayBorrow: '2022-12-01 04:33:12',
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12',
         status:'0',
-        endDate: '2022-02-01 04:33:12',
+        endDate: '2022-03-01 04:33:12',
         userId: 2,
-        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
+        urlImage: '1676386638251-603230508sach-than-so-hoc.jpg',
       },
       {
         name: 'Sherlock holmes',
@@ -86,7 +86,7 @@ module.exports = {
         status:'0',
         endDate: '2023-01-17 04:33:12',
         userId: null,
-        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
+        urlImage: '1676386638251-603230508sach-than-so-hoc.jpg',
       },
       {
         name: 'Sherlock holmes',
@@ -116,7 +116,7 @@ module.exports = {
         status:'0',
         endDate: '2023-04-17 04:33:12',
         userId: 2,
-        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
+        urlImage: '1676386647379-817654570review-sach-dung-bao-gio-tu-bo-giac-mo-revisach.com_.jpg',
       },
       {
         name: 'Dragonball tập 2',
@@ -131,7 +131,7 @@ module.exports = {
         status:'0',
         endDate: null,
         userId:null,
-        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
+        urlImage: '1676386647379-817654570review-sach-dung-bao-gio-tu-bo-giac-mo-revisach.com_.jpg',
       },
       {
         name: 'Dragonball tập 3',
@@ -161,7 +161,7 @@ module.exports = {
         status:'0',
         endDate: null,
         userId: null,
-        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
+        urlImage: '1676208124523-433792148doi-ngan-dung-ngu-dai.jpg',
       },
       {
         name: 'Conan tập 2',
@@ -296,7 +296,7 @@ module.exports = {
         status:'0',
         endDate: null,
         userId: null,
-        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
+        urlImage: '1676386647379-817654570review-sach-dung-bao-gio-tu-bo-giac-mo-revisach.com_.jpg',
       },
       {
         name: 'Tâm Lý Học - Phác Họa Chân Dung Kẻ Phạm Tội',
@@ -311,7 +311,7 @@ module.exports = {
         status:'0',
         endDate: null,
         userId: null,
-        urlImage: '1675440654788-715983700booksnewe1611252343470-1640339-6533-8077-1640339279.jpg',
+        urlImage: '1676386647379-817654570review-sach-dung-bao-gio-tu-bo-giac-mo-revisach.com_.jpg',
       },
     ], {});
   },

@@ -15,3 +15,5 @@ export const CHECK_ID_BOOK_REDUCER = 'CHECK_ID_BOOK_REDUCER'
 export const FIND_BOOK_BY_TITLE = 'FIND_BOOK_BY_TITLE'
 
 export const FIND_MY_BOOK = 'FIND_MY_BOOK'
+
+export const BOOK_TITLE = 'BOOK_TITLE'

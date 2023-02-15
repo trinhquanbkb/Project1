@@ -29,6 +29,9 @@ export default function IndexUser() {
         })
       }, 10)
     }
+    setTimeout(() => {
+      localStorage.setItem('allBook', JSON.stringify(totalBookTitle))
+    }, 1000)
   }, [])
 
   const renderTitleBook = () => {

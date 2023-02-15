@@ -93,3 +93,11 @@ export const listBookStudentBorrow = async () => {
         }
     })
 }
+
+export const giveBook = async (id) => {
+    return await Axios.put(`${DOMAIN_SERVER}/books/giveBook?id=${id}`, { params: { id: id } }, {
+        headers: {
+            token: localStorage.getItem(TOKEN_ADMIN)
+        }
+    })
+}

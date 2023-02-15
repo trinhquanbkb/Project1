@@ -141,6 +141,8 @@ Tạo sách mới                                      ------done-------
 
 Mượn sách theo id của sách và id của user                      ------done-------
 
+Trả sách theo id của sách
+
 
 ### `Thay đổi thông tin người dùng admin`
 Thay đổi mật khẩu                       ------done-------
@@ -157,21 +159,33 @@ Tạo tài khoản admin                     ------done-------
 ### `Header && Footer`                  
 ------done-------
 
+
 ### `Trang chủ user`
 Carousel                               ------done-------
+List thể loại sách                       ------done-------
 
+
+### `List những quyển sách cùng thể loại`                             
+------done-------
+
+
+### `Giới thiệu chi tiết về quyển sách đã chọn`                             
+------done-------
 
 
 ### `Trang giới thiệu`                  
 ------done-------
 
 
-
-## `BUG`
----Chưa có
+### `Trang sách của thư viện`  
 
 
 
 
+
+# `Giao diện còn thiếu`
+--Trang sách của thư viện (user)
+--Trả sách theo id của sách (admin)
+--Xử lý phần quên mật khẩu user (login)
 
 

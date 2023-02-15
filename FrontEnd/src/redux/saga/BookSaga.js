@@ -11,6 +11,7 @@ import {
     uploadImage,
     findBookByTitle,
     listBookStudentBorrow,
+    giveBook,
 } from '../../services/BookService'
 import { getUserByMssv } from '../../services/UserService'
 import { STATUS_CODE } from '../../utils/constant/statusCode'
@@ -175,6 +176,19 @@ function* listBookStudent(action) {
     }
 }
 
+function* giveBookSaga(action) {
+    try {
+        let response = yield giveBook(action.data.idBook)
+        if(response.status === STATUS_CODE.SUCCESS_PUT){
+            localStorage.setItem('giveBookStatus', 'true')
+        }else{
+            localStorage.setItem('giveBookStatus', 'returned')
+        }
+    } catch (error) {
+        localStorage.setItem('giveBookStatus', 'false')
+    }
+}
+
 
 export function* getBookSaga() {
     yield takeLatest('GET_BOOK_BORROW_STUDENT', getBookBorrowStudent)
@@ -187,4 +201,5 @@ export function* getBookSaga() {
     yield takeLatest('UPLOAD_IMAGE_BOOK', uploadImageBook)
     yield takeEvery('GET_DATA_BOOK_BY_TITLE', getBookByTitle)
     yield takeLatest('MY_BOOK', listBookStudent)
+    yield takeLatest('GIVE_BOOK', giveBookSaga)
 }

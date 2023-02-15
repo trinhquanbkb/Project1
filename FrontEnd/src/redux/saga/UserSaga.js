@@ -54,8 +54,7 @@ function* loginAdminSaga(action) {
                 })
             }
         } catch (error) {
-            localStorage.removeItem(TOKEN_ADMIN)
-            localStorage.removeItem(TOKEN_USER)
+            localStorage.clear()
             yield put({
                 type: LOGIN,
                 data: {

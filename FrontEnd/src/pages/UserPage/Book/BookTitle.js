@@ -155,7 +155,7 @@ export default function BookTitle() {
                 array.push(item.listBook)
             }
         })
-        setFilter({ nameFilter: 'Tất cả sách', status: 1 })
+        setFilter({ nameFilter: 'Bộ lọc', status: 1 })
         localStorage.setItem('listBookByTitle', JSON.stringify(array[0]))
     }
 
@@ -184,20 +184,25 @@ export default function BookTitle() {
 
     return (
         <div style={{ textAlign: 'left' }}>
-            <p style={{ fontSize: '21px', fontWeight: '500', marginTop: '50px', marginLeft: '170px', textAlign: 'left' }}> Thể loại: <span style={{ fontSize: '18px' }}>{localStorage.getItem('title')} /</span>
-                <Space style={{ marginLeft: '725px' }} direction="vertical">
-                    <Space wrap>
-                        <Dropdown
-                            menu={{
-                                items,
-                            }}
-                            placement="bottom"
-                        >
-                            <Button style={{ width: '140px' }}>{filter.nameFilter}</Button>
-                        </Dropdown>
+            <Row>
+                <Col span={17}>
+                    <p style={{ fontSize: '21px', fontWeight: '500', marginTop: '50px', paddingLeft: '220px', textAlign: 'left' }}> Thể loại: <span style={{ fontSize: '18px' }}>{localStorage.getItem('title')} </span></p>
+                </Col>
+                <Col span={7}>
+                    <Space style={{marginTop: '50px', paddingLeft: '50px'}} direction="vertical">
+                        <Space wrap>
+                            <Dropdown
+                                menu={{
+                                    items,
+                                }}
+                                placement="bottom"
+                            >
+                                <Button style={{ width: '140px' }}>{filter.nameFilter}</Button>
+                            </Dropdown>
+                        </Space>
                     </Space>
-                </Space>
-            </p>
+                </Col>
+            </Row>
 
             <Row style={{ marginLeft: '210px', marginTop: '20px' }}>
                 {renderBook()}

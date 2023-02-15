@@ -65,6 +65,7 @@ export default function HeaderAdmin() {
                             <Menu.Item><NavLink className="nav-link" to="/adminPage/bookManager/listBook" style={{ fontSize: '15px', fontWeight: '500', textAlign: 'left', marginLeft: '50px', color: '#303f9f' }}>Danh sách quyển sách</NavLink></Menu.Item>
                             <Menu.Item><NavLink className="nav-link" to="/adminPage/bookManager/createBook" style={{ fontSize: '15px', fontWeight: '500', textAlign: 'left', marginLeft: '50px', color: '#303f9f' }}>Tạo sách mới</NavLink></Menu.Item>
                             <Menu.Item><NavLink className="nav-link" to="/adminPage/bookManager/registerBook" style={{ fontSize: '15px', fontWeight: '500', textAlign: 'left', marginLeft: '50px', color: '#303f9f' }}>Đăng ký mượn sách</NavLink></Menu.Item>
+                            <Menu.Item><NavLink className="nav-link" to="/adminPage/bookManager/giveBook" style={{ fontSize: '15px', fontWeight: '500', textAlign: 'left', marginLeft: '50px', color: '#303f9f' }}>Trả sách</NavLink></Menu.Item>
                         </Menu.SubMenu>
                         <Menu.SubMenu title="Quản lý chỗ ngồi" style={{ fontSize: '17px', fontWeight: '500', marginLeft: '-21px' }} disabled>
                             <Menu.Item><NavLink className="nav-link" to="/adminPage/bookAdminPage" style={{ fontSize: '15px', fontWeight: '500', textAlign: 'left', marginLeft: '50px', color: '#303f9f' }}>Danh sách quyển sách</NavLink></Menu.Item>

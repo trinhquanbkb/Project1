@@ -211,7 +211,7 @@ const borrowBook = async (req, res) => {
 }
 //Trả sách giveBook
 const giveBook = async (req, res) => {
-    const { id } = req.params
+    const { id } = req.query
     try {
         const book = await Books.findOne({
             where: {
@@ -219,20 +219,24 @@ const giveBook = async (req, res) => {
             }
         })
         if (book) {
-            const updateBook = await Books.update({
-                userId: null,
-                dayBorrow: null,
-                status: statusBook.notExtend,
-                endDate: null
-            }, {
-                where: {
-                    id,
+            if (book.dataValues.userId !== null) {
+                const updateBook = await Books.update({
+                    userId: null,
+                    dayBorrow: null,
+                    status: statusBook.notExtend,
+                    endDate: null
+                }, {
+                    where: {
+                        id,
+                    }
+                })
+                if (updateBook) {
+                    res.status(201).send("Give book successful!")
+                } else {
+                    res.status(500).send("Give book failed!")
                 }
-            })
-            if (updateBook) {
-                res.status(201).send("Give book successful!")
             } else {
-                res.status(500).send("Give book failed!")
+                res.status(200).send("The book has been returned")
             }
         } else {
             throw new Error(`Couldn't find book by this id ${id}`)
@@ -483,7 +487,7 @@ const findBookByTitle = async (req, res) => {
 
 //xem danh sách mượn sách của sinh viên khi sinh viên đăng nhập
 const listBookStudentBorrow = async (req, res) => {
-    const { userId} = req.user
+    const { userId } = req.user
     try {
         const user = await Users.findOne({
             where: {

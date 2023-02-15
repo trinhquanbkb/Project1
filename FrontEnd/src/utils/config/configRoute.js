@@ -1,4 +1,5 @@
 import CreateBook from "../../pages/AdminPages/Book/CreateBook";
+import GiveBook from "../../pages/AdminPages/Book/GiveBook";
 import ListBook from "../../pages/AdminPages/Book/ListBook";
 import RegisterBook from "../../pages/AdminPages/Book/RegisterBook";
 import HeaderAdmin from "../../pages/AdminPages/Header/HeaderAdmin";
@@ -29,6 +30,8 @@ export const publicRoutes = [
     { path: '/adminPage/bookManager/listBook', component: ListBook, layout: HeaderAdmin, pathLayout: '/adminPage' },
     { path: '/adminPage/bookManager/createBook', component: CreateBook, layout: HeaderAdmin, pathLayout: '/adminPage' },
     { path: '/adminPage/bookManager/registerBook', component: RegisterBook, layout: HeaderAdmin, pathLayout: '/adminPage' },
+    { path: '/adminPage/bookManager/giveBook', component: GiveBook, layout: HeaderAdmin, pathLayout: '/adminPage' },
+
     //user Page
     { path: '/userPage', component: IndexUser, layout: HeaderUser, pathLayout: '/userPage' },
     { path: '/userPage/introduce', component: Contact, layout: HeaderUser, pathLayout: '/userPage' },

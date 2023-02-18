@@ -16,8 +16,9 @@ const { createBook,
     minTime,
     recreateBookById,
     uploadImageBook,
-    findBookByTitle, 
-    listBookStudentBorrow, } = require('../controller/books.controller')
+    findBookByTitle,
+    listBookStudentBorrow,
+    searchBook } = require('../controller/books.controller')
 const { authenticate } = require('../middleware/authentication')
 const { adminAuthorize, userAuthorize, userOtherSchoolAuthorize, allAuthorize } = require('../middleware/authorization')
 const { uploadImage } = require('../middleware/uploadImage')
@@ -40,6 +41,7 @@ bookRouter.put('/recreateBookById', authenticate, adminAuthorize, checkBook, rec
 bookRouter.put('/uploadImage', authenticate, adminAuthorize, uploadImage(), uploadImageBook)
 bookRouter.get('/findBookByTitle', authenticate, allAuthorize, findBookByTitle)
 bookRouter.get('/listBookStudentBorrow', authenticate, userAuthorize, listBookStudentBorrow)
+bookRouter.get('/searchBook', authenticate, userAuthorize, searchBook)
 
 
 module.exports = {

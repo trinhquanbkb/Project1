@@ -1,4 +1,4 @@
-import { BOOK_TITLE, BORROW_BOOK_BY_USERID, CHECK_ID_BOOK_REDUCER, DELETE_BOOK_BY_ID, FIND_BOOK_BY_TITLE, FIND_MY_BOOK, GET_BOOK_BORROW_BY_STUDENTID, RECREATE_BOOK_BY_ID, SUBMIT_UPDATE_BOOK, UPDATE_BOOK_BY_ID } from '../type/BookType'
+import { BOOK_TITLE, BORROW_BOOK_BY_USERID, CHECK_ID_BOOK_REDUCER, DELETE_BOOK_BY_ID, FIND_BOOK_BY_TITLE, FIND_MY_BOOK, GET_BOOK_BORROW_BY_STUDENTID, RECREATE_BOOK_BY_ID, SEARCH_BOOK, SUBMIT_UPDATE_BOOK, UPDATE_BOOK_BY_ID } from '../type/BookType'
 import { STATUS_CODE } from '../../utils/constant/statusCode'
 
 const bookData = {
@@ -190,8 +190,10 @@ const bookReducer = (state = bookData, action) => {
             return { ...state }
         }
         case BOOK_TITLE: {
-            return { ...state,
-            titleBook: action.data }
+            return {
+                ...state,
+                titleBook: action.data
+            }
         }
         default: {
             return { ...state }

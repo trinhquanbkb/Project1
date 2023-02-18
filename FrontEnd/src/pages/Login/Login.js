@@ -91,7 +91,7 @@ export default function Login() {
                                         <div className="text-center pt-1 mb-5 pb-1" style={{ paddingLeft: '88px' }}>
                                             <button className="btn btn-primary btn-block fa-lg gradient-custom-2"
                                                 style={{ width: '180px', fontSize: '16px', paddingTop: '12px', paddingBottom: '12px', marginBottom: '6px' }} >Đăng nhập</button>
-                                            <a className="text-muted" href="#!" style={{ fontSize: '13px', paddingRight: '88px' }} data-toggle="modal" data-target="#modelId">Quên mật khẩu?</a>
+                                            
                                         </div>
                                         <div className="d-flex align-items-center justify-content-center pb-4">
                                             <p className="mb-0 me-2" style={{ fontSize: '13px' }}>Bạn chưa có tài khoản?</p>

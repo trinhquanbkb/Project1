@@ -12,6 +12,7 @@ import {
     findBookByTitle,
     listBookStudentBorrow,
     giveBook,
+    searchBook
 } from '../../services/BookService'
 import { getUserByMssv } from '../../services/UserService'
 import { STATUS_CODE } from '../../utils/constant/statusCode'
@@ -164,7 +165,7 @@ function* getBookByTitle(action) {
 
 function* listBookStudent(action) {
     try {
-        let response= yield listBookStudentBorrow()
+        let response = yield listBookStudentBorrow()
         if (response) {
             yield put({
                 type: FIND_MY_BOOK,
@@ -179,9 +180,9 @@ function* listBookStudent(action) {
 function* giveBookSaga(action) {
     try {
         let response = yield giveBook(action.data.idBook)
-        if(response.status === STATUS_CODE.SUCCESS_PUT){
+        if (response.status === STATUS_CODE.SUCCESS_PUT) {
             localStorage.setItem('giveBookStatus', 'true')
-        }else{
+        } else {
             localStorage.setItem('giveBookStatus', 'returned')
         }
     } catch (error) {
@@ -189,6 +190,13 @@ function* giveBookSaga(action) {
     }
 }
 
+function* searchBookSaga(action) {
+    try {
+        let response = yield searchBook(action.data)
+        localStorage.setItem('bookFilterLibrary', JSON.stringify(response.data))
+    } catch (error) {
+    }
+}
 
 export function* getBookSaga() {
     yield takeLatest('GET_BOOK_BORROW_STUDENT', getBookBorrowStudent)
@@ -202,4 +210,5 @@ export function* getBookSaga() {
     yield takeEvery('GET_DATA_BOOK_BY_TITLE', getBookByTitle)
     yield takeLatest('MY_BOOK', listBookStudent)
     yield takeLatest('GIVE_BOOK', giveBookSaga)
+    yield takeLatest('SEARCH_BOOK_SAGA', searchBookSaga)
 }

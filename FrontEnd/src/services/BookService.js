@@ -11,9 +11,10 @@ export const historyBookBorrowOfStudent = async (id) => {
 }
 
 export const getAllBooks = async () => {
+    const token = localStorage.getItem(TOKEN_ADMIN) ? localStorage.getItem(TOKEN_ADMIN) : localStorage.getItem(TOKEN_USER)
     return await Axios.get(`${DOMAIN_SERVER}/books/getAllBook`, {
         headers: {
-            token: localStorage.getItem(TOKEN_ADMIN)
+            token: token
         }
     })
 }
@@ -98,6 +99,14 @@ export const giveBook = async (id) => {
     return await Axios.put(`${DOMAIN_SERVER}/books/giveBook?id=${id}`, { params: { id: id } }, {
         headers: {
             token: localStorage.getItem(TOKEN_ADMIN)
+        }
+    })
+}
+
+export const searchBook = async (value) => {
+    return await Axios.get(`${DOMAIN_SERVER}/books/searchBook?name=${value}`, {
+        headers: {
+            token: localStorage.getItem(TOKEN_USER)
         }
     })
 }

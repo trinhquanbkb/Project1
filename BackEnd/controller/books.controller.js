@@ -515,6 +515,27 @@ const listBookStudentBorrow = async (req, res) => {
     }
 }
 
+//search book theo name
+const searchBook = async (req, res) => {
+    try {
+        const { name } = req.query
+        const books = await Books.findAll({
+            where: {
+                name: {
+                    [Op.substring]: name
+                }
+            }
+        })
+        if(books){
+            res.status(200).send(books)
+        }else{
+            throw new Error(`Not found by name book`)
+        }
+    } catch (err) {
+        res.status(400).send(err)
+    }
+}
+
 module.exports = {
     createBook,
     deleteBook,
@@ -533,4 +554,5 @@ module.exports = {
     uploadImageBook,
     findBookByTitle,
     listBookStudentBorrow,
+    searchBook
 }

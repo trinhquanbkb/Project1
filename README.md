@@ -93,6 +93,8 @@ branch-24: deleteStudentById (xóa sinh viên) (q)       -----done-----
 
 branch-25: recreateBookById (active lại quyển sách đã xóa) (q) -----done-----
 
+branch-26: searchBook (tìm book theo tên)     (q) -----done-----
+
 
 
 ## `FRONTEND`:
@@ -101,7 +103,6 @@ branch-25: recreateBookById (active lại quyển sách đã xóa) (q) -----done
 
 ## `Login`
 giao diện đăng nhập                   ------done-----
-xử lý phần quên mật khẩu
 
 
 
@@ -140,8 +141,8 @@ Xóa sách                                               ------done-------
 Tạo sách mới                                      ------done-------
 
 Mượn sách theo id của sách và id của user                      ------done-------
-
-Trả sách theo id của sách
+ 
+Trả sách theo id của sách                             ------done-------
 
 
 ### `Thay đổi thông tin người dùng admin`
@@ -162,6 +163,7 @@ Tạo tài khoản admin                     ------done-------
 
 ### `Trang chủ user`
 Carousel                               ------done-------
+
 List thể loại sách                       ------done-------
 
 
@@ -179,13 +181,10 @@ List thể loại sách                       ------done-------
 
 ### `Trang sách của thư viện`  
 
+thanh search tìm kiếm theo tên sách           --------done--------
+
+liệt kê danh sách các quyển sách và filter theo status           --------done--------
 
 
-
-
-# `Giao diện còn thiếu`
---Trang sách của thư viện (user)
---Trả sách theo id của sách (admin)
---Xử lý phần quên mật khẩu user (login)
 
 

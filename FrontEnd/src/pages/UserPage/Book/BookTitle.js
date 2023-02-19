@@ -40,7 +40,7 @@ export default function BookTitle() {
         const titleBook = JSON.parse(localStorage.getItem('listBookByTitle'))
         return titleBook.map(item => {
             if (item.userId === null) {
-                return <Col span={7}>
+                return <Col span={6}>
                     <NavLink onClick={() => {
                         let array = []
                         totalBookTitle.map(item => {
@@ -69,7 +69,7 @@ export default function BookTitle() {
                     </NavLink>
                 </Col>
             } else {
-                return <Col span={7}>
+                return <Col span={6}>
                     <NavLink onClick={() => {
                         let array = []
                         totalBookTitle.map(item => {
@@ -185,10 +185,10 @@ export default function BookTitle() {
     return (
         <div style={{ textAlign: 'left' }}>
             <Row>
-                <Col span={17}>
-                    <p style={{ fontSize: '21px', fontWeight: '500', marginTop: '50px', paddingLeft: '220px', textAlign: 'left' }}> Thể loại: <span style={{ fontSize: '18px' }}>{localStorage.getItem('title')} </span></p>
+                <Col span={19}>
+                    <p style={{ fontSize: '21px', fontWeight: '500', marginTop: '50px', paddingLeft: '170px', textAlign: 'left' }}> Thể loại: <span style={{ fontSize: '18px' }}>{localStorage.getItem('title')} </span></p>
                 </Col>
-                <Col span={7}>
+                <Col span={5}>
                     <Space style={{marginTop: '50px', paddingLeft: '50px'}} direction="vertical">
                         <Space wrap>
                             <Dropdown
@@ -204,7 +204,7 @@ export default function BookTitle() {
                 </Col>
             </Row>
 
-            <Row style={{ marginLeft: '210px', marginTop: '20px' }}>
+            <Row style={{ marginTop: '20px', marginBottom: '90px' }}>
                 {renderBook()}
             </Row>
         </div>

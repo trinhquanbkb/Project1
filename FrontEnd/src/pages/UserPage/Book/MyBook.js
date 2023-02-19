@@ -28,7 +28,7 @@ export default function MyBook() {
       const report = (time < 0) ? <div>
         <span style={{ color: 'red', fontSize: '22px', fontWeight: '600' }}>Hết hạn</span><br />
       </div> : null
-      return <Col span={7}>
+      return <Col span={6}>
         <NavLink className="nav-link" to="/userPage/book/title/bookDetailtail" onClick={() => {
           let array = []
           JSON.parse(localStorage.getItem('allBook')).map(i => {
@@ -64,7 +64,7 @@ export default function MyBook() {
 
   return (
     <div>
-      <Row style={{ marginLeft: '210px', marginTop: '80px' }}>
+      <Row style={{ marginTop: '80px' }}>
         {renderBook()}
       </Row>
     </div>

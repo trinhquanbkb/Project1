@@ -21,7 +21,7 @@ export default function HeaderUser() {
     }, [])
 
     const items = [{
-        label: 'Sách',
+        label: <p style={{ textAlign: 'center', height: '48px' }}>Sách</p>,
         key: 'book',
         children: [
             {
@@ -48,7 +48,7 @@ export default function HeaderUser() {
                         </Col>
                         <Col className="gutter-row" span={17}>
                             <Row>
-                                <Col span={5} style={{ height: '65px' }}></Col>
+                                <Col span={6} style={{ height: '65px' }}></Col>
                                 <Col span={3} style={{ height: '65px' }}>
                                     <Menu><NavLink className="nav-link" to="/userPage" style={{ color: 'black', fontWeight: '600', fontSize: '18px', padding: '0', borderRight: '1px solid #bdbdbd' }}>Trang chủ</NavLink></Menu>
                                 </Col>
@@ -56,7 +56,7 @@ export default function HeaderUser() {
                                     <Menu theme='light' style={{ color: 'black', fontWeight: '600', fontSize: '18px', paddingLeft: '32px', paddingBottom: '1px', borderRight: '1px solid #bdbdbd', borderBottom: '1px solid white' }} selectedKeys={[current]} mode="horizontal" items={items} />
                                 </Col>
                                 <Col span={3} style={{ height: '65px' }}>
-                                    <Menu><NavLink className="nav-link" to="/userPage/introduce" style={{ color: 'black', fontWeight: '600', fontSize: '18px', padding: '0', borderRight: '1px solid #bdbdbd' }} >Giới thiệu</NavLink></Menu>
+                                    <Menu style={{ borderRight: '1px solid white' }}><NavLink className="nav-link" to="/userPage/introduce" style={{ color: 'black', fontWeight: '600', fontSize: '18px', padding: '0' }} >Giới thiệu</NavLink></Menu>
                                 </Col>
                             </Row>
                         </Col>

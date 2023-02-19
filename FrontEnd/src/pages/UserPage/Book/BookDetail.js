@@ -36,20 +36,37 @@ export default function BookDetail() {
   }
 
   const renderBookLikeTitle = () => {
-    const arrayBook = JSON.parse(localStorage.getItem('listBookByTitle'))
-    let t = 0
-    const book = JSON.parse(localStorage.getItem('bookDetail'))
-    return arrayBook.map(item => {
-      if (item.id !== book.id && t <= 7) {
-        t++
-        return <NavLink className="nav-link" to="/userPage/book/title/bookDetailtail" onClick={() => {
-          localStorage.setItem('bookDetail', JSON.stringify(item))
-        }} style={{ fontWeight: '300', fontSize: '16px', fontFamily: 'initial', borderBlockEnd: '1px #bdbdbd solid', writingMode: 'horizontal-tb', width: '100%', margin: '0 auto', paddingTop: '10px' }}>
-          <p style={{ marginBottom: '-5px', textAlign: 'left', paddingLeft: '50px', fontSize: '19px', fontWeight: '550', fontFamily: 'initial' }}>{item.name}</p>
-          <p style={{ marginBottom: '5px', textAlign: 'left', paddingLeft: '50px', fontSize: '14px' }}>{item.author}</p>
-        </NavLink>
-      }
-    })
+    if (JSON.parse(localStorage.getItem('bookFilterLibrary')) === null) {
+      const arrayBook = JSON.parse(localStorage.getItem('listBookByTitle'))
+      let t = 0
+      const book = JSON.parse(localStorage.getItem('bookDetail'))
+      return arrayBook.map(item => {
+        if (item.id !== book.id && t <= 7) {
+          t++
+          return <NavLink className="nav-link" to="/userPage/book/title/bookDetailtail" onClick={() => {
+            localStorage.setItem('bookDetail', JSON.stringify(item))
+          }} style={{ fontWeight: '300', fontSize: '16px', fontFamily: 'initial', borderBlockEnd: '1px #bdbdbd solid', writingMode: 'horizontal-tb', width: '100%', margin: '0 auto', paddingTop: '10px' }}>
+            <p style={{ marginBottom: '-5px', textAlign: 'left', paddingLeft: '50px', fontSize: '19px', fontWeight: '550', fontFamily: 'initial' }}>{item.name}</p>
+            <p style={{ marginBottom: '5px', textAlign: 'left', paddingLeft: '50px', fontSize: '14px' }}>{item.author}</p>
+          </NavLink>
+        }
+      })
+    } else {
+      const arrayBook = JSON.parse(localStorage.getItem('bookFilterLibrary'))
+      let t = 0
+      const book = JSON.parse(localStorage.getItem('bookDetail'))
+      return arrayBook.map(item => {
+        if (item.id !== book.id && t <= 7) {
+          t++
+          return <NavLink className="nav-link" to="/userPage/book/title/bookDetailtail" onClick={() => {
+            localStorage.setItem('bookDetail', JSON.stringify(item))
+          }} style={{ fontWeight: '300', fontSize: '16px', fontFamily: 'initial', borderBlockEnd: '1px #bdbdbd solid', writingMode: 'horizontal-tb', width: '100%', margin: '0 auto', paddingTop: '10px' }}>
+            <p style={{ marginBottom: '-5px', textAlign: 'left', paddingLeft: '50px', fontSize: '19px', fontWeight: '550', fontFamily: 'initial' }}>{item.name}</p>
+            <p style={{ marginBottom: '5px', textAlign: 'left', paddingLeft: '50px', fontSize: '14px' }}>{item.author}</p>
+          </NavLink>
+        }
+      })
+    }
   }
 
   return (

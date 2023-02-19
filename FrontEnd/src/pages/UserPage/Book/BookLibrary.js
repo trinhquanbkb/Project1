@@ -66,6 +66,7 @@ export default function BookLibrary() {
         if (item.userId === null) {
           return <Col span={6}>
             <NavLink onClick={() => {
+              localStorage.setItem('bookFilterLibrary', JSON.stringify(listBookBorrowOfStudent))
               localStorage.setItem('bookDetail', JSON.stringify(item))
             }} className="nav-link" to="/userPage/book/title/bookDetailtail">
               <Card
@@ -88,6 +89,7 @@ export default function BookLibrary() {
         } else {
           return <Col span={6}>
             <NavLink onClick={() => {
+              localStorage.setItem('bookFilterLibrary', JSON.stringify(listBookBorrowOfStudent))
               localStorage.setItem('bookDetail', JSON.stringify(item))
             }} className="nav-link" to="/userPage/book/title/bookDetailtail">
               <Card
@@ -269,7 +271,7 @@ export default function BookLibrary() {
       <Row>
         {renderBook()}
       </Row>
-      <Pagination style={{ marginTop: '40px', marginBottom: '100px' }} onChange={onChange} defaultCurrent={1} total={50} />;
+      <Pagination style={{ marginTop: '40px', marginBottom: '100px' }} onChange={onChange} defaultCurrent={1} total={listBookBorrowOfStudent.length} />;
     </div>
   )
 }

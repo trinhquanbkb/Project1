@@ -274,6 +274,24 @@ const getUserByMssv = async (req, res) => {
     }
 }
 
+const convertUserOtherSchool = async (req, res) => {
+    const { userId } = req.user
+    try {
+        const user = await Users.update({userType: 'userOtherSchool'}, {
+            where: {
+                id: userId
+            }
+        })
+        if(user){
+            res.status(201).send('convert user to userOtherSchool success!')
+        }else{
+            throw new Error('convert user to userOtherSchool error!')
+        }
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}
+
 module.exports = {
     register,
     loginUser,
@@ -286,5 +304,6 @@ module.exports = {
     deleteStudentById,
     updateAccount,
     getUserByMssv,
+    convertUserOtherSchool
 }
 

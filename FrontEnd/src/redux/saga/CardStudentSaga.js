@@ -29,7 +29,10 @@ function* getBalanceById(action){
             data: promise.data.balance
         })
     } catch (error) {
-        
+        yield put({
+            type: BALANCE_OF_USERID,
+            data: "Người dùng chưa có thẻ"
+        })
     }
 }
 

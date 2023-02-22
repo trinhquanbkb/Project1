@@ -73,7 +73,7 @@ export default function BookDetail() {
     <div style={{ marginTop: '50px', marginBottom: '100px' }}>
       <p style={{ fontSize: '21px', fontWeight: '500', marginLeft: '170px', textAlign: 'left' }}> Thể loại: <span style={{ fontSize: '18px' }}>{localStorage.getItem('title')} /</span> <span style={{ color: '#9e9e9e', fontWeight: '400', fontSize: '16px' }}>{JSON.parse(localStorage.getItem('bookDetail')).name}</span></p>
       <Row>
-        <Col span={15} style={{ width: '70%', backgroundColor: 'white', minHeight: '200px', marginLeft: '160px', paddingBottom: '100px' }}>
+        <Col span={15} style={{ width: '70%', backgroundColor: 'white', minHeight: '200px', marginLeft: '160px', paddingBottom: '100px', borderRadius: '20px 0px 0px 20px' }}>
           <Row >
             <Col span={7}>
               <div style={{ backgroundImage: `url("${DOMAIN_FILE_SERVER}/avatarBook/${JSON.parse(localStorage.getItem('bookDetail')).urlImage}")`, width: '200px', height: '230px', backgroundSize: '100% 100%', marginLeft: '30px', marginTop: '30px' }} />
@@ -89,7 +89,7 @@ export default function BookDetail() {
           </Row>
           {inforBook()}
         </Col>
-        <Col style={{ backgroundColor: '#eceff1', width: '80%', minHeight: '200px' }} span={5}>
+        <Col style={{ backgroundColor: '#eceff1', width: '80%', minHeight: '200px', borderRadius: '0px 20px 20px 0px' }} span={5}>
           <p style={{ fontWeight: '700', fontSize: '20px', fontFamily: 'initial', padding: '20px 5px 0px 5px', borderBlockEnd: '2px #4527a0 solid', writingMode: 'horizontal-tb', width: '80%', margin: '0 auto' }}>Truyện cùng thể loại</p>
           <div style={{ marginTop: '10px' }}>
             {renderBookLikeTitle()}

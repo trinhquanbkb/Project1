@@ -1,6 +1,6 @@
 const express = require('express')
 const userRouter = express.Router()
-const { register, loginUser, loginAdmin, forgotPassword, changePassword, registerAdmin, getAllStudent, updateStudentById, deleteStudentById, updateAccount, getUserByMssv } = require('../controller/user.controller')
+const { register, loginUser, loginAdmin, forgotPassword, changePassword, registerAdmin, getAllStudent, updateStudentById, deleteStudentById, updateAccount, getUserByMssv, convertUserOtherSchool } = require('../controller/user.controller')
 const { authenticate } = require('../middleware/authentication')
 const { adminAuthorize, userAuthorize, userOtherSchoolAuthorize, allAuthorize } = require('../middleware/authorization')
 
@@ -15,6 +15,7 @@ userRouter.put('/updateStudent/:id', authenticate, adminAuthorize, updateStudent
 userRouter.put('/deleteAccount', authenticate, adminAuthorize, deleteStudentById)
 userRouter.put('/recreateAccount', authenticate, adminAuthorize, updateAccount)
 userRouter.get('/getUserByMssv', getUserByMssv)
+userRouter.put('/convertUser', authenticate, userAuthorize, convertUserOtherSchool)
 
 module.exports = {
     userRouter

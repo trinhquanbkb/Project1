@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import { TOKEN_ADMIN } from '../utils/constant/data'
+import { TOKEN_ADMIN, TOKEN_USER } from '../utils/constant/data'
 import { DOMAIN_SERVER } from '../utils/constant/domain'
 
 export const loginAdmin = async (mssv, password) => {
@@ -56,6 +56,15 @@ export const changePasswordAdmin = async (values) => {
         {
             headers: {
                 token: localStorage.getItem(TOKEN_ADMIN)
+            }
+        })
+}
+
+export const convertUser = async () => {
+    return await Axios.put(`${DOMAIN_SERVER}/users/convertUser`, {},
+        {
+            headers: {
+                token: localStorage.getItem(TOKEN_USER)
             }
         })
 }

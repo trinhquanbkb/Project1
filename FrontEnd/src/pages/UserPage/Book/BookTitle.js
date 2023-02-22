@@ -58,7 +58,7 @@ export default function BookTitle() {
                                 height: 400,
                                 margin: 30,
                                 borderRadius: 15,
-                                backgroundColor: '#eeeeee'
+                                backgroundColor: '#d2e0dc'
                             }}
                             cover={
                                 <div style={{ backgroundImage: `url("${DOMAIN_FILE_SERVER}/avatarBook/${item.urlImage}")`, width: '250px', height: '300px', backgroundSize: '100% 100%', borderRadius: '15px 15px 0px 0px' }} />
@@ -87,7 +87,7 @@ export default function BookTitle() {
                                 height: 400,
                                 margin: 30,
                                 borderRadius: 15,
-                                backgroundColor: '#eeeeee'
+                                backgroundColor: '#d2e0dc'
                             }}
                             cover={
                                 <div style={{ backgroundImage: `url("${DOMAIN_FILE_SERVER}/avatarBook/${item.urlImage}")`, width: '250px', height: '300px', backgroundSize: '100% 100%', borderRadius: '15px 15px 0px 0px' }} >

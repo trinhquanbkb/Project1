@@ -9,6 +9,7 @@ import {
     registerAdmin,
     changePasswordAdmin,
     getUserByMssv,
+    convertUser
 } from '../../services/UserService'
 import { LOGIN, GET_STUDENT_BY_ADMIN, DELETE_STUDENT_SAGA, UPDATE_ACCOUNT, STATUS_REGISTER_ADMIN, STATUS_CHANGE_PASSWORD_ADMIN, CHECK_MSSV_REDUCER } from '../type/UserType'
 import { TOKEN_ADMIN, TOKEN_USER } from '../../utils/constant/data'
@@ -191,6 +192,15 @@ function* checkMssv(action) {
     }
 }
 
+function* convertUserSaga(action) {
+    try {
+        const p = yield convertUser()
+        console.log(p)
+    } catch (error) {
+        
+    }
+}
+
 export function* getUserSaga() {
     yield takeLatest('LOGIN_USER', loginAdminSaga)
     yield takeLatest('GET_ALL_STUDENT', getAllStudentSaga)
@@ -201,4 +211,5 @@ export function* getUserSaga() {
     yield takeLatest('CONFIRM_REGISTER_ADMIN', registerAdminSaga)
     yield takeLatest('CONFIRM_CHANGE_PASSWORD_ADMIN', changePassword)
     yield takeLatest('CHECK_MSSV', checkMssv)
+    yield takeLatest('CONVERT_USER_SAGA', convertUserSaga)
 }

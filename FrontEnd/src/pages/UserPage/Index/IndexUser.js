@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Carousel, Button, Col, Row, Badge, Avatar } from 'antd';
+import React, { useEffect, useState } from 'react'
+import { Carousel, Button, Col, Row, Badge, Avatar, Modal, message, Space } from 'antd';
 import { NavLink } from 'react-router-dom';
 import befinit from '../../../assets/book/book-image-1.png'
 import bookTitle from '../../../assets/book/bookTitle.png'
@@ -15,11 +15,17 @@ export default function IndexUser() {
 
   const dispatch = useDispatch()
   const { totalBookTitle } = useSelector(state => state.bookReducer)
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate()
+
   useEffect(() => {
     if (!localStorage.getItem(TOKEN_USER)) {
       navigate('/login', { replace: true })
+    }
+    if (localStorage.getItem('confirmUserType')) {
+      setIsModalOpen(true)
+    } else {
+      setIsModalOpen(false)
     }
     for (let i = 0; i < listTitleOption.length; i++) {
       setTimeout(() => {
@@ -56,6 +62,29 @@ export default function IndexUser() {
     lineHeight: '160px',
     textAlign: 'center',
     background: '#364d79',
+  };
+
+  // handle Modal
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  // handle convert user
+  const [messageApi, contextHolder] = message.useMessage();
+  const successUser = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'Cập nhật thành sinh viên trong trường!',
+    });
+  };
+  const successUserOtherSchool = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'Cập nhật thành sinh viên ngoài trường!',
+    });
   };
 
   return (
@@ -164,6 +193,26 @@ export default function IndexUser() {
       <Row style={{ marginBottom: '200px' }}>
         {renderTitleBook()}
       </Row>
+
+      {contextHolder}
+      {/* Modal */}
+      <Modal title="Cần xác nhận thông tin người dùng!" open={isModalOpen} footer={null}>
+        <h4 style={{ marginTop: '30px' }}>Bạn là sinh viên trong hay ngoài trường?</h4>
+        <Button onClick={() => {
+          setIsModalOpen(false)
+          successUser()
+          localStorage.removeItem('confirmUserType')
+        }} type="primary">Sinh viên trong trường</Button>
+        <Button onClick={() => {
+          dispatch({
+            type: 'CONVERT_USER_SAGA'
+          })
+          setIsModalOpen(false)
+          successUserOtherSchool()
+          localStorage.removeItem('confirmUserType')
+          alert("Hãy đến thư viện Đại Học Bách Khoa để tiến hành tạo và nạp thẻ!")
+        }} style={{ marginLeft: '20px', marginBottom: '20px' }}>Sinh viên ngoài trường</Button>
+      </Modal>
 
     </div >
   )

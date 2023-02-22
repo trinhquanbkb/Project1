@@ -439,7 +439,7 @@ export default function UserManager() {
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
                 >
-                    <span style={{ color: 'green' }}>Số dư tài khoản: {balance}</span>
+                    <span style={{ color: 'green' }}>{balance=="Người dùng chưa có thẻ" ? <p style={{color: 'red'}}>"Người dùng chưa có thẻ"</p> : <p> Số dư tài khoản: {balance}</p>}</span>
                     <Form.Item
                         style={{ marginTop: '30px' }}
                         label="Số tiền cần nạp"
@@ -472,7 +472,7 @@ export default function UserManager() {
                         </Button>
                     </Form.Item>
                 </Form>
-                {(clickCharge === 0) ? <span></span> : ((status === 500) ? <span style={{ color: 'red', marginLeft: '224px' }}>Nạp tiền thất bại!</span> : <span style={{ color: 'grey', marginLeft: '223px' }}>Nạp tiền thành công</span>)}
+                {(clickCharge === 0) ? <span></span> : ((status === 500) ? <span style={{ color: 'red', marginLeft: '233px' }}>Nạp tiền thất bại!</span> : <span style={{ color: 'grey', marginLeft: '223px' }}>Nạp tiền thành công</span>)}
             </Modal>
         </div>
     )

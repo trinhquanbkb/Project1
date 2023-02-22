@@ -56,6 +56,7 @@ export default function Register() {
                 })
                 //sử dụng tài khoản vừa đăng nhập để tiến hành login
                 setTimeout(() => {
+                    localStorage.setItem('confirmUserType', false)
                     dispatch({
                         type: 'LOGIN_USER',
                         userLogin: {

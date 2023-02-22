@@ -1,7 +1,7 @@
 import { takeLatest, put } from 'redux-saga/effects'
 import { STATUS_CODE } from '../../utils/constant/statusCode'
-import { rechargeCard, findCardByUserId } from '../../services/CardStudentService'
-import { BALANCE_OF_USERID, CHARGE_CARD_USERID } from '../type/CardStudentType'
+import { rechargeCard, findCardByUserId, createCard} from '../../services/CardStudentService'
+import { BALANCE_OF_USERID, CHARGE_CARD_USERID, CREATE_CARD_STUDENT } from '../type/CardStudentType'
 
 function* rechargeCardStudent(action) {
     try {
@@ -36,7 +36,25 @@ function* getBalanceById(action){
     }
 }
 
+function* createCardByMssv(action){
+    try {
+        let promise = yield createCard(action.data)
+        if (promise.status === STATUS_CODE.SUCCESS_PUT) {
+            yield put({
+                type: CREATE_CARD_STUDENT,
+                data: STATUS_CODE.SUCCESS_PUT
+            })
+        }
+    } catch (error) {
+        yield put({
+            type: CREATE_CARD_STUDENT,
+            data: STATUS_CODE.SERVER_ERROR
+        })
+    }
+}
+
 export function* getCardStudentSaga() {
     yield takeLatest('RECHARGE_CARD_BY_USERID', rechargeCardStudent)
     yield takeLatest('GET_BALANCE', getBalanceById)
+    yield takeLatest('CREATE_CARD', createCardByMssv)
 }

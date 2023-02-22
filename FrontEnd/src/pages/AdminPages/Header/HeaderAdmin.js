@@ -58,19 +58,18 @@ export default function HeaderAdmin() {
                         <Menu.Item key="/adminPage/indexAdmin" style={{ height: '45px', marginTop: '20px' }}>
                             <NavLink className="nav-link" to="/adminPage/indexAdmin" style={{ fontSize: '17px', fontWeight: '500', textAlign: 'left' }}>Trang chủ</NavLink>
                         </Menu.Item>
-                        <Menu.Item key="/adminPage/userManager" style={{ height: '45px' }}>
-                            <NavLink className="nav-link" to="/adminPage/userManager" style={{ fontSize: '17px', fontWeight: '500', textAlign: 'left' }}>Quản lý người dùng</NavLink>
-                        </Menu.Item>
+                        <Menu.SubMenu title="Quản lý người dùng" style={{ fontSize: '17px', fontWeight: '500' }}>
+                            <Menu.Item><NavLink className="nav-link" to="/adminPage/userManager" style={{ fontSize: '16px', fontWeight: '500', textAlign: 'left', color: '#303f9f' }}>Quản lý người dùng</NavLink></Menu.Item>
+                            <Menu.Item><NavLink className="nav-link" to="/adminPage/createCard" style={{ fontSize: '16px', fontWeight: '500', textAlign: 'left', color: '#303f9f' }}>Tạo thẻ</NavLink></Menu.Item>
+                        </Menu.SubMenu>
                         <Menu.SubMenu title="Quản lý sách" style={{ fontSize: '17px', fontWeight: '500', marginLeft: '-55px' }}>
-                            <Menu.Item><NavLink className="nav-link" to="/adminPage/bookManager/listBook" style={{ fontSize: '15px', fontWeight: '500', textAlign: 'left', marginLeft: '50px', color: '#303f9f' }}>Danh sách quyển sách</NavLink></Menu.Item>
-                            <Menu.Item><NavLink className="nav-link" to="/adminPage/bookManager/createBook" style={{ fontSize: '15px', fontWeight: '500', textAlign: 'left', marginLeft: '50px', color: '#303f9f' }}>Tạo sách mới</NavLink></Menu.Item>
-                            <Menu.Item><NavLink className="nav-link" to="/adminPage/bookManager/registerBook" style={{ fontSize: '15px', fontWeight: '500', textAlign: 'left', marginLeft: '50px', color: '#303f9f' }}>Đăng ký mượn sách</NavLink></Menu.Item>
-                            <Menu.Item><NavLink className="nav-link" to="/adminPage/bookManager/giveBook" style={{ fontSize: '15px', fontWeight: '500', textAlign: 'left', marginLeft: '50px', color: '#303f9f' }}>Trả sách</NavLink></Menu.Item>
+                            <Menu.Item><NavLink className="nav-link" to="/adminPage/bookManager/listBook" style={{ fontSize: '16px', fontWeight: '500', textAlign: 'left', marginLeft: '50px', color: '#303f9f' }}>Danh sách quyển sách</NavLink></Menu.Item>
+                            <Menu.Item><NavLink className="nav-link" to="/adminPage/bookManager/createBook" style={{ fontSize: '16px', fontWeight: '500', textAlign: 'left', marginLeft: '50px', color: '#303f9f' }}>Tạo sách mới</NavLink></Menu.Item>
+                            <Menu.Item><NavLink className="nav-link" to="/adminPage/bookManager/registerBook" style={{ fontSize: '16px', fontWeight: '500', textAlign: 'left', marginLeft: '50px', color: '#303f9f' }}>Đăng ký mượn sách</NavLink></Menu.Item>
+                            <Menu.Item><NavLink className="nav-link" to="/adminPage/bookManager/giveBook" style={{ fontSize: '16px', fontWeight: '500', textAlign: 'left', marginLeft: '50px', color: '#303f9f' }}>Trả sách</NavLink></Menu.Item>
                         </Menu.SubMenu>
                         <Menu.SubMenu title="Quản lý chỗ ngồi" style={{ fontSize: '17px', fontWeight: '500', marginLeft: '-21px' }} disabled>
-                            <Menu.Item><NavLink className="nav-link" to="/adminPage/bookAdminPage" style={{ fontSize: '15px', fontWeight: '500', textAlign: 'left', marginLeft: '50px', color: '#303f9f' }}>Danh sách quyển sách</NavLink></Menu.Item>
-                            <Menu.Item><NavLink className="nav-link" to="/adminPage/bookAdminPage" style={{ fontSize: '15px', fontWeight: '500', textAlign: 'left', marginLeft: '50px', color: '#303f9f' }}>Tạo sách mới</NavLink></Menu.Item>
-                            <Menu.Item><NavLink className="nav-link" to="/adminPage/bookAdminPage" style={{ fontSize: '15px', fontWeight: '500', textAlign: 'left', marginLeft: '50px', color: '#303f9f' }}>Đăng ký mượn sách</NavLink></Menu.Item>
+                           
                         </Menu.SubMenu>
                     </Menu>
                 </Sider>

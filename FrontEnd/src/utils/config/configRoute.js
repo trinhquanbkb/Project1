@@ -4,6 +4,7 @@ import ListBook from "../../pages/AdminPages/Book/ListBook";
 import RegisterBook from "../../pages/AdminPages/Book/RegisterBook";
 import HeaderAdmin from "../../pages/AdminPages/Header/HeaderAdmin";
 import IndexAdmin from "../../pages/AdminPages/Index/IndexAdmin";
+import CreateCard from "../../pages/AdminPages/User/CreateCard";
 import UserManager from "../../pages/AdminPages/User/UserManager";
 import Login from "../../pages/Login/Login";
 import PageNotFound from "../../pages/PageError/PageNotFound";
@@ -27,6 +28,7 @@ export const publicRoutes = [
     { path: '/adminPage', component: IndexAdmin, layout: HeaderAdmin, pathLayout: '/adminPage' },
     { path: '/adminPage/indexAdmin', component: IndexAdmin, layout: HeaderAdmin, pathLayout: '/adminPage' },
     { path: '/adminPage/userManager', component: UserManager, layout: HeaderAdmin, pathLayout: '/adminPage' },
+    { path: '/adminPage/createCard', component: CreateCard, layout: HeaderAdmin, pathLayout: '/adminPage' },
     { path: '/adminPage/bookManager/listBook', component: ListBook, layout: HeaderAdmin, pathLayout: '/adminPage' },
     { path: '/adminPage/bookManager/createBook', component: CreateBook, layout: HeaderAdmin, pathLayout: '/adminPage' },
     { path: '/adminPage/bookManager/registerBook', component: RegisterBook, layout: HeaderAdmin, pathLayout: '/adminPage' },

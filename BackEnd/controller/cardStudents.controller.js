@@ -1,4 +1,4 @@
-const { Card } = require('../models/index')
+const { Card, Users } = require('../models/index')
 const { Op } = require('sequelize')
 
 //cron job
@@ -16,12 +16,12 @@ var job = new CronJob(
                 }
             }
         })
-        const arrayBalance = cards.map( item => {
+        const arrayBalance = cards.map(item => {
             return item.dataValues.balance
         })
-        arrayBalance.forEach( async(item) => {
+        arrayBalance.forEach(async (item) => {
             const newBalance = item - 10000
-            const updateBalance = await Card.update({balance: newBalance},{
+            const updateBalance = await Card.update({ balance: newBalance }, {
                 where: {
                     userId: {
                         [Op.ne]: null
@@ -71,16 +71,33 @@ const getAllCard = async (req, res) => {
 }
 
 const createCard = async (req, res) => {
-    const { nameUser, school, balance } = req.body
+    const { mssv, school, balance } = req.body
     try {
-        const newCard = await Card.create({ nameUser, school, balance })
-        if (newCard) {
-            res.status(201).send(newCard)
-        } else {
-            throw new Error("Cannot create new card")
+        //find user have this mssv
+        const user = await Users.findOne({
+            where: {
+                mssv: mssv,
+            }
+        })
+        const checkCard = await Card.findAll({
+            where: {
+                userId: user.dataValues.id
+            }
+        })
+        if (user.dataValues.userType === 'userOtherSchool' && checkCard.length === 0) {
+            const newCard = await Card.create({ nameUser: user.dataValues.name, school: school, balance: balance, userId: user.dataValues.id })
+            if (newCard) {
+                res.status(201).send(newCard)
+            } else {
+                throw new Error("Cannot create new card")
+            }
+        }else if(checkCard.length !== 0){
+            throw new Error(`This mssv did create card`)
+        }else if(user.dataValues.userType !== 'userOtherSchool'){
+            throw new Error("Cannot find this mssv")
         }
-    } catch (e) {
-        res.status(500).send(e)
+    } catch (err) {
+        res.status(500).send(err)
     }
 }
 

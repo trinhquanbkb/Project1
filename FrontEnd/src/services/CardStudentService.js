@@ -18,3 +18,11 @@ export const findCardByUserId = async (userId) => {
     })
 }
 
+export const createCard = async (values) => {
+    return await Axios.post(`${DOMAIN_SERVER}/cardStudents/createCard`, values, {
+        headers: {
+            token: localStorage.getItem(TOKEN_ADMIN)
+        }
+    })
+}
+

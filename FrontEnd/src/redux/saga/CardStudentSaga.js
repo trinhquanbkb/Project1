@@ -58,6 +58,10 @@ function* getBalanceCardStudent(action){
         let promise = yield getBalance()
         if(promise){
             localStorage.setItem('balance', promise.data.balance)
+            yield put({
+                type: 'STATUS_BALANCE',
+                data: true
+            })
         }
     } catch (error) {
     }

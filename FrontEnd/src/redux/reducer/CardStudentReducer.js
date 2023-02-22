@@ -8,7 +8,8 @@ const cardStudentData = {
     //balance là số dư tài khoản của người dùng
     balance: null,
     //statusCreate cho biết status khi create card 
-    statusCreate: null
+    statusCreate: null,
+    statusBalance: null
 }
 const cardStudentReducer = (state = cardStudentData, action) => {
     switch (action.type) {
@@ -41,6 +42,10 @@ const cardStudentReducer = (state = cardStudentData, action) => {
                 state.statusCreate = null
             }
             return { ...state }
+        }
+        case 'STATUS_BALANCE':{
+            state.statusBalance = action.data
+            return {...state}
         }
         default: {
             return { ...state }

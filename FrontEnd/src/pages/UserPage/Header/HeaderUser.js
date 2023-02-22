@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { TOKEN_USER } from '../../../utils/constant/data';
 import DropDownUser from '../User/DropDownUser';
 import { NavLink, Outlet } from 'react-router-dom'
-
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function HeaderUser() {
     const { Header, Content, Footer } = Layout
@@ -13,12 +13,22 @@ export default function HeaderUser() {
     } = theme.useToken();
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const { statusBalance } = useSelector(state => state.cardStudentReducer)
 
     useEffect(() => {
         if (!localStorage.getItem(TOKEN_USER)) {
             navigate('/login', { replace: true })
         }
+        dispatch({
+            type: 'GET_BALANCE_CARD'
+        })
     }, [])
+
+    useEffect(() => {
+
+    }, [statusBalance])
+
 
     const items = [{
         label: <p style={{ textAlign: 'center', height: '48px' }}>Sách</p>,
@@ -35,6 +45,10 @@ export default function HeaderUser() {
         ],
     }]
     const [current, setCurrent] = useState('mail');
+
+    const renderBalance = () => {
+        return <p style={{ color: 'green', textAlign: 'right' }}>Số dư tài khoản: {localStorage.getItem('balance')}</p>
+    }
     return (
         <Layout className="layout" style={{ width: '100%' }}>
             <Header className="header" style={{ width: '107%', marginLeft: '-55px', height: '65px', position: 'sticky', top: '0', zIndex: '1' }}>
@@ -61,7 +75,7 @@ export default function HeaderUser() {
                             </Row>
                         </Col>
                         <Col span={3}>
-                            <p style={{color: 'green', textAlign: 'right'}}>Số dư tài khoản: {localStorage.getItem('balance')}</p>
+                            {renderBalance()}
                         </Col>
                         <Col span={2}>
                             <DropDownUser />

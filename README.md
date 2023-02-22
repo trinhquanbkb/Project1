@@ -128,6 +128,8 @@ xem danh sách các quyển sách của một sinh viên đang mượn      ----
 
 nạp thẻ cho sinh viên ngoài trường (Chỉ sinh viên ngoài trường mới hiện button nạp thẻ) và hiển thị số dư sau khi nạp thẻ --------done---------
 
+tạo thẻ cho sinh viên ngoài trường                     --------done---------
+
 
 ### `Quản lý sách`
 Xem danh sách các quyển sách                       ------done------- 

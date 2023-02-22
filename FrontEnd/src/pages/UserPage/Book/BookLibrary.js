@@ -38,8 +38,7 @@ export default function BookLibrary() {
   }, [])
 
   useEffect(() => {
-    setFilter({ ...filter, status: 0 })
-  }, [listBookBorrowOfStudent, filter.status, JSON.parse(localStorage.getItem('bookFilterLibrary'))])
+  }, [listBookBorrowOfStudent, filter.nameFilter, JSON.parse(localStorage.getItem('bookFilterLibrary'))])
 
   const onSearch = (value) => {
     dispatch({

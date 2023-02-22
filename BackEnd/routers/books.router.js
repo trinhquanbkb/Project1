@@ -29,7 +29,7 @@ bookRouter.put('/deleteBook', authenticate, adminAuthorize, checkBook, deleteBoo
 bookRouter.get('/getAllBook', authenticate, allAuthorize, getAllBook)
 bookRouter.get('/findById', authenticate, allAuthorize, checkBook, getBookById)
 bookRouter.put('/updateBook', authenticate, adminAuthorize, updateBook)
-bookRouter.put('/extendBook/:id', authenticate, userAuthorize, extendBook)
+bookRouter.put('/extendBook', authenticate, userAuthorize, extendBook)
 bookRouter.put('/borrowBook', authenticate, adminAuthorize, borrowBook)
 bookRouter.put('/giveBook', authenticate, allAuthorize, checkBook, giveBook)
 bookRouter.get('/totalBook/:name', authenticate, allAuthorize, totalBook)

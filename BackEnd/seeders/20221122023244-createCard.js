@@ -19,7 +19,7 @@ module.exports = {
         balance: 30000,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12',
-        userId: 1
+        userId: 2
       },
       {
         nameUser: 'Nguyễn Công Lập',
@@ -27,7 +27,7 @@ module.exports = {
         balance: 60000,
         createdAt: '2022-01-17 04:33:12',
         updatedAt: '2022-01-17 04:33:12',
-        userId: 2
+        userId: 1
       },
       {
         nameUser: 'Trần Thanh Quang',

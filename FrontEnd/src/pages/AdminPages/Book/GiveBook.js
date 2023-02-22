@@ -60,7 +60,7 @@ export default function GiveBook() {
     const confirm = (e) => {
         if (localStorage.getItem('giveBookStatus') === 'true') {
             message.success('Thành công trả sách!');
-        } else if (checkIdBook === false && localStorage.getItem('giveBookStatus') === 'returned') {
+        } else if (checkIdBook === false) {
             message.error('Không tồn tại id của quyển sách này!')
         } else if (localStorage.getItem('giveBookStatus') === 'returned') {
             message.error('Lỗi server: sách đã được trả trước đó rồi!')

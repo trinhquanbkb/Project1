@@ -89,7 +89,7 @@ const deleteBook = async (req, res) => {
 const extendBook = async (req, res) => {
     try {
         //Lấy id của sách
-        const { id } = req.params
+        const { id } = req.query
         const book = await Books.findOne({
             where: {
                 id,

@@ -21,6 +21,8 @@ export default function BookDetail() {
     if (JSON.parse(localStorage.getItem('bookDetail')).userId !== null) {
       let endDate = JSON.parse(localStorage.getItem('bookDetail')).endDate
       let x = (new Date(endDate) - Date.now()) / (1000 * 60 * 60 * 24)
+      console.log(new Date(endDate))
+      console.log(Date.now())
       date = (x > 0) ? <p>Cần chờ thêm {Math.floor(x)} ngày nữa để mượn sách</p> : <p>Chưa xác định ngày trả lại (người mượn đã quá hạn nhưng chưa trả)</p>
     }
 

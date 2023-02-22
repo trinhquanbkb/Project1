@@ -42,23 +42,26 @@ export default function HeaderUser() {
                 <Menu theme="light" mode="horizontal" defaultSelectedKeys={['2']} >
                     <Row justify="start" style={{ width: '100%', height: '65px' }}>
                         <Col span={5}>
-                            <p style={{ fontSize: '16px', marginBottom: '0', marginLeft: '-10px' }}>
+                            <p style={{ fontSize: '18px', marginBottom: '0', marginLeft: '-10px' }}>
                                 Thư viện Tạ Quang Bửu
                             </p>
                         </Col>
-                        <Col className="gutter-row" span={17}>
+                        <Col className="gutter-row" span={14}>
                             <Row>
-                                <Col span={6} style={{ height: '65px' }}></Col>
+                                <Col span={8} style={{ height: '65px' }}></Col>
                                 <Col span={3} style={{ height: '65px' }}>
                                     <Menu><NavLink className="nav-link" to="/userPage" style={{ color: 'black', fontWeight: '600', fontSize: '18px', padding: '0', borderRight: '1px solid #bdbdbd' }}>Trang chủ</NavLink></Menu>
                                 </Col>
                                 <Col span={3} style={{ height: '65px' }}>
-                                    <Menu theme='light' style={{ color: 'black', fontWeight: '600', fontSize: '18px', paddingLeft: '32px', paddingBottom: '1px', borderRight: '1px solid #bdbdbd', borderBottom: '1px solid white' }} selectedKeys={[current]} mode="horizontal" items={items} />
+                                    <Menu theme='light' style={{ color: 'black', fontWeight: '600', fontSize: '18px', paddingLeft: '20px', paddingBottom: '1px', borderRight: '1px solid #bdbdbd', borderBottom: '1px solid white' }} selectedKeys={[current]} mode="horizontal" items={items} />
                                 </Col>
                                 <Col span={3} style={{ height: '65px' }}>
                                     <Menu style={{ borderRight: '1px solid white' }}><NavLink className="nav-link" to="/userPage/introduce" style={{ color: 'black', fontWeight: '600', fontSize: '18px', padding: '0' }} >Giới thiệu</NavLink></Menu>
                                 </Col>
                             </Row>
+                        </Col>
+                        <Col span={3}>
+                            <p style={{color: 'green', textAlign: 'right'}}>Số dư tài khoản: {localStorage.getItem('balance')}</p>
                         </Col>
                         <Col span={2}>
                             <DropDownUser />

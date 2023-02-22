@@ -27,6 +27,9 @@ export default function IndexUser() {
     } else {
       setIsModalOpen(false)
     }
+    dispatch({
+      type: 'GET_BALANCE_CARD'
+    })
     for (let i = 0; i < listTitleOption.length; i++) {
       setTimeout(() => {
         dispatch({

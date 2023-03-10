@@ -67,8 +67,8 @@ export default function Login() {
     }, [user])
 
     return (
-        <div className='container-fluid m-0 p-0' style={{ backgroundImage: 'url("./hust_background.png")', backgroundSize: 'cover', width: '100%', height: '713.5px' }}>
-            <div style={{ backgroundColor: 'rgba(0,0,0,0.6)', width: '100%', height: '713.5px' }}>
+        <div className='container-fluid m-0 p-0' style={{ backgroundImage: 'url("./hust_background.png")', backgroundSize: 'cover', width: '100%', height: '100vh' }}>
+            <div style={{ backgroundColor: 'rgba(0,0,0,0.6)', width: '100%', height: '100vh' }}>
                 <div className='row'>
                     <div className='col-7'>
 

@@ -24,6 +24,7 @@ export default function BookLibrary() {
     if (!localStorage.getItem(TOKEN_USER)) {
       navigate('/login', { replace: true })
     }
+    window.scrollTo(0, 0)
     dispatch({
       type: 'GET_BOOK_BORROW_STUDENT'
     })
@@ -38,6 +39,7 @@ export default function BookLibrary() {
   }, [])
 
   useEffect(() => {
+    window.scrollTo(0, 0)
   }, [listBookBorrowOfStudent, filter.nameFilter, JSON.parse(localStorage.getItem('bookFilterLibrary'))])
 
   const onSearch = (value) => {
@@ -50,6 +52,7 @@ export default function BookLibrary() {
   const onChange = (page) => {
     //page đánh dấu trang nào đang được chọn
     setCurrentPage({ page: page })
+    window.scrollTo(0, 0)
   };
 
   const renderBook = () => {

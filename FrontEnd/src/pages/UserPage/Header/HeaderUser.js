@@ -47,8 +47,13 @@ export default function HeaderUser() {
     const [current, setCurrent] = useState('mail');
 
     const renderBalance = () => {
-        return <p style={{ color: 'green', textAlign: 'right' }}>Số dư tài khoản: {localStorage.getItem('balance')}</p>
+        if(localStorage.getItem('balance') !== null){
+            return <p style={{ color: 'green', textAlign: 'right' }}>Số dư tài khoản: {localStorage.getItem('balance')}</p>
+        }else{
+            return <p></p>
+        }
     }
+    
     return (
         <Layout className="layout" style={{ width: '100%' }}>
             <Header className="header" style={{ width: '107%', marginLeft: '-55px', height: '65px', position: 'sticky', top: '0', zIndex: '1' }}>

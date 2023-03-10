@@ -48,7 +48,7 @@ export default function IndexUser() {
             localStorage.setItem('title', item.title)
             localStorage.setItem('listBookByTitle', JSON.stringify(item.listBook))
           }} count={item.countBook}>
-            <Avatar style={{ width: '150px', height: '140px', backgroundImage: `url(${bookTitle})`, backgroundSize: '100% 100%', color: 'white', paddingTop: '25px', fontWeight: '500', fontSize: '17px', borderRadius: '14px' }} shape="square" size="large">{item.title}</Avatar>
+            <Avatar style={{ width: '150px', height: '140px', backgroundImage: `url(${bookTitle})`, backgroundSize: '100% 100%', color: 'white', paddingTop: '25px', fontWeight: '500', fontSize: '16px', borderRadius: '14px' }} shape="square" size="large">{item.title}</Avatar>
           </Badge>
         </NavLink>
       </Col>
@@ -95,7 +95,7 @@ export default function IndexUser() {
         <div style={contentStyle}>
           <div style={{ backgroundImage: 'url("./carousel/scroll1.jpg")', backgroundSize: '100% 100%', height: '660px' }}>
             <div style={{ backgroundColor: 'rgba(0,0,0,0.6)', width: '100%', height: '660px' }}>
-              <p style={{ textAlign: 'left', paddingLeft: '70px', paddingTop: '160px', boxSizing: 'border-box', color: 'white', fontWeight: '600', fontSize: '36px', width: '55%' }}><span style={{ color: 'red', fontWeight: '600', fontSize: '36px' }}>Thư viện Tạ Quang Bửu</span> là nơi dành cho các bạn sinh viên có thể nghiên cứu và học thêm những kiến thức bổ ích.</p>
+              <p style={{ textAlign: 'left', paddingLeft: '70px', paddingTop: '160px', boxSizing: 'border-box', color: 'white', fontWeight: '600', fontSize: '33px', width: '55%' }}><span style={{ color: 'red', fontWeight: '600', fontSize: '33px' }}>Thư viện Tạ Quang Bửu</span> là nơi dành cho các bạn sinh viên có thể nghiên cứu và học thêm những kiến thức bổ ích.</p>
               <p style={{ textAlign: 'left', paddingLeft: '70px', paddingTop: '10px', boxSizing: 'border-box', color: 'white', fontWeight: '400', fontSize: '18px', width: '65%' }}>Được thành lập từ năm 1956, ngay sau ngày thành lập trường và trải qua quá trình xây dựng và phát triển thư viện đã có nhiều đóng góp quan trọng vào việc đào tạo đội ngũ cán bộ khoa học kỹ thuật đông đảo, đóng góp tích cực vào sự nghiệp phát triển kinh tế - khoa học - kỹ thuật của đất nước.</p>
               <div style={{ textAlign: 'left', paddingLeft: '70px', paddingTop: '10px' }}>
                 <Button ghost ><NavLink style={{ marginTop: '-8px' }} className="nav-link" to="/userPage/introduce">Xem thêm</NavLink></Button>
@@ -106,7 +106,7 @@ export default function IndexUser() {
         <div style={contentStyle}>
           <div style={{ backgroundImage: 'url("./carousel/scroll2.jpg")', backgroundSize: '100% 105%', height: '660px' }}>
             <div style={{ backgroundColor: 'rgba(0,0,0,0.6)', width: '100%', height: '660px' }}>
-              <p style={{ textAlign: 'left', paddingLeft: '70px', paddingTop: '160px', boxSizing: 'border-box', color: 'white', fontWeight: '600', fontSize: '36px', width: '55%' }}><span style={{ color: 'red', fontWeight: '600', fontSize: '36px' }}>Thư viện Tạ Quang Bửu</span> là nơi dành cho các bạn sinh viên có thể nghiên cứu và học thêm những kiến thức bổ ích.</p>
+              <p style={{ textAlign: 'left', paddingLeft: '70px', paddingTop: '160px', boxSizing: 'border-box', color: 'white', fontWeight: '600', fontSize: '33px', width: '55%' }}><span style={{ color: 'red', fontWeight: '600', fontSize: '33px' }}>Thư viện Tạ Quang Bửu</span> là nơi dành cho các bạn sinh viên có thể nghiên cứu và học thêm những kiến thức bổ ích.</p>
               <p style={{ textAlign: 'left', paddingLeft: '70px', paddingTop: '10px', boxSizing: 'border-box', color: 'white', fontWeight: '400', fontSize: '18px', width: '65%' }}>Được thành lập từ năm 1956, ngay sau ngày thành lập trường và trải qua quá trình xây dựng và phát triển thư viện đã có nhiều đóng góp quan trọng vào việc đào tạo đội ngũ cán bộ khoa học kỹ thuật đông đảo, đóng góp tích cực vào sự nghiệp phát triển kinh tế - khoa học - kỹ thuật của đất nước.</p>
               <div style={{ textAlign: 'left', paddingLeft: '70px', paddingTop: '10px' }}>
                 <Button ghost ><NavLink style={{ marginTop: '-8px' }} className="nav-link" to="/userPage/introduce">Xem thêm</NavLink></Button>
@@ -117,7 +117,7 @@ export default function IndexUser() {
         <div style={contentStyle}>
           <div style={{ backgroundImage: 'url("./carousel/scroll3.jpg")', backgroundSize: '100% 100%', height: '660px' }}>
             <div style={{ backgroundColor: 'rgba(0,0,0,0.6)', width: '100%', height: '660px' }}>
-              <p style={{ textAlign: 'left', paddingLeft: '70px', paddingTop: '160px', boxSizing: 'border-box', color: 'white', fontWeight: '600', fontSize: '36px', width: '55%' }}><span style={{ color: 'red', fontWeight: '600', fontSize: '36px' }}>Thư viện Tạ Quang Bửu</span> là nơi dành cho các bạn sinh viên có thể nghiên cứu và học thêm những kiến thức bổ ích.</p>
+              <p style={{ textAlign: 'left', paddingLeft: '70px', paddingTop: '160px', boxSizing: 'border-box', color: 'white', fontWeight: '600', fontSize: '33px', width: '55%' }}><span style={{ color: 'red', fontWeight: '600', fontSize: '33px' }}>Thư viện Tạ Quang Bửu</span> là nơi dành cho các bạn sinh viên có thể nghiên cứu và học thêm những kiến thức bổ ích.</p>
               <p style={{ textAlign: 'left', paddingLeft: '70px', paddingTop: '10px', boxSizing: 'border-box', color: 'white', fontWeight: '400', fontSize: '18px', width: '65%' }}>Được thành lập từ năm 1956, ngay sau ngày thành lập trường và trải qua quá trình xây dựng và phát triển thư viện đã có nhiều đóng góp quan trọng vào việc đào tạo đội ngũ cán bộ khoa học kỹ thuật đông đảo, đóng góp tích cực vào sự nghiệp phát triển kinh tế - khoa học - kỹ thuật của đất nước.</p>
               <div style={{ textAlign: 'left', paddingLeft: '70px', paddingTop: '10px' }}>
                 <Button ghost ><NavLink style={{ marginTop: '-8px' }} className="nav-link" to="/userPage/introduce">Xem thêm</NavLink></Button>
@@ -128,7 +128,7 @@ export default function IndexUser() {
         <div style={contentStyle}>
           <div style={{ backgroundImage: 'url("./carousel/scroll4.jpg")', backgroundSize: '100% 112%', height: '660px' }}>
             <div style={{ backgroundColor: 'rgba(0,0,0,0.6)', width: '100%', height: '660px' }}>
-              <p style={{ textAlign: 'left', paddingLeft: '70px', paddingTop: '160px', boxSizing: 'border-box', color: 'white', fontWeight: '600', fontSize: '36px', width: '55%' }}><span style={{ color: 'red', fontWeight: '600', fontSize: '36px' }}>Thư viện Tạ Quang Bửu</span> là nơi dành cho các bạn sinh viên có thể nghiên cứu và học thêm những kiến thức bổ ích.</p>
+              <p style={{ textAlign: 'left', paddingLeft: '70px', paddingTop: '160px', boxSizing: 'border-box', color: 'white', fontWeight: '600', fontSize: '33px', width: '55%' }}><span style={{ color: 'red', fontWeight: '600', fontSize: '33px' }}>Thư viện Tạ Quang Bửu</span> là nơi dành cho các bạn sinh viên có thể nghiên cứu và học thêm những kiến thức bổ ích.</p>
               <p style={{ textAlign: 'left', paddingLeft: '70px', paddingTop: '10px', boxSizing: 'border-box', color: 'white', fontWeight: '400', fontSize: '18px', width: '65%' }}>Được thành lập từ năm 1956, ngay sau ngày thành lập trường và trải qua quá trình xây dựng và phát triển thư viện đã có nhiều đóng góp quan trọng vào việc đào tạo đội ngũ cán bộ khoa học kỹ thuật đông đảo, đóng góp tích cực vào sự nghiệp phát triển kinh tế - khoa học - kỹ thuật của đất nước.</p>
               <div style={{ textAlign: 'left', paddingLeft: '70px', paddingTop: '10px' }}>
                 <Button ghost ><NavLink style={{ marginTop: '-8px' }} className="nav-link" to="/userPage/introduce">Xem thêm</NavLink></Button>
@@ -141,7 +141,7 @@ export default function IndexUser() {
 
       {/* Befinit */}
       <p style={{ fontWeight: 'bold', marginTop: '150px', fontFamily: 'Poppins', fontSize: '33px' }}>Lợi ích của việc đọc sách</p>
-      <p style={{ fontWeight: '400', fontSize: '20px', padding: '0px 280px' }}>Đọc sách vẫn luôn là một thói quen bổ ích được nhiều người yêu thích nhưng bên cạnh việc cung cấp tri thức đọc sách còn mang lại nhiều lợi ích hơn thế</p>
+      <p style={{ fontWeight: '400', fontSize: '18px', padding: '0px 280px' }}>Đọc sách vẫn luôn là một thói quen bổ ích được nhiều người yêu thích nhưng bên cạnh việc cung cấp tri thức đọc sách còn mang lại nhiều lợi ích hơn thế</p>
       <Row style={{ width: '100%', height: '940px', marginTop: '40px' }}>
         <Col className="gutter-row" span={14} style={{ textAlign: 'left', paddingLeft: '120px' }}>
           <Row style={{ width: '100%', marginTop: '40px' }}>

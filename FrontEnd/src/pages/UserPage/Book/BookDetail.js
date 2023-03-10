@@ -11,6 +11,7 @@ export default function BookDetail() {
   useEffect(() => {
     if (!localStorage.getItem(TOKEN_USER)) {
       navigate('/login', { replace: true })
+      window.scrollTo(0, 0)
     }
   }, [])
 

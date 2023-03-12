@@ -54,10 +54,10 @@ export const createBook = async (values) => {
 }
 
 export const borrowBook = async (idBook, userId) => {
-    return await Axios.put(`${DOMAIN_SERVER}/books/borrowBook?userId=${userId}&idBook=${idBook}`, { params: { userId: userId, idBook: idBook } },
-        {
-            headers: {
-                token: localStorage.getItem(TOKEN_ADMIN)
+    return await Axios.put(`${DOMAIN_SERVER}/books/borrowBook`, {idBook: idBook, userId: userId},
+    {
+        headers: {
+            token: localStorage.getItem(TOKEN_ADMIN)
             }
         })
 }
@@ -107,6 +107,22 @@ export const searchBook = async (value) => {
     return await Axios.get(`${DOMAIN_SERVER}/books/searchBook?name=${value}`, {
         headers: {
             token: localStorage.getItem(TOKEN_USER)
+        }
+    })
+}
+
+export const getBookByIdUnborrow = async (id) => {
+    return await Axios.get(`${DOMAIN_SERVER}/books/findByIdUnborrow?id=${id}`, {
+        headers: {
+            token: localStorage.getItem(TOKEN_ADMIN)
+        }
+    })
+}
+
+export const getBookUnborrow = async () => {
+    return await Axios.get(`${DOMAIN_SERVER}/books/unborrowListBook`, {
+        headers: {
+            token: localStorage.getItem(TOKEN_ADMIN)
         }
     })
 }

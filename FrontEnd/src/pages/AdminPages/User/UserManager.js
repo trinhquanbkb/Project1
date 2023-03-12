@@ -418,7 +418,7 @@ export default function UserManager() {
                     loading={loading} />
             </>
             <Modal title="Danh sách sách của sinh viên" width={850} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                <Table columns={columnsModal} dataSource={dataModal} />
+                <Table columns={columnsModal} dataSource={dataModal} pageSize={dataModal.length} />
             </Modal>
             <Modal title="Nạp thẻ cho sinh viên" width={600} open={isModalCardOpen} onOk={handleCardOk} onCancel={handleCardCancel}>
                 <Form

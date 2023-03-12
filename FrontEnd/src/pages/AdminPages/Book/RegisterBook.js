@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Button, Form, Input, message, Popconfirm } from 'antd';
+import React, { useEffect, useState} from 'react'
+import { Button, Form, Input, message, Popconfirm, Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
 import { STATUS_CODE } from '../../../utils/constant/statusCode';
 import { useNavigate } from 'react-router-dom'
@@ -14,6 +14,9 @@ export default function RegisterBook() {
   const { statusBorrow, checkIdBook } = useSelector(state => state.bookReducer)
   const { checkMssv } = useSelector(state => state.userReducer)
   const navigate = useNavigate()
+  const [messageApi, contextHolder] = message.useMessage();
+  const [stateBook, setStateBook] = useState(0)
+
 
   const layout = {
     labelCol: {
@@ -41,39 +44,68 @@ export default function RegisterBook() {
     if (!localStorage.getItem(TOKEN_ADMIN)) {
       navigate('/login', { replace: true })
     }
+    localStorage.setItem('checkIdBook', null)
+    dispatch({
+      type: 'GET_BOOK_UNBORROW',
+    })
   }, [])
 
   useEffect(() => {
     setTimeout(confirm, 100)
-  }, [statusBorrow])
+    dispatch({
+      type: 'GET_BOOK_UNBORROW',
+    })
+    setStateBook(0)
+  }, [statusBorrow, stateBook])
 
   const onFinish = (values) => {
+    loading()
     //check mssv
     dispatch({
       type: 'CHECK_MSSV',
       data: values.mssv
     })
     //check id book
-    dispatch({
-      type: 'CHECK_BOOK_ID',
-      data: values.idBook
+    values.idBook.forEach((item) => {
+      if (localStorage.getItem('checkIdBook') === 'true' || localStorage.getItem('checkIdBook') === 'null') {
+        dispatch({
+          type: 'CHECK_BOOK_ID',
+          data: item
+        })
+      }
     })
     //send data check status register book
     dispatch({
       type: 'BORROW_BOOK',
       data: values
     })
+
   };
 
+  const loading = () => {
+    messageApi.open({
+      type: 'loading',
+      content: 'Đang xử lý...',
+      duration: 0,
+    });
+  };
 
   const confirm = (e) => {
-    if (statusBorrow === STATUS_CODE.SUCCESS_PUT && checkIdBook === true && checkMssv === true) {
+    if (statusBorrow === STATUS_CODE.SUCCESS_PUT && localStorage.getItem('checkIdBook') === 'true' && checkMssv === true) {
+      messageApi.destroy()
       message.success('Thành công!');
+      localStorage.setItem('checkIdBook', null)
+      setStateBook(1)
     } else if (statusBorrow === STATUS_CODE.CLIENT_ERROR) {
-      message.error('Đã có người mượn quyển sách này!')
-    } else if (checkIdBook === false && statusBorrow === STATUS_CODE.NOT_FOUND) {
-      message.error('Không tồn tại id của quyển sách này!')
-    } else if (checkMssv === false && statusBorrow === STATUS_CODE.NOT_FOUND) {
+      messageApi.destroy()
+      message.error('Danh sách id sách tồn tại sách đã được mượn hoặc không tồn tại. Hãy kiểm tra lại!');
+      localStorage.setItem('checkIdBook', null)
+    } else if (localStorage.getItem('checkIdBook') === 'false') {
+      messageApi.destroy()
+      message.error('Có quyển sách đã được mượn hoặc không tồn tại trong danh sách đăng ký. Vui lòng kiểm tra lại!')
+      localStorage.setItem('checkIdBook', null)
+    } else if (checkMssv === false) {
+      messageApi.destroy()
       message.error('Không tồn tại mssv của người dùng này!')
     } else if (statusBorrow === null) {
     }
@@ -102,8 +134,23 @@ export default function RegisterBook() {
   };
 
 
+  const options = [];
+  const bookUnborrows = JSON.parse(localStorage.getItem('bookUnborrow')) ? JSON.parse(localStorage.getItem('bookUnborrow')) : []
+  bookUnborrows.forEach((item) => {
+    options.push({
+      value: item.id,
+      label: item.id + " - " + item.name+"("+item.author+")"
+    });
+  })
+  //handle change id book
+  const handleIdBookChange = (value) => {
+
+  };
+
+
   return (
     <div>
+      {contextHolder}
       <h3 style={{ textAlign: 'left', marginLeft: '50px', fontSize: '29px' }}>
         Đăng ký mượn sách cho người dùng
       </h3>
@@ -136,18 +183,22 @@ export default function RegisterBook() {
         <Form.Item
           name='idBook'
           label="Id sách"
-          rules={[
-            {
-              required: true,
-              pattern: new RegExp(/^[0-9]+$/),
-              message: 'Xin hãy nhập id sách bằng số!'
-            },
-          ]}
           style={{ height: '40px' }}
         >
-          <Input style={{ marginLeft: '15px' }} />
+          {/* <Input style={{ marginLeft: '15px' }} /> */}
+          <Select
+            mode="multiple"
+            size="default"
+            onChange={handleIdBookChange}
+            style={{
+              width: '100%',
+              marginLeft: '15px'
+            }}
+            options={options}
+          />
         </Form.Item>
-        <span style={{ color: 'green', marginLeft: '-30px' }}>Chú ý: Id sách tham khảo ở trang 'Danh sách các quyển sách'</span>
+        <span style={{ color: 'green', paddingLeft: '310px', width: '440px', textAlign: 'center' }}>Chú ý: Danh sách các id đăng ký cho người dùng mượn cần nằm trong danh sách gợi ý,</span><br></br>
+        <span style={{ color: 'green', paddingLeft: '310px', width: '440px', textAlign: 'center' }}>không phải trong danh sách gợi ý sẽ là sách đã được mượn hoặc không tồn tại!</span>
         <Form.Item
           wrapperCol={{
             ...layout.wrapperCol,
@@ -159,6 +210,7 @@ export default function RegisterBook() {
             title="Đăng ký mượn sách"
             description="Bạn có chắc chắn cho sinh viên này mượn sách?"
             onConfirm={(e) => {
+              messageApi.destroy()
               form.submit()
             }
             }

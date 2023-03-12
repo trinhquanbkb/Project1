@@ -175,36 +175,47 @@ const extendBook = async (req, res) => {
 }
 //Mượn sách borrowBook( mượn sách theo idBook)
 const borrowBook = async (req, res) => {
-    const { idBook, userId } = req.query
+    const { idBook, userId } = req.body
     const dateNow = new Date()
     const newEndDate = new Date(dateNow).getTime() + 60 * 24 * 3600 * 1000
     try {
-        const book = await Books.findOne({
+        const books = await Books.findAll({
             where: {
-                id: idBook,
+                id: {
+                    [Op.in]: idBook
+                }
             }
         })
-        if (book) {
-            //Kiểm tra sách đã được mượn hay chưa
-            if (!book.dataValues.userId) {
-                //Chưa được mượn--cập nhật dayBorrow, userId, endDate
-                const updateBook = await Books.update({ userId: userId, dayBorrow: dateNow, endDate: newEndDate }, {
-                    where: {
-                        id: idBook,
+        let t = 0  //0 là đúng
+        books.forEach(async (book) => {
+            if (book && t === 0) {
+                //Kiểm tra sách đã được mượn hay chưa
+                if (!book.dataValues.userId) {
+                    //Chưa được mượn--cập nhật dayBorrow, userId, endDate
+                    const updateBook = await Books.update({ userId: userId, dayBorrow: dateNow, endDate: newEndDate }, {
+                        where: {
+                            id: book.dataValues.id,
+                        }
+                    })
+                    if (!updateBook) {
+                        t = 1   //1 là lỗi update phía server
                     }
-                })
-                if (updateBook) {
-                    res.status(201).send("Borrow successful!")
                 } else {
-                    res.status(500).send("Borrow failed!")
+                    t = 2    //2 là do sách đá được mượn
                 }
             } else {
-                //Sách đã được mượn--In ra thông báo
-                res.status(200).send("This book has been borrowed!")
+                t = 2
             }
-        } else {
-            throw new Error(`Couldn't find book by id is ${id}`)
-        }
+        })
+        setTimeout(() => {
+            if (t === 1) {
+                res.status(500).send("Borrow book error!")
+            } else if (t == 2) {
+                res.status(500).send("Book borrowed!")
+            } else {
+                res.status(201).send("Success borrow book!")
+            }
+        }, 200)
     } catch (e) {
         res.status(500).send(e)
     }
@@ -278,7 +289,7 @@ const unborrowListBook = async (req, res) => {
             }
         })
         if (book) {
-            res.status(200).send("Successfully list unborrowed books!")
+            res.status(200).send(book)
         } else {
             throw new Error("Fail to list unborrowed books!")
         }
@@ -526,13 +537,32 @@ const searchBook = async (req, res) => {
                 }
             }
         })
-        if(books){
+        if (books) {
             res.status(200).send(books)
-        }else{
+        } else {
             throw new Error(`Not found by name book`)
         }
     } catch (err) {
         res.status(400).send(err)
+    }
+}
+
+const getBookByIdUnborrow = async (req, res) => {
+    const { id } = req.query
+    try {
+        const book = await Books.findOne({
+            where: {
+                id: id,
+                userId: null
+            }
+        })
+        if (book) {
+            res.status(200).send(book)
+        } else {
+            throw new Error(`Cannot get book by id = ${id}`)
+        }
+    } catch (e) {
+        res.status(500).send(e)
     }
 }
 
@@ -554,5 +584,6 @@ module.exports = {
     uploadImageBook,
     findBookByTitle,
     listBookStudentBorrow,
-    searchBook
+    searchBook,
+    getBookByIdUnborrow
 }

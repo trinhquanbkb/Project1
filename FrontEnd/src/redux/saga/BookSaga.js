@@ -7,12 +7,13 @@ import {
     updateBookById,
     createBook,
     borrowBook,
-    getBookById,
     uploadImage,
     findBookByTitle,
     listBookStudentBorrow,
     giveBook,
-    searchBook
+    searchBook,
+    getBookByIdUnborrow,
+    getBookUnborrow
 } from '../../services/BookService'
 import { getUserByMssv } from '../../services/UserService'
 import { STATUS_CODE } from '../../utils/constant/statusCode'
@@ -108,32 +109,21 @@ function* borrowBookSaga(action) {
                 type: BORROW_BOOK_BY_USERID,
                 data: STATUS_CODE.SUCCESS_PUT
             })
-        } else if (promise.status === STATUS_CODE.SUCCESS) {
-            yield put({
-                type: BORROW_BOOK_BY_USERID,
-                data: STATUS_CODE.CLIENT_ERROR
-            })
         }
     } catch (error) {
         yield put({
             type: BORROW_BOOK_BY_USERID,
-            data: STATUS_CODE.NOT_FOUND
+            data: STATUS_CODE.CLIENT_ERROR
         })
     }
 }
 
 function* checkIdBook(action) {
     try {
-        yield getBookById(action.data)
-        yield put({
-            type: CHECK_ID_BOOK_REDUCER,
-            data: true
-        })
+        yield getBookByIdUnborrow(action.data)
+        localStorage.setItem('checkIdBook', 'true')
     } catch (error) {
-        yield put({
-            type: CHECK_ID_BOOK_REDUCER,
-            data: false
-        })
+        localStorage.setItem('checkIdBook', 'false')
     }
 }
 
@@ -198,6 +188,14 @@ function* searchBookSaga(action) {
     }
 }
 
+function* getBookUnBorrowSaga(action) {
+    try {
+        let response = yield getBookUnborrow()
+        localStorage.setItem('bookUnborrow', JSON.stringify(response.data))
+    } catch (error) {
+    }
+}
+
 export function* getBookSaga() {
     yield takeLatest('GET_BOOK_BORROW_STUDENT', getBookBorrowStudent)
     yield takeLatest('DELETE_BOOK', deleteBook)
@@ -205,10 +203,11 @@ export function* getBookSaga() {
     yield takeLatest('UPDATE_BOOK', updateBook)
     yield takeLatest('CONFIRM_CREATE_BOOK', createNewBook)
     yield takeLatest('BORROW_BOOK', borrowBookSaga)
-    yield takeLatest('CHECK_BOOK_ID', checkIdBook)
+    yield takeEvery('CHECK_BOOK_ID', checkIdBook)
     yield takeLatest('UPLOAD_IMAGE_BOOK', uploadImageBook)
     yield takeEvery('GET_DATA_BOOK_BY_TITLE', getBookByTitle)
     yield takeLatest('MY_BOOK', listBookStudent)
     yield takeLatest('GIVE_BOOK', giveBookSaga)
     yield takeLatest('SEARCH_BOOK_SAGA', searchBookSaga)
+    yield takeLatest('GET_BOOK_UNBORROW', getBookUnBorrowSaga)
 }

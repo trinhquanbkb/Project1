@@ -186,6 +186,7 @@ export default function BookLibrary() {
 
   //lọc những quyển sách chưa mượn
   const filterBookUnborrow = () => {
+    setCurrentPage({ page: 1 })
     let title = {
       listBook: []
     }
@@ -196,10 +197,12 @@ export default function BookLibrary() {
     })
     setFilter({ nameFilter: 'Sách chưa mượn', status: 1 })
     localStorage.setItem('bookFilterLibrary', JSON.stringify(title.listBook))
+    setCurrentPage({ page: 1 })
   }
 
   //lọc những quyển sách đã mượn
   const filterBookBorrowed = () => {
+    setCurrentPage({ page: 1 })
     let title = {
       listBook: []
     }
@@ -208,12 +211,13 @@ export default function BookLibrary() {
         title.listBook.push(item)
       }
     })
-    setFilter({ nameFilter: 'Sách chưa mượn', status: 1 })
+    setFilter({ nameFilter: 'Sách đã mượn', status: 1 })
     localStorage.setItem('bookFilterLibrary', JSON.stringify(title.listBook))
   }
 
   //lọc tất cả các quyển sách
   const filterAllBook = () => {
+    setCurrentPage({ page: 1 })
     setFilter({ nameFilter: 'Bộ lọc', status: 1 })
     localStorage.removeItem('bookFilterLibrary')
   }

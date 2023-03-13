@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Form, Input, message, Popconfirm, Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
 import { STATUS_CODE } from '../../../utils/constant/statusCode';
@@ -44,7 +44,7 @@ export default function RegisterBook() {
     if (!localStorage.getItem(TOKEN_ADMIN)) {
       navigate('/login', { replace: true })
     }
-    localStorage.setItem('checkIdBook', null)
+    localStorage.setItem('checkIdBook', 0)
     dispatch({
       type: 'GET_BOOK_UNBORROW',
     })
@@ -66,14 +66,18 @@ export default function RegisterBook() {
       data: values.mssv
     })
     //check id book
-    values.idBook.forEach((item) => {
-      if (localStorage.getItem('checkIdBook') === 'true' || localStorage.getItem('checkIdBook') === 'null') {
-        dispatch({
-          type: 'CHECK_BOOK_ID',
-          data: item
-        })
-      }
-    })
+    if(values.idBook === undefined) {
+      localStorage.setItem('checkIdBook', null)
+    }else{
+      values.idBook.forEach((item) => {
+        if (localStorage.getItem('checkIdBook') === 'true' || localStorage.getItem('checkIdBook') === 'null') {
+          dispatch({
+            type: 'CHECK_BOOK_ID',
+            data: item
+          })
+        }
+      })
+    }
     //send data check status register book
     dispatch({
       type: 'BORROW_BOOK',
@@ -139,7 +143,7 @@ export default function RegisterBook() {
   bookUnborrows.forEach((item) => {
     options.push({
       value: item.id,
-      label: item.id + " - " + item.name+"("+item.author+")"
+      label: item.id + " - " + item.name + "(" + item.author + ")"
     });
   })
   //handle change id book
